@@ -9,15 +9,16 @@ module.exports = {
   ignorePatterns: ['.eslintrc.js'],
   plugins: ['@typescript-eslint'],
   extends: [
-    'prettier',
     'airbnb',
     'airbnb/hooks',
     'airbnb-typescript',
     'plugin:@typescript-eslint/recommended',
+    'plugin:prettier/recommended',
   ],
   rules: {
     // import 'react'가 필요 없음
     'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
     // import 순서
     'import/order': [
       'warn',
