@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Alert,
   Image,
@@ -8,9 +8,9 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-function Login({navigation}: any): JSX.Element {
+function Login({ navigation }: any): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -33,27 +33,31 @@ function Login({navigation}: any): JSX.Element {
         />
         <Pressable
           style={styles.loginButton}
-          onPress={() => Alert.alert('로그인을 시도하였습니다.')}>
+          onPress={() => Alert.alert('로그인을 시도하였습니다.')}
+        >
           <Text style={styles.buttonText}>로그인</Text>
         </Pressable>
       </View>
       <View style={styles.helpSection}>
         <Pressable
           style={styles.findButton}
-          onPress={() => Alert.alert('아이디 찾기를 실행하였습니다.')}>
+          onPress={() => Alert.alert('아이디 찾기를 실행하였습니다.')}
+        >
           <Text style={styles.boldText}>아이디 찾기</Text>
         </Pressable>
         <Text style={styles.boldText}>|</Text>
         <Pressable
           style={styles.findButton}
-          onPress={() => Alert.alert('비밀번호 찾기를 실행하였습니다.')}>
+          onPress={() => Alert.alert('비밀번호 찾기를 실행하였습니다.')}
+        >
           <Text style={styles.boldText}>비밀번호 찾기</Text>
         </Pressable>
       </View>
       <View style={styles.socialLoginSection}>
         <Pressable
           style={[styles.socialLoginButton, styles.naverBackgroundColor]}
-          onPress={() => Alert.alert('네이버 로그인을 실행하였습니다.')}>
+          onPress={() => Alert.alert('네이버 로그인을 실행하였습니다.')}
+        >
           <Image
             style={styles.socialLogo}
             source={require('../lib/img/naverLogo.png')}
@@ -62,16 +66,18 @@ function Login({navigation}: any): JSX.Element {
         </Pressable>
         <Pressable
           style={[styles.socialLoginButton, styles.kakaoBackgroundColor]}
-          onPress={() => Alert.alert('카카오 로그인을 실행하였습니다.')}>
+          onPress={() => Alert.alert('카카오 로그인을 실행하였습니다.')}
+        >
           <Image
-            style={[styles.socialLogo, {height: 18}]}
+            style={[styles.socialLogo, { height: 18 }]}
             source={require('../lib/img/kakaoLogo.png')}
           />
           <Text style={styles.kakaoTextColor}>카카오 로그인</Text>
         </Pressable>
         <Pressable
           style={[styles.socialLoginButton, styles.googleBackgroundColor]}
-          onPress={() => Alert.alert('구글 로그인을 실행하였습니다.')}>
+          onPress={() => Alert.alert('구글 로그인을 실행하였습니다.')}
+        >
           <Image
             style={styles.socialLogo}
             source={require('../lib/img/googleLogo.png')}
@@ -83,7 +89,8 @@ function Login({navigation}: any): JSX.Element {
         <Text style={styles.commonText}>혹시, 처음이시라면?</Text>
         <Pressable
           style={styles.signupButton}
-          onPress={() => navigation.navigate('Signup')}>
+          onPress={() => navigation.navigate('Signup')}
+        >
           <Text style={styles.boldText}>회원가입</Text>
         </Pressable>
       </View>

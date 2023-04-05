@@ -1,5 +1,4 @@
-import React from 'react';
-import {Text} from 'react-native';
+import { Text } from 'react-native';
 
 function Button(): JSX.Element {
   return <Text>Button</Text>;
