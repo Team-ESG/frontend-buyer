@@ -21,7 +21,7 @@ import PasswordInputScreen from '../components/Signup/passwordInput';
 import PhoneNumberInputScreen from '../components/Signup/PhoneNumberInput';
 
 function Signup({ navigation }: any): JSX.Element {
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(1);
   // 1단계
   const [phoneNumber, setPhoneNumber] = useState('');
   // 2단계
