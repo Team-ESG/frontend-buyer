@@ -7,7 +7,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   ignorePatterns: ['.eslintrc.js'],
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'import'],
   extends: [
     'airbnb',
     'airbnb/hooks',
@@ -17,6 +17,20 @@ module.exports = {
   ],
   rules: {
     // import 'react'가 필요 없음
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: true,
+        optionalDependencies: false,
+        peerDependencies: false,
+      },
+    ],
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     // import 순서
