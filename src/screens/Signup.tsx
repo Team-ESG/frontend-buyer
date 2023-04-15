@@ -12,13 +12,12 @@ import {
 } from 'react-native';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
+import AddressInputScreen from '@components/Signup/AddressInput';
+import IdInputScreen from '@components/Signup/IdInput';
+import InfoInputScreen from '@components/Signup/InfoInput';
+import PasswordInputScreen from '@components/Signup/PasswordInput';
+import PhoneNumberInputScreen from '@components/Signup/PhoneNumberInput';
 import axios from 'axios';
-
-import AddressInputScreen from '../components/Signup/AddressInput';
-import IdInputScreen from '../components/Signup/IdInput';
-import InfoInputScreen from '../components/Signup/InfoInput';
-import PasswordInputScreen from '../components/Signup/passwordInput';
-import PhoneNumberInputScreen from '../components/Signup/PhoneNumberInput';
 
 function Signup({ navigation }: any): JSX.Element {
   const [step, setStep] = useState(1);
