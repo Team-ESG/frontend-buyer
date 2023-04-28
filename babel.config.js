@@ -19,6 +19,9 @@ module.exports = {
         alias: {
           '@components': ['./src/components'],
           '@screens': ['./src/screens'],
+          '@hooks': ['./src/hooks'],
+          '@lib': ['./src/lib'],
+          '@navigation': ['./src/navigation'],
         },
       },
     ],
