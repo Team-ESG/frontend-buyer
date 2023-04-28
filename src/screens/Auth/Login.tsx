@@ -89,7 +89,7 @@ function Login({ navigation }: any): JSX.Element {
         <Text style={styles.commonText}>혹시, 처음이시라면?</Text>
         <Pressable
           style={styles.signupButton}
-          onPress={() => navigation.navigate('Signup')}
+          onPress={() => navigation.navigate('Home')}
         >
           <Text style={styles.boldText}>회원가입</Text>
         </Pressable>
