@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unstable-nested-components */
+import Header from '@components/Header';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Cart from '@screens/Item/Cart';
 import ItemList from '@screens/Item/ItemList';
@@ -22,6 +23,7 @@ export default function BottomTab(): JSX.Element {
             ) : (
               <Icon name="home-outline" size={25} />
             ),
+          header: () => <Header />,
         }}
       />
       <Tab.Screen
@@ -34,6 +36,7 @@ export default function BottomTab(): JSX.Element {
             ) : (
               <Icon name="heart-outline" size={25} />
             ),
+          header: () => <Header />,
         }}
       />
       <Tab.Screen
@@ -46,6 +49,7 @@ export default function BottomTab(): JSX.Element {
             ) : (
               <Icon name="cart-outline" size={25} />
             ),
+          header: () => <Header />,
         }}
       />
       <Tab.Screen

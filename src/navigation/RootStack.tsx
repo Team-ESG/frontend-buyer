@@ -23,7 +23,7 @@ export default function RootStack(): JSX.Element {
       <Stack.Screen
         name="MarketDetail"
         component={MarketDetail}
-        options={{ title: '가게 상세' }}
+        options={{ title: '가게 상세', headerShown: false }}
       />
     </Stack.Navigator>
   );
