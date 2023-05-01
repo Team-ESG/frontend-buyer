@@ -4,11 +4,8 @@ import {
   StyleSheet,
   Text,
   View,
-  Pressable,
   KeyboardAvoidingView,
   Platform,
-  Image,
-  ScrollView,
   TextInput,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -99,6 +96,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 30,
     flex: 0.3,
+    backgroundColor: '#fff',
+    shadowColor: '#787878',
+    shadowOpacity: 0.25,
+    shadowOffset: {
+      height: 5,
+      width: 0,
+    },
+    zIndex: 99,
+    elevation: 5,
   },
   searchWordText: {
     fontSize: 12,
