@@ -65,7 +65,12 @@ export default function Favorites({ navigation }: any) {
         {ItemList.map((item) => (
           <Pressable
             key={item.id}
-            style={styles.itemContainer}
+            style={({ pressed }) => [
+              {
+                backgroundColor: pressed ? '#eee' : '#fff',
+              },
+              styles.itemContainer,
+            ]}
             onPress={() => navigation.navigate('MarketDetail')}
           >
             <View style={styles.imageContainer}>
