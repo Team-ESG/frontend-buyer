@@ -96,18 +96,20 @@ const styles = StyleSheet.create({
   textContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: 25,
+    marginHorizontal: 25,
     marginBottom: 20,
   },
   textTitle: {
+    flex: 0.2,
     fontSize: 16,
     fontWeight: 'bold',
     color: '#333',
   },
   textDetail: {
+    flex: 0.8,
     fontSize: 14,
     color: '#333',
-    marginLeft: 10,
+    marginLeft: 15,
   },
   mapContainer: {
     alignItems: 'center',

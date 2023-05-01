@@ -50,10 +50,6 @@ export default function Favorites({ navigation }: any) {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
-      {/* <View style={styles.searchContainer}>
-        <Text></Text>
-        <Icon name="magnify" size={25} />
-      </View> */}
       <View style={styles.titleContainer}>
         <Text style={styles.title}>찜한 가게</Text>
         <View style={styles.totalCountCircle}>
@@ -65,7 +61,12 @@ export default function Favorites({ navigation }: any) {
         {ItemList.map((item) => (
           <Pressable
             key={item.id}
-            style={styles.itemContainer}
+            style={({ pressed }) => [
+              {
+                backgroundColor: pressed ? '#eee' : '#fff',
+              },
+              styles.itemContainer,
+            ]}
             onPress={() => navigation.navigate('MarketDetail')}
           >
             <View style={styles.imageContainer}>

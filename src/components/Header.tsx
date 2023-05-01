@@ -1,9 +1,16 @@
 import { Text, View, StyleSheet, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Header(): JSX.Element {
+  const navigation = useNavigation();
+
+  const handleSearchPress = () => {
+    navigation.navigate('Search');
+  };
+
   return (
     <View style={styles.background}>
       <SafeAreaView edges={['top']}>
@@ -12,11 +19,7 @@ export default function Header(): JSX.Element {
             <Text style={styles.locationText}>영통구</Text>
             <Icon name="keyboard-arrow-down" size={24} color="#333" />
           </View>
-          <Pressable
-            onPress={() => {
-              console.log('Search');
-            }}
-          >
+          <Pressable onPress={handleSearchPress}>
             <Icon name="search" size={24} color="#333" />
           </Pressable>
         </View>
@@ -43,6 +46,7 @@ const styles = StyleSheet.create({
       height: 5,
       width: 0,
     },
+    elevation: 10,
   },
   leftContainer: {
     flexDirection: 'row',
