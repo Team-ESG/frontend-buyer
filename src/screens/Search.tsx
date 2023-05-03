@@ -13,12 +13,18 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Search({ navigation }: any) {
+  const [searchWord, setSearchWord] = React.useState<string>('');
   return (
     <SafeAreaView>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}
       >
+        <Icon
+          name="arrow-back-ios"
+          style={styles.backBtn}
+          onPress={() => navigation.goBack()}
+        />
         <View style={styles.imageContainer}>
           <View style={styles.section}>
             <Icon name="search" size={24} style={styles.icon} />
@@ -45,6 +51,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  backBtn: {
+    position: 'absolute',
+    top: 25,
+    left: 20,
+    zIndex: 1,
+    color: '#ffffff',
+    fontSize: 24,
   },
   imageContainer: {
     backgroundColor: 'rgba(73,172,106,0.7)',
