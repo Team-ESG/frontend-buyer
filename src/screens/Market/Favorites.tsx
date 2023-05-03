@@ -7,8 +7,6 @@ import {
   Pressable,
   Image,
   ScrollView,
-  KeyboardAvoidingView,
-  Platform,
 } from 'react-native';
 
 import marketImg from '@lib/img/market.png';
@@ -46,14 +44,13 @@ const ItemList = [
 ];
 export default function Favorites({ navigation }: any) {
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.container}
-    >
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>찜한 가게</Text>
-        <View style={styles.totalCountCircle}>
-          <Text style={styles.totalCountText}>총 {ItemList.length}개</Text>
+    <View style={styles.container}>
+      <View style={styles.outerContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>찜한 가게</Text>
+          <View style={styles.totalCountCircle}>
+            <Text style={styles.totalCountText}>총 {ItemList.length}개</Text>
+          </View>
         </View>
       </View>
 
@@ -83,7 +80,7 @@ export default function Favorites({ navigation }: any) {
           </Pressable>
         ))}
       </ScrollView>
-    </KeyboardAvoidingView>
+    </View>
   );
 }
 
@@ -92,21 +89,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  outerContainer: {
     shadowColor: '#000',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    overflow: 'hidden',
   },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#80c597',
-    shadowColor: '#000',
-    elevation: 15,
     paddingHorizontal: 20,
     paddingVertical: 20,
+    backgroundColor: '#80c597',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 3.84,
+    elevation: 3,
   },
   title: {
     fontSize: 17,
