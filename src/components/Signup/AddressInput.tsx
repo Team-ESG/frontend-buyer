@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 
 import { Picker } from '@react-native-picker/picker';
+import color from '@lib/img/color/color';
 
 function AddressInputScreen({ address, setAddress }: any): JSX.Element {
   return (
@@ -34,20 +35,20 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 5,
-    color: '#433518',
+    color: color.brown,
   },
   subTitle: {
     fontSize: 17,
     fontWeight: 'normal',
     marginBottom: 15,
-    color: 'rgb(200,200,200)',
+    color: color.disabled_02,
   },
   label: {
     fontSize: 14,
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 5,
-    color: '#433518',
+    color: color.brown,
     paddingHorizontal: 5,
   },
 });
