@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 
+import color from '@lib/color/color';
 import { Picker } from '@react-native-picker/picker';
-import color from '@lib/img/color/color';
 
 function AddressInputScreen({ address, setAddress }: any): JSX.Element {
   return (

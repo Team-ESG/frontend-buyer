@@ -8,7 +8,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 
-import color from '@lib/img/color/color';
+import color from '@lib/color/color';
 
 import useFocus from '../../hooks/useFocus';
 

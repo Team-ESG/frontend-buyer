@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import useFocus from '@hooks/useFocus';
-import color from '@lib/img/color/color';
+import color from '@lib/color/color';
 import axios from 'axios';
 
 const NAME_REGEX = /^[가-힣a-zA-Z]{2,10}$/;

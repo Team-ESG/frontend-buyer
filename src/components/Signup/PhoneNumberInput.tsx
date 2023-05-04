@@ -11,7 +11,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 
-import color from '@lib/img/color/color';
+import color from '@lib/color/color';
 import axios from 'axios';
 
 import useFocus from '../../hooks/useFocus';

@@ -17,7 +17,7 @@ import IdInputScreen from '@components/Signup/IdInput';
 import InfoInputScreen from '@components/Signup/InfoInput';
 import PasswordInputScreen from '@components/Signup/PasswordInput';
 import PhoneNumberInputScreen from '@components/Signup/PhoneNumberInput';
-import color from '@lib/img/color/color';
+import color from '@lib/color/color';
 import axios from 'axios';
 
 function Signup({ navigation }: any): JSX.Element {

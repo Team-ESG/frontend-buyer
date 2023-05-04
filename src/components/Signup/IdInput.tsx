@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import useFocus from '@hooks/useFocus';
-import color from '@lib/img/color/color';
+import color from '@lib/color/color';
 
 const ID_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
