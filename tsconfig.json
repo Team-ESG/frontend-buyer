@@ -7,7 +7,8 @@
       "@hooks/*": ["src/hooks/*"],
       "@lib/*": ["src/lib/*"],
       "@navigation/*": ["src/navigation/*"],
-      "@screens/*": ["src/screens/*"],
+      "@recoil/*": ["src/recoil/*"],
+      "@screens/*": ["src/screens/*"]
     }
   }
 }

@@ -9,7 +9,8 @@ import {
   SafeAreaView,
 } from 'react-native';
 
-import useFocus from '../../hooks/useFocus';
+import useFocus from '@hooks/useFocus';
+import color from '@lib/color/color';
 
 const ID_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
@@ -92,19 +93,19 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 5,
-    color: '#433518',
+    color: color.brown,
   },
   title_disabled: {
     fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: 'rgb(150,150,150)',
+    color: color.disabled_01,
   },
   subTitle: {
     fontSize: 17,
     fontWeight: 'normal',
     marginBottom: 15,
-    color: 'rgb(200,200,200)',
+    color: color.disabled_02,
   },
   inputContainer: {
     marginBottom: 5,
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 5,
-    color: '#433518',
+    color: color.brown,
     paddingHorizontal: 5,
   },
   label_disabled: {
@@ -124,41 +125,41 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 5,
     marginBottom: 5,
-    color: 'rgb(150,150,150)',
+    color: color.disabled_01,
     paddingHorizontal: 5,
   },
   input: {
     borderWidth: 2,
-    borderColor: '#433518',
+    borderColor: color.brown,
     borderRadius: 5,
     paddingHorizontal: 15,
     paddingVertical: 8,
     fontSize: 16,
-    color: '#433518',
+    color: color.brown,
     flex: 1,
   },
   input_disabled: {
     borderWidth: 2,
-    borderColor: 'rgb(150,150,150)',
+    borderColor: color.disabled_01,
     borderRadius: 5,
     paddingHorizontal: 15,
     paddingVertical: 8,
     fontSize: 16,
-    color: 'rgb(150,150,150)',
+    color: color.disabled_01,
     flex: 1,
   },
   buttonContainer: {
     marginTop: 5,
   },
   button: {
-    backgroundColor: '#433518',
+    backgroundColor: color.green,
     // borderRadius: 5,
     paddingHorizontal: 25,
     paddingVertical: 14,
     alignItems: 'center',
   },
   button_disabled: {
-    backgroundColor: 'rgb(200,200,200)',
+    backgroundColor: color.disabled_02,
     paddingHorizontal: 25,
     paddingVertical: 14,
     alignItems: 'center',

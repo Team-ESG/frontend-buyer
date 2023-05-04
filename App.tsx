@@ -1,17 +1,17 @@
 import React from 'react';
 
+import AuthStack from '@navigation/AuthStack';
 import RootStack from '@navigation/RootStack';
 import { NavigationContainer } from '@react-navigation/native';
+import { useRecoilValue } from 'recoil';
 
-import Auth from './src/navigation/Auth';
+import { userState } from './src/recoil/auth';
 
-function App(): JSX.Element {
+export default function App(): JSX.Element {
+  const user = useRecoilValue(userState);
   return (
     <NavigationContainer>
-      {/* <Auth /> */}
-      <RootStack />
+      {user ? <RootStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }
-
-export default App;

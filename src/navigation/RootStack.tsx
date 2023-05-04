@@ -5,6 +5,7 @@ import ItemDetail from '@screens/Item/ItemDetail';
 import MarketDetail from '@screens/Market/MarketDetail';
 import BottomTab from 'src/navigation/BottomTab';
 import Search from '@screens/Search';
+import EditProfile from '@screens/User/EditProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,6 +31,11 @@ export default function RootStack(): JSX.Element {
         name="Search"
         component={Search}
         options={{ title: '검색', headerShown: false }}
+      />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfile}
+        options={{ title: '프로필 수정', headerShown: false }}
       />
     </Stack.Navigator>
   );

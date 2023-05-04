@@ -22,6 +22,7 @@ module.exports = {
           '@hooks': ['./src/hooks'],
           '@lib': ['./src/lib'],
           '@navigation': ['./src/navigation'],
+          '@recoil': ['./src/recoil'],
         },
       },
     ],

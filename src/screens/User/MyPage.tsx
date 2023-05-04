@@ -2,10 +2,21 @@
 import React from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 
+import { userState } from '@recoil/auth';
+import { useSetRecoilState } from 'recoil';
+
 export default function MyPage({ navigation }: any) {
+  const setUser = useSetRecoilState(userState);
   return (
     <View style={styles.container}>
-      <Text>마이페이지</Text>
+      <Text
+        onPress={() => {
+          console.log('로그아웃 버튼 클릭');
+          setUser(null);
+        }}
+      >
+        로그아웃
+      </Text>
     </View>
   );
 }

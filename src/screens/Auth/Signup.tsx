@@ -17,6 +17,7 @@ import IdInputScreen from '@components/Signup/IdInput';
 import InfoInputScreen from '@components/Signup/InfoInput';
 import PasswordInputScreen from '@components/Signup/PasswordInput';
 import PhoneNumberInputScreen from '@components/Signup/PhoneNumberInput';
+import color from '@lib/color/color';
 import axios from 'axios';
 
 function Signup({ navigation }: any): JSX.Element {
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   button: {
-    backgroundColor: '#433518',
+    backgroundColor: color.green,
     // borderRadius: 5,
     paddingHorizontal: 25,
     paddingVertical: 14,
