@@ -17,14 +17,15 @@ module.exports = {
   ],
   rules: {
     // import 'react'가 필요 없음
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: true,
-        optionalDependencies: false,
-        peerDependencies: false,
-      },
-    ],
+    // 'import/no-extraneous-dependencies': [
+    //   'error',
+    //   {
+    //     devDependencies: true,
+    //     optionalDependencies: false,
+    //     peerDependencies: false,
+    //   },
+    // ],
+    'import/no-extraneous-dependencies': 'off',
     'prettier/prettier': [
       'error',
       {

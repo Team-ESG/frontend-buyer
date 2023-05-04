@@ -10,9 +10,15 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import kakaoLogo from '@lib/img/kakaoLogo.png';
+import naverLogo from '@lib/img/naverLogo.png';
+import { userState } from '@recoil/auth';
+import { useSetRecoilState } from 'recoil';
+
 function Login({ navigation }: any): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const setUser = useSetRecoilState(userState);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -22,18 +28,21 @@ function Login({ navigation }: any): JSX.Element {
           onChangeText={setEmail}
           value={email}
           placeholder="이메일"
-          placeholderTextColor={'#433518'}
+          placeholderTextColor="#433518"
         />
         <TextInput
           style={styles.input}
           onChangeText={setPassword}
           value={password}
           placeholder="비밀번호"
-          placeholderTextColor={'#433518'}
+          placeholderTextColor="#433518"
         />
         <Pressable
           style={styles.loginButton}
-          onPress={() => Alert.alert('로그인을 시도하였습니다.')}
+          onPress={() => {
+            console.log('로그인 버튼 클릭');
+            setUser({ id: email });
+          }}
         >
           <Text style={styles.buttonText}>로그인</Text>
         </Pressable>
@@ -41,14 +50,18 @@ function Login({ navigation }: any): JSX.Element {
       <View style={styles.helpSection}>
         <Pressable
           style={styles.findButton}
-          onPress={() => Alert.alert('아이디 찾기를 실행하였습니다.')}
+          onPress={() => {
+            navigation.navigate('FindAccount');
+          }}
         >
           <Text style={styles.boldText}>아이디 찾기</Text>
         </Pressable>
         <Text style={styles.boldText}>|</Text>
         <Pressable
           style={styles.findButton}
-          onPress={() => Alert.alert('비밀번호 찾기를 실행하였습니다.')}
+          onPress={() => {
+            navigation.navigate('FindPassword');
+          }}
         >
           <Text style={styles.boldText}>비밀번호 찾기</Text>
         </Pressable>
@@ -58,10 +71,7 @@ function Login({ navigation }: any): JSX.Element {
           style={[styles.socialLoginButton, styles.naverBackgroundColor]}
           onPress={() => Alert.alert('네이버 로그인을 실행하였습니다.')}
         >
-          <Image
-            style={styles.socialLogo}
-            source={require('../lib/img/naverLogo.png')}
-          />
+          <Image style={styles.socialLogo} source={naverLogo} />
           <Text style={styles.naverTextColor}>네이버로 로그인</Text>
         </Pressable>
         <Pressable
@@ -70,26 +80,23 @@ function Login({ navigation }: any): JSX.Element {
         >
           <Image
             style={[styles.socialLogo, { height: 18 }]}
-            source={require('../lib/img/kakaoLogo.png')}
+            source={kakaoLogo}
           />
           <Text style={styles.kakaoTextColor}>카카오 로그인</Text>
         </Pressable>
-        <Pressable
+        {/* <Pressable
           style={[styles.socialLoginButton, styles.googleBackgroundColor]}
           onPress={() => Alert.alert('구글 로그인을 실행하였습니다.')}
         >
-          <Image
-            style={styles.socialLogo}
-            source={require('../lib/img/googleLogo.png')}
-          />
+          <Image style={styles.socialLogo} source={googleLogo} />
           <Text style={styles.googleTextColor}>구글계정으로 로그인</Text>
-        </Pressable>
+        </Pressable> */}
       </View>
       <View style={styles.signupSection}>
         <Text style={styles.commonText}>혹시, 처음이시라면?</Text>
         <Pressable
           style={styles.signupButton}
-          onPress={() => navigation.navigate('Home')}
+          onPress={() => navigation.navigate('Signup')}
         >
           <Text style={styles.boldText}>회원가입</Text>
         </Pressable>
