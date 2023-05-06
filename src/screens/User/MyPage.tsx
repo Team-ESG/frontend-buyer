@@ -80,8 +80,8 @@ export default function MyPage({ navigation }: any) {
                 ]}
                 onPress={() => navigation.navigate(menu.target)}
               >
-                <Icon name={menu.icon} size={24} color="black" />
-                <Text style={{ color: 'black', fontWeight: 'bold' }}>
+                <Icon name={menu.icon} size={24} color="#333" />
+                <Text style={{ color: '#333', fontWeight: 'bold' }}>
                   {menu.title}
                 </Text>
               </Pressable>
@@ -110,9 +110,9 @@ export default function MyPage({ navigation }: any) {
                     : () => navigation.navigate(menu.target)
                 }
               >
-                <Text style={{ color: 'black' }}>{menu.title}</Text>
+                <Text style={{ color: '#333' }}>{menu.title}</Text>
                 {menu.id === 3 ? (
-                  <Text style={{ color: 'black' }}>1.0.0</Text>
+                  <Text style={{ color: '#333' }}>1.0.0</Text>
                 ) : (
                   <Icon name="arrow-right" size={14} />
                 )}
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   profileText: {
     fontSize: 17,
     fontWeight: 'bold',
-    color: 'black',
+    color: '#333',
   },
   menuContainer: {
     marginTop: 10,

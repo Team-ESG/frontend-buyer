@@ -50,7 +50,20 @@ export default function EditProfile({ navigation }: any): JSX.Element {
         <Icon name="user-circle" size={64} color={color.green} />
         <View style={styles.profileList}>
           {profileList.map((item) => (
-            <Pressable key={item.id} style={styles.profileItem}>
+            <Pressable
+              key={item.id}
+              style={({ pressed }) => [
+                {
+                  backgroundColor: pressed ? '#eee' : '#fff',
+                },
+                styles.profileItem,
+              ]}
+              onPress={
+                item.id === 1 || item.id === 3 || item.id === 6
+                  ? () => navigation.navigate('Edit', { title: item.title })
+                  : () => {}
+              }
+            >
               <Text style={styles.profileTitle}>{item.title}</Text>
               {item.id !== 2 ? (
                 <View style={{ flexDirection: 'row', gap: 15 }}>
@@ -112,7 +125,7 @@ const styles = StyleSheet.create({
   profileTitle: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: 'black',
+    color: '#333',
   },
   profileContent: {
     fontSize: 14,
