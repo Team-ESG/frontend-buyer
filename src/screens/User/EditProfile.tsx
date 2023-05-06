@@ -2,40 +2,42 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import color from '@lib/color/color';
+import { userState } from '@recoil/auth';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BackIcon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/SimpleLineIcons';
-
-const profileList = [
-  {
-    id: 1,
-    title: '닉네임',
-    content: '김코딩',
-  },
-  {
-    id: 2,
-    title: '이메일',
-    content: 'esg@ajou.ac.kr',
-  },
-  {
-    id: 3,
-    title: '비밀번호 변경',
-  },
-  {
-    id: 4,
-    title: '생년월일',
-  },
-  {
-    id: 5,
-    title: '휴대폰 번호',
-  },
-  {
-    id: 6,
-    title: '주소 변경',
-  },
-];
+import { useRecoilState } from 'recoil';
 
 export default function EditProfile({ navigation }: any): JSX.Element {
+  const [user, setUser] = useRecoilState(userState);
+  const profileList = [
+    {
+      id: 1,
+      title: '닉네임',
+      content: user?.nickname,
+    },
+    {
+      id: 2,
+      title: '이메일',
+      content: user?.id,
+    },
+    {
+      id: 3,
+      title: '비밀번호 변경',
+    },
+    {
+      id: 4,
+      title: '생년월일',
+    },
+    {
+      id: 5,
+      title: '휴대폰 번호',
+    },
+    {
+      id: 6,
+      title: '주소 변경',
+    },
+  ];
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>

@@ -41,7 +41,13 @@ function Login({ navigation }: any): JSX.Element {
           style={styles.loginButton}
           onPress={() => {
             console.log('로그인 버튼 클릭');
-            setUser({ id: email });
+            setUser({
+              id: email,
+              nickname: 'esg',
+              address: '경기도 수원시 영통구',
+              accessToken: '1234',
+              refreshToken: '5678',
+            });
           }}
         >
           <Text style={styles.buttonText}>로그인</Text>
