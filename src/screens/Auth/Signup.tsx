@@ -57,12 +57,16 @@ function Signup({ navigation }: any): JSX.Element {
     try {
       formatBirthDate(birthDate);
       /* Todo: 회원가입 요청 코드 
-        const response = await axios.post('http://localhost:8080/auth/signup', {
+        const response = await axios.post('http://localhost:8080/register', {
           memberId: id,
           password,
           name,
           nickname,
-          address,
+          address:{
+            firstAddress: address.split(' ')[0],
+            secondAddress: address.split(' ')[1],
+            thirdAddress: address.split(' ')[2],
+          }
           sex: gender,
           birthDate: 
           phoneNumber,
@@ -156,9 +160,10 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: color.green,
-    // borderRadius: 5,
+    borderTopStartRadius: 10,
+    borderTopEndRadius: 10,
     paddingHorizontal: 25,
-    paddingVertical: 14,
+    paddingVertical: 18,
     alignItems: 'center',
   },
   buttonText: {

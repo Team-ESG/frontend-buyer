@@ -153,15 +153,18 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: color.green,
-    // borderRadius: 5,
+    borderTopStartRadius: 10,
+    borderTopEndRadius: 10,
     paddingHorizontal: 25,
-    paddingVertical: 14,
+    paddingVertical: 18,
     alignItems: 'center',
   },
   button_disabled: {
     backgroundColor: color.disabled_02,
+    borderTopStartRadius: 10,
+    borderTopEndRadius: 10,
     paddingHorizontal: 25,
-    paddingVertical: 14,
+    paddingVertical: 18,
     alignItems: 'center',
   },
   buttonText: {

@@ -15,7 +15,10 @@ function AddressInputScreen({ address, setAddress }: any): JSX.Element {
           setAddress(itemValue);
         }}
       >
-        <Picker.Item label="수원시 영통구" value="수원시 영통구" />
+        <Picker.Item
+          label="경기도 수원시 영통구"
+          value="경기도 수원시 영통구"
+        />
       </Picker>
     </View>
   );

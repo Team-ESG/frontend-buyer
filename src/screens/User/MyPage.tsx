@@ -133,8 +133,6 @@ const styles = StyleSheet.create({
   header: {
     paddingVertical: 15,
     alignItems: 'center',
-    borderBottomWidth: 0.5,
-    borderBottomColor: '#eee',
     justifyContent: 'center',
   },
   headerText: {
