@@ -15,31 +15,18 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const ItemList = [
   {
     id: 1,
-    title: '미스터쉐프프프프프프',
+    title: '듀쿠플',
+    desc: '초콜릿 레이어 케이크, 블루베리 치즈케이크',
   },
   {
     id: 2,
-    title: '미스터쉐프2',
+    title: '파리바게트',
+    desc: '크로와상, 바게트, 초코케이크, 빵, 케이크',
   },
   {
     id: 3,
-    title: '미스터쉐프3',
-  },
-  {
-    id: 4,
-    title: '미스터쉐프4',
-  },
-  {
-    id: 5,
-    title: '미스터쉐프5',
-  },
-  {
-    id: 6,
-    title: '미스터쉐프6',
-  },
-  {
-    id: 7,
-    title: '미스터쉐프7',
+    title: '미스터쉐프',
+    desc: '제육볶음, 불고기',
   },
 ];
 export default function Favorites({ navigation }: any) {
@@ -73,10 +60,16 @@ export default function Favorites({ navigation }: any) {
               <Text numberOfLines={1} style={styles.itemText}>
                 {item.title}
               </Text>
+              <Text numberOfLines={1} style={styles.descText}>
+                {item.desc}
+              </Text>
+              {/* <Text numberOfLines={1} style={styles.descText}>
+                {item.desc}
+              </Text> */}
             </View>
-            <View style={styles.itemHeartContainer}>
+            {/* <View style={styles.itemHeartContainer}>
               <Icon name="heart" size={25} color="red" />
-            </View>
+            </View> */}
           </Pressable>
         ))}
       </ScrollView>
@@ -146,13 +139,24 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   itemTextContainer: {
-    flex: 0.6,
+    height: '95%',
+    flex: 0.7,
     paddingHorizontal: 10,
+    justifyContent: 'flex-start',
   },
   itemText: {
-    fontSize: 17,
+    fontSize: 18,
     fontWeight: 'bold',
-    margin: 15,
+    color: '#433518',
+    marginHorizontal: 15,
+    marginTop: 5,
+    marginBottom: 2.5,
+  },
+  descText: {
+    fontSize: 13,
+    color: '#7e7e7e',
+    marginHorizontal: 15,
+    marginVertical: 5,
   },
   itemHeartContainer: {
     flex: 0.1,

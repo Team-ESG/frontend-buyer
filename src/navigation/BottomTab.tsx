@@ -62,6 +62,7 @@ export default function BottomTab(): JSX.Element {
             ) : (
               <Icon name="account-outline" size={25} />
             ),
+          headerShown: false,
         }}
       />
     </Tab.Navigator>
