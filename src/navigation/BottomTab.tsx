@@ -12,16 +12,22 @@ const Tab = createBottomTabNavigator();
 
 export default function BottomTab(): JSX.Element {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarLabelStyle: {
+          color: '#333',
+        },
+      }}
+    >
       <Tab.Screen
         name="홈"
         component={ItemList}
         options={{
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <Icon name="home" size={25} />
+              <Icon name="home" size={24} color="#333" />
             ) : (
-              <Icon name="home-outline" size={25} />
+              <Icon name="home-outline" size={24} />
             ),
           header: () => <Header />,
         }}
@@ -32,9 +38,9 @@ export default function BottomTab(): JSX.Element {
         options={{
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <Icon name="heart" size={25} />
+              <Icon name="heart" size={24} color="#333" />
             ) : (
-              <Icon name="heart-outline" size={25} />
+              <Icon name="heart-outline" size={24} />
             ),
           header: () => <Header />,
         }}
@@ -45,9 +51,9 @@ export default function BottomTab(): JSX.Element {
         options={{
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <Icon name="cart" size={25} />
+              <Icon name="cart" size={24} color="#333" />
             ) : (
-              <Icon name="cart-outline" size={25} />
+              <Icon name="cart-outline" size={24} />
             ),
           header: () => <Header />,
         }}
@@ -58,10 +64,11 @@ export default function BottomTab(): JSX.Element {
         options={{
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <Icon name="account" size={25} />
+              <Icon name="account" size={24} color="#333" />
             ) : (
-              <Icon name="account-outline" size={25} />
+              <Icon name="account-outline" size={24} />
             ),
+          headerShown: false,
         }}
       />
     </Tab.Navigator>
