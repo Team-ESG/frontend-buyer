@@ -24,7 +24,7 @@ export default function Header(): JSX.Element {
         <View style={styles.container}>
           <View style={styles.leftContainer}>
             <Text style={styles.locationText}>
-              {user?.address.split(' ')[2]}
+              {user?.address.thirdAddress}
             </Text>
             <Icon
               name="keyboard-arrow-down"

@@ -13,12 +13,33 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import kakaoLogo from '@lib/img/kakaoLogo.png';
 import naverLogo from '@lib/img/naverLogo.png';
 import { userState } from '@recoil/auth';
+import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
 
 function Login({ navigation }: any): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const setUser = useSetRecoilState(userState);
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:8080/login', {
+        id: email,
+        pwd: password,
+      });
+      setUser({
+        id: email,
+        nickname: response.data.info.nickName,
+        address: response.data.info.address,
+        discountPrice: response.data.info.discountPrice,
+        sex: response.data.info.sex,
+        accessToken: response.data.accessToken,
+        refreshToken: response.data.refreshToken,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -37,19 +58,7 @@ function Login({ navigation }: any): JSX.Element {
           placeholder="비밀번호"
           placeholderTextColor="#433518"
         />
-        <Pressable
-          style={styles.loginButton}
-          onPress={() => {
-            console.log('로그인 버튼 클릭');
-            setUser({
-              id: email,
-              nickname: 'esg',
-              address: '경기도 수원시 영통구',
-              accessToken: '1234',
-              refreshToken: '5678',
-            });
-          }}
-        >
+        <Pressable style={styles.loginButton} onPress={handleLogin}>
           <Text style={styles.buttonText}>로그인</Text>
         </Pressable>
       </View>

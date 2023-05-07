@@ -95,15 +95,15 @@ function InfoInputScreen({
   const handleCheckDuplicateNickname = async () => {
     try {
       /* Todo: 닉네임 중복 확인 코드  */
-      // const response = await axios.get(
-      //   `http://localhost:8080/register/check/nickname/${nickname}`,
-      //   {
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //   }
-      // );
-      //   if (response.state >= 400) throw new Error();
+      const response = await axios.get(
+        `http://localhost:8080/register/check/nickname/${nickname}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      if (response.state >= 400) throw new Error();
       goToNextStep();
     } catch (error: any) {
       setNicknameErrorMessage(DUPLICATE_NICKNAME_ERROR_MESSAGE);
