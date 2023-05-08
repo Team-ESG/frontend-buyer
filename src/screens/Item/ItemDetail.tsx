@@ -13,27 +13,24 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import testMarket from '@lib/img/market.png';
 import testImg from '@lib/img/testImg.jpeg';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRef } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 export default function ItemDetail({ navigation }: any) {
-  const scrollOffsetY = useRef(new Animated.Value(0)).current;
-
-  const minHeaderHeight = 116;
-  const maxHeaderHeight = 300;
-  const scrollDistance = maxHeaderHeight - minHeaderHeight;
-
-  const animatedHedaer = scrollOffsetY.interpolate({
-    inputRange: [0, 150],
-    outputRange: ['blue', 'red'],
-    extrapolate: 'clamp',
-  });
-  console.log(scrollOffsetY);
-  console.log(animatedHedaer);
+  useEffect(() => {
+    axios
+      .get('http://localhost:8080/main/item/1')
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <View style={styles.container}>
       <SafeAreaView
         style={{
-          backgroundColor: '#000000',
           width: '100%',
           position: 'absolute',
           top: 0,
@@ -51,15 +48,7 @@ export default function ItemDetail({ navigation }: any) {
           <Icon name="arrow-back-ios" size={24} color="#fff" />
         </Pressable>
       </SafeAreaView>
-      <ScrollView
-        scrollEventThrottle={16}
-        stickyHeaderIndices={[1]}
-        showsVerticalScrollIndicator={false}
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { y: scrollOffsetY } } }],
-          { useNativeDriver: false }
-        )}
-      >
+      <ScrollView showsVerticalScrollIndicator={false}>
         <ImageBackground
           style={{ position: 'relative', width: '100%', aspectRatio: 1 }}
           source={testImg}
