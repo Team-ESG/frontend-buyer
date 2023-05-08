@@ -44,102 +44,114 @@ export default function Cart({ navigation }: any) {
   return (
     <View style={styles.container}>
       <ScrollView>
-        {data?.map((item, index) => (
-          <View key={index}>
-            <View
-              style={{
-                flexDirection: 'row',
-                padding: 20,
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderBottomWidth: 1,
-                borderBottomColor: '#78787850',
-              }}
-            >
-              <Image
-                source={item.pthotoUrl}
-                style={{ borderRadius: 18, flex: 1, aspectRatio: 1 }}
-              />
-              <View style={{ flex: 1, gap: 5, padding: 20 }}>
-                <Text style={{ color: '#787878' }}>듀쿠플</Text>
-                <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
-                  초콜릿 레이어 케이크
-                </Text>
-                <View style={{ flexDirection: 'row', gap: 10 }}>
-                  <Text
-                    style={{
-                      color: '#787878',
-                      textDecorationLine: 'line-through',
-                      textDecorationColor: '#787878',
-                    }}
-                  >
-                    19,000원
+        <View style={{ marginBottom: 120 }}>
+          {data?.map((item, index) => (
+            <View key={index}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  padding: 20,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderBottomWidth: 1,
+                  borderBottomColor: '#78787850',
+                }}
+              >
+                <Image
+                  source={item.pthotoUrl}
+                  style={{ borderRadius: 18, flex: 1, aspectRatio: 1 }}
+                />
+                <View style={{ flex: 1, gap: 5, padding: 20 }}>
+                  <Text style={{ color: '#787878' }}>듀쿠플</Text>
+                  <Text style={{ fontSize: 16, fontWeight: 'bold' }}>
+                    초콜릿 레이어 케이크
                   </Text>
-                  <Text style={{ color: 'red' }}>20%</Text>
-                </View>
-                <Text
-                  style={{ color: '#433518', fontSize: 18, fontWeight: 'bold' }}
-                >
-                  15,200원
-                </Text>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    gap: 10,
-                    marginTop: 20,
-                    alignItems: 'center',
-                  }}
-                >
-                  <Icon
-                    name="remove-circle-outline"
-                    size={24}
-                    color="#78787850"
-                  />
-                  <Text style={{ fontWeight: 'bold' }}>1</Text>
-                  <Icon name="add-circle-outline" size={24} color="#787878" />
+                  <View style={{ flexDirection: 'row', gap: 10 }}>
+                    <Text
+                      style={{
+                        color: '#787878',
+                        textDecorationLine: 'line-through',
+                        textDecorationColor: '#787878',
+                      }}
+                    >
+                      19,000원
+                    </Text>
+                    <Text style={{ color: 'red' }}>20%</Text>
+                  </View>
                   <Text
                     style={{
                       color: '#433518',
-                      fontSize: 18,
+                      fontSize: 16,
                       fontWeight: 'bold',
                     }}
                   >
                     15,200원
                   </Text>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      gap: 10,
+                      marginTop: 20,
+                      alignItems: 'center',
+                    }}
+                  >
+                    <Icon
+                      name="remove-circle-outline"
+                      size={24}
+                      color="#78787850"
+                    />
+                    <Text style={{ fontWeight: 'bold' }}>1</Text>
+                    <Icon name="add-circle-outline" size={24} color="#787878" />
+                    <Text
+                      style={{
+                        color: '#433518',
+                        fontSize: 16,
+                        fontWeight: 'bold',
+                      }}
+                    >
+                      15,200원
+                    </Text>
+                  </View>
                 </View>
+                <Icon
+                  style={{ position: 'absolute', top: 20, right: 20 }}
+                  name="clear"
+                  size={24}
+                  color="#787878"
+                />
               </View>
-              <Icon
-                style={{ position: 'absolute', top: 20, right: 20 }}
-                name="clear"
-                size={24}
-                color="#787878"
-              />
-            </View>
-            {item.leftTime === 0 && (
-              <View
-                style={{
-                  position: 'absolute',
-                  width: '100%',
-                  height: '100%',
-                  backgroundColor: '#00000090',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Text
-                  style={{ color: 'white', fontSize: 30, fontWeight: 'bold' }}
+              {item.leftTime === 0 && (
+                <View
+                  style={{
+                    position: 'absolute',
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: '#00000090',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
                 >
-                  SOLD OUT
-                </Text>
-              </View>
-            )}
-          </View>
-        ))}
+                  <Icon
+                    style={{ position: 'absolute', top: 20, right: 20 }}
+                    name="clear"
+                    size={24}
+                    color="white"
+                  />
+                  <Text
+                    style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}
+                  >
+                    SOLD OUT
+                  </Text>
+                </View>
+              )}
+            </View>
+          ))}
+        </View>
       </ScrollView>
-      <View>
+      <View style={{ position: 'absolute', width: '100%', bottom: 0 }}>
         <View
           style={{
-            height: 70,
+            height: 60,
             backgroundColor: 'white',
             shadowColor: '#000000',
             shadowOpacity: 0.1,
@@ -162,17 +174,17 @@ export default function Cart({ navigation }: any) {
           <Text style={{ fontSize: 14, color: '#787878', fontWeight: 'bold' }}>
             총 1건
           </Text>
-          <Text style={{ fontSize: 20, fontWeight: 'bold' }}>15,200원</Text>
+          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>15,200원</Text>
         </View>
         <View
           style={{
-            height: 70,
+            height: 60,
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: '#80C597',
           }}
         >
-          <Text style={{ fontSize: 24, fontWeight: 'bold', color: 'white' }}>
+          <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>
             주문하기
           </Text>
         </View>

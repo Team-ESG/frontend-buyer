@@ -31,15 +31,13 @@ export default function ItemDetail({ navigation }: any) {
     <View style={styles.container}>
       <SafeAreaView
         style={{
-          width: '100%',
           position: 'absolute',
-          top: 0,
           zIndex: 9999,
+          marginLeft: 20,
         }}
       >
         <Pressable
           style={{
-            marginLeft: 20,
             width: 24,
             height: 24,
           }}
@@ -48,20 +46,14 @@ export default function ItemDetail({ navigation }: any) {
           <Icon name="arrow-back-ios" size={24} color="#fff" />
         </Pressable>
       </SafeAreaView>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <ImageBackground
-          style={{ position: 'relative', width: '100%', aspectRatio: 1 }}
-          source={testImg}
-        />
-        <View style={{ position: 'relative', top: -116 }}>
-          <SafeAreaView>
-            <View
-              style={{
-                width: 24,
-                height: 24,
-              }}
-            ></View>
-          </SafeAreaView>
+      <ScrollView>
+        <View>
+          <ImageBackground
+            style={{ width: '100%', aspectRatio: 1 }}
+            source={testImg}
+          ></ImageBackground>
+        </View>
+        <View>
           <View
             style={{
               flexDirection: 'row',
@@ -100,11 +92,11 @@ export default function ItemDetail({ navigation }: any) {
               />
               <View style={{ marginLeft: 20, gap: 5 }}>
                 <Text
-                  style={{ fontSize: 18, color: '#433518', fontWeight: 'bold' }}
+                  style={{ fontSize: 16, color: '#433518', fontWeight: 'bold' }}
                 >
                   미스터쉐프
                 </Text>
-                <Text style={{ fontSize: 16, color: '#787878' }}>
+                <Text style={{ fontSize: 14, color: '#787878' }}>
                   우만동 아주로47번길 18
                 </Text>
               </View>
@@ -132,15 +124,13 @@ export default function ItemDetail({ navigation }: any) {
           style={{
             padding: 20,
             gap: 10,
-            position: 'relative',
-            top: -116,
           }}
         >
-          <Text style={{ fontSize: 16, color: '#787878' }}>미스터쉐프</Text>
-          <Text style={{ fontSize: 20, color: '#433518', fontWeight: 'bold' }}>
+          <Text style={{ fontSize: 14, color: '#787878' }}>미스터쉐프</Text>
+          <Text style={{ fontSize: 16, color: '#433518', fontWeight: 'bold' }}>
             초콜릿 레이어 케이크
           </Text>
-          <Text style={{ fontSize: 16 }}>
+          <Text style={{ fontSize: 14, marginBottom: 40 }}>
             미스터쉐프에서 오랜만에 케이크를 제작해 보았습니다. 저렴하게
             판매하니 많이 찾아와주세요.미스터쉐프에서 오랜만에 케이크를 제작해
             보았습니다. 저렴하게 판매하니 많이 찾아와주세요.미스터쉐프에서
@@ -192,7 +182,7 @@ export default function ItemDetail({ navigation }: any) {
             marginLeft: 40,
           }}
         >
-          <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>
+          <Text style={{ color: 'white', fontSize: 14, fontWeight: 'bold' }}>
             유통기한:23.04.27
           </Text>
         </View>
@@ -228,7 +218,7 @@ export default function ItemDetail({ navigation }: any) {
             </View>
             <View>
               <Text
-                style={{ color: '#433518', fontSize: 18, fontWeight: 'bold' }}
+                style={{ color: '#433518', fontSize: 16, fontWeight: 'bold' }}
               >
                 15,200원
               </Text>
@@ -271,7 +261,7 @@ export default function ItemDetail({ navigation }: any) {
           </View>
           <View>
             <Text
-              style={{ color: '#433518', fontSize: 30, fontWeight: 'bold' }}
+              style={{ color: '#433518', fontSize: 20, fontWeight: 'bold' }}
             >
               총 15,200원
             </Text>
@@ -285,7 +275,7 @@ export default function ItemDetail({ navigation }: any) {
               borderRadius: 10,
             }}
           >
-            <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>
+            <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>
               구매하기
             </Text>
           </View>
