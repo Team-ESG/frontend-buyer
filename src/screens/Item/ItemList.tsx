@@ -1,11 +1,10 @@
 // home screen component with tsx
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleSheet,
   Text,
   View,
   Pressable,
-  Image,
   ScrollView,
   ImageBackground,
 } from 'react-native';
@@ -13,6 +12,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import testImg from '@lib/img/testImg.jpeg';
+import axios from 'axios';
 const data = [
   {
     marketName: '듀쿠플',
@@ -39,6 +39,16 @@ const data = [
 ];
 
 export default function ItemList({ navigation }: any) {
+  useEffect(() => {
+    axios
+      .get('http://localhost:8080/main/list')
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <ScrollView>
       <View style={styles.container}>
