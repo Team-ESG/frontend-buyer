@@ -178,6 +178,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '90%',
     padding: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
     marginBottom: 20,
     backgroundColor: '#ffffff99',
     flexDirection: 'row',
