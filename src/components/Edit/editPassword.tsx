@@ -38,7 +38,7 @@ export default function EditPassword({ navigation }: any) {
         },
         {
           headers: {
-            authorization: user?.accessToken,
+            Authorization: `Bearer ${user?.accessToken}`,
           },
         }
       );

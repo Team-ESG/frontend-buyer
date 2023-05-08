@@ -5,10 +5,10 @@ import color from '@lib/color/color';
 import { Picker } from '@react-native-picker/picker';
 import { userState } from '@recoil/auth';
 import axios from 'axios';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 export default function EditAddress({ navigation }: any) {
-  const user = useRecoilValue(userState);
+  const [user, setUser] = useRecoilState(userState);
   const [address, setAddress] = useState('');
 
   const handleEditAddress = async () => {
@@ -22,10 +22,14 @@ export default function EditAddress({ navigation }: any) {
         },
         {
           headers: {
-            authorization: user?.accessToken,
+            Authorization: `Bearer ${user?.accessToken}`,
           },
         }
       );
+      setUser({
+        ...user,
+        address,
+      });
       if (response.state >= 400) throw new Error();
     } catch (err) {
       Alert.alert('주소 변경 오류', '다시 시도해주세요');

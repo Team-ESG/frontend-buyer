@@ -16,6 +16,10 @@ export default function BottomTab(): JSX.Element {
       screenOptions={{
         tabBarLabelStyle: {
           color: '#333',
+          paddingBottom: 5,
+        },
+        tabBarStyle: {
+          paddingTop: 5,
         },
       }}
     >
