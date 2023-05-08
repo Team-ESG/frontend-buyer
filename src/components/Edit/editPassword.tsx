@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 
 import color from '@lib/color/color';
+import { userState } from '@recoil/auth';
 import axios from 'axios';
+import { useRecoilValue } from 'recoil';
 
 const PASSWORD_REGEX = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
 const PASSWORD_ERROR_MESSAGE =
@@ -17,6 +19,7 @@ const PASSWORD_ERROR_MESSAGE =
 const PASSWORD_CONFIRMATION_ERROR_MESSAGE = '비밀번호가 일치하지 않아요.';
 
 export default function EditPassword({ navigation }: any) {
+  const user = useRecoilValue(userState);
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
@@ -28,15 +31,20 @@ export default function EditPassword({ navigation }: any) {
 
   const handleEditPassword = async () => {
     try {
-      const response = await axios.post(
+      const response = await axios.patch(
         'http://localhost:8080/auth/info/reset/pwd',
         {
           pwd: password,
+        },
+        {
+          headers: {
+            authorization: user?.accessToken,
+          },
         }
       );
-      // if (response.state >= 400) throw new Error();
+      if (response.state >= 400) throw new Error();
     } catch (err) {
-      Alert.alert('오류', '다시 시도해주세요');
+      Alert.alert('비밀번호 변경 오류', '다시 시도해주세요');
     }
   };
 

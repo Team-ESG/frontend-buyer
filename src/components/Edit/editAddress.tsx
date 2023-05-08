@@ -3,24 +3,32 @@ import { StyleSheet, View, Text, Pressable, Alert } from 'react-native';
 
 import color from '@lib/color/color';
 import { Picker } from '@react-native-picker/picker';
+import { userState } from '@recoil/auth';
 import axios from 'axios';
+import { useRecoilValue } from 'recoil';
 
 export default function EditAddress({ navigation }: any) {
+  const user = useRecoilValue(userState);
   const [address, setAddress] = useState('');
 
   const handleEditAddress = async () => {
     try {
-      const response = await axios.post(
-        'http://localhost:8080/auth/info/reset/nickname',
+      const response = await axios.patch(
+        'http://localhost:8080/auth/info/reset/address',
         {
           firstAddr: address.split(' ')[0],
           secondAddr: address.split(' ')[1],
           thirdAddr: address.split(' ')[2],
+        },
+        {
+          headers: {
+            authorization: user?.accessToken,
+          },
         }
       );
-      // if (response.state >= 400) throw new Error();
+      if (response.state >= 400) throw new Error();
     } catch (err) {
-      Alert.alert('오류', '다시 시도해주세요');
+      Alert.alert('주소 변경 오류', '다시 시도해주세요');
     }
   };
 

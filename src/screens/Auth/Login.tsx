@@ -37,7 +37,7 @@ function Login({ navigation }: any): JSX.Element {
         refreshToken: response.data.refreshToken,
       });
     } catch (e) {
-      console.log(e);
+      Alert.alert('로그인 실패!', '아이디 혹은 비밀번호를 확인해주세요.');
     }
   };
 
@@ -57,6 +57,7 @@ function Login({ navigation }: any): JSX.Element {
           value={password}
           placeholder="비밀번호"
           placeholderTextColor="#433518"
+          secureTextEntry
         />
         <Pressable style={styles.loginButton} onPress={handleLogin}>
           <Text style={styles.buttonText}>로그인</Text>
@@ -99,13 +100,6 @@ function Login({ navigation }: any): JSX.Element {
           />
           <Text style={styles.kakaoTextColor}>카카오 로그인</Text>
         </Pressable>
-        {/* <Pressable
-          style={[styles.socialLoginButton, styles.googleBackgroundColor]}
-          onPress={() => Alert.alert('구글 로그인을 실행하였습니다.')}
-        >
-          <Image style={styles.socialLogo} source={googleLogo} />
-          <Text style={styles.googleTextColor}>구글계정으로 로그인</Text>
-        </Pressable> */}
       </View>
       <View style={styles.signupSection}>
         <Text style={styles.commonText}>혹시, 처음이시라면?</Text>
@@ -151,6 +145,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 5,
     },
+    elevation: 5,
   },
   buttonText: {
     color: '#fff',
