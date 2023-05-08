@@ -15,6 +15,7 @@ import naverLogo from '@lib/img/naverLogo.png';
 import { userState } from '@recoil/auth';
 import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
+import color from '@lib/color/color';
 
 function Login({ navigation }: any): JSX.Element {
   const [email, setEmail] = useState('');
@@ -131,13 +132,13 @@ const styles = StyleSheet.create({
     borderBottomColor: '#433518',
   },
   loginButton: {
-    width: '90%',
+    width: '100%',
     marginTop: 70,
     height: 60,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    backgroundColor: '#433518',
+    backgroundColor: color.green,
     shadowColor: '#000',
     shadowOpacity: 0.5,
     shadowRadius: 5,
@@ -149,7 +150,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   helpSection: {
@@ -199,6 +200,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignItems: 'center',
     flexDirection: 'row',
+    elevation: 3,
   },
   naverBackgroundColor: {
     backgroundColor: '#03C75A',
@@ -211,22 +213,15 @@ const styles = StyleSheet.create({
   },
   naverTextColor: {
     flex: 1,
-    fontSize: 20,
+    fontSize: 16,
     color: '#fff',
     textAlign: 'center',
   },
   kakaoTextColor: {
     flex: 1,
-    fontSize: 20,
+    fontSize: 16,
     color: '#000',
     opacity: 0.85,
-    textAlign: 'center',
-  },
-  googleTextColor: {
-    flex: 1,
-    fontSize: 20,
-    color: '#757575',
-    fontWeight: 'bold',
     textAlign: 'center',
   },
   socialLogo: {
