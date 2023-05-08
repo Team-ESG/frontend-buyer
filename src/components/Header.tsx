@@ -2,10 +2,17 @@ import { Text, View, StyleSheet, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useNavigation } from '@react-navigation/native';
+import { userState } from '@recoil/auth';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useRecoilValue } from 'recoil';
 
 export default function Header(): JSX.Element {
   const navigation = useNavigation();
+  const user = useRecoilValue(userState);
+
+  const handleEditAddress = () => {
+    navigation.navigate('Edit', { title: '주소 변경' });
+  };
 
   const handleSearchPress = () => {
     navigation.navigate('Search');
@@ -16,8 +23,15 @@ export default function Header(): JSX.Element {
       <SafeAreaView edges={['top']}>
         <View style={styles.container}>
           <View style={styles.leftContainer}>
-            <Text style={styles.locationText}>영통구</Text>
-            <Icon name="keyboard-arrow-down" size={24} color="#333" />
+            <Text style={styles.locationText}>
+              {user?.address.thirdAddress}
+            </Text>
+            <Icon
+              name="keyboard-arrow-down"
+              size={24}
+              color="#333"
+              onPress={handleEditAddress}
+            />
           </View>
           <Pressable onPress={handleSearchPress}>
             <Icon name="search" size={24} color="#333" />

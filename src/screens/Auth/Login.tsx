@@ -13,12 +13,33 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import kakaoLogo from '@lib/img/kakaoLogo.png';
 import naverLogo from '@lib/img/naverLogo.png';
 import { userState } from '@recoil/auth';
+import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
 
 function Login({ navigation }: any): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const setUser = useSetRecoilState(userState);
+
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('http://localhost:8080/login', {
+        id: email,
+        pwd: password,
+      });
+      setUser({
+        id: email,
+        nickname: response.data.info.nickName,
+        address: response.data.info.address,
+        discountPrice: response.data.info.discountPrice,
+        sex: response.data.info.sex,
+        accessToken: response.data.accessToken,
+        refreshToken: response.data.refreshToken,
+      });
+    } catch (e) {
+      Alert.alert('로그인 실패!', '아이디 혹은 비밀번호를 확인해주세요.');
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -36,14 +57,9 @@ function Login({ navigation }: any): JSX.Element {
           value={password}
           placeholder="비밀번호"
           placeholderTextColor="#433518"
+          secureTextEntry
         />
-        <Pressable
-          style={styles.loginButton}
-          onPress={() => {
-            console.log('로그인 버튼 클릭');
-            setUser({ id: email });
-          }}
-        >
+        <Pressable style={styles.loginButton} onPress={handleLogin}>
           <Text style={styles.buttonText}>로그인</Text>
         </Pressable>
       </View>
@@ -84,13 +100,6 @@ function Login({ navigation }: any): JSX.Element {
           />
           <Text style={styles.kakaoTextColor}>카카오 로그인</Text>
         </Pressable>
-        {/* <Pressable
-          style={[styles.socialLoginButton, styles.googleBackgroundColor]}
-          onPress={() => Alert.alert('구글 로그인을 실행하였습니다.')}
-        >
-          <Image style={styles.socialLogo} source={googleLogo} />
-          <Text style={styles.googleTextColor}>구글계정으로 로그인</Text>
-        </Pressable> */}
       </View>
       <View style={styles.signupSection}>
         <Text style={styles.commonText}>혹시, 처음이시라면?</Text>
@@ -136,6 +145,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 5,
     },
+    elevation: 5,
   },
   buttonText: {
     color: '#fff',

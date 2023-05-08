@@ -7,7 +7,7 @@ import color from '@lib/color/color';
 import { userState } from '@recoil/auth';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 const menuList = [
   {
@@ -42,7 +42,7 @@ const systemList = [
 ];
 
 export default function MyPage({ navigation }: any) {
-  const setUser = useSetRecoilState(userState);
+  const [user, setUser] = useRecoilState(userState);
   const total = 7000;
   return (
     <SafeAreaView style={styles.container}>
@@ -63,7 +63,7 @@ export default function MyPage({ navigation }: any) {
             <View style={styles.profileLeft}>
               <Icon2 name="user-circle" size={64} color={color.green} />
               <Text style={styles.profileText} numberOfLines={1}>
-                김쿠키
+                {user?.nickname}
               </Text>
             </View>
             <Icon name="arrow-right" size={24} />
@@ -133,8 +133,6 @@ const styles = StyleSheet.create({
   header: {
     paddingVertical: 15,
     alignItems: 'center',
-    borderBottomWidth: 0.5,
-    borderBottomColor: '#eee',
     justifyContent: 'center',
   },
   headerText: {

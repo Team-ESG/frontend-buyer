@@ -50,28 +50,40 @@ function Signup({ navigation }: any): JSX.Element {
       2,
       4
     )}-${yymmdd.slice(4, 6)}`;
-    setBirthDate(formattedBirthDate);
+    return formattedBirthDate;
+  };
+
+  const formatGender = (num: string) => {
+    if (num === '1' || num === '3') return 'MAN';
+    if (num === '2' || num === '4') return 'WOMAN';
+    return '';
   };
 
   const handleSignUp = async () => {
     try {
-      formatBirthDate(birthDate);
-      /* Todo: 회원가입 요청 코드 
-        const response = await axios.post('http://localhost:8080/auth/signup', {
-          memberId: id,
-          password,
-          name,
-          nickname,
-          address,
-          sex: gender,
-          birthDate: 
-          phoneNumber,
-      */
-      // if (response.state >= 400) throw new Error();
+      const formattedBirthDate = await formatBirthDate(birthDate);
+      const formattedGender = await formatGender(gender);
+
+      const response = await axios.post('http://localhost:8080/register', {
+        memberId: id,
+        password,
+        name,
+        nickname,
+        address: {
+          firstAddr: address.split(' ')[0],
+          secondAddr: address.split(' ')[1],
+          thirdAddr: address.split(' ')[2],
+        },
+        sex: formattedGender,
+        birthDate: formattedBirthDate,
+        phoneNumber,
+        social: false,
+      });
+      if (response.state >= 400) throw new Error();
       Alert.alert('회원가입 성공', '로그인 페이지로 이동합니다.');
       navigation.navigate('Login');
     } catch (error) {
-      Alert.alert('오류', '다시 시도해주세요');
+      Alert.alert('회원가입 실패', '다시 시도해주세요');
     }
   };
 
@@ -156,9 +168,10 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: color.green,
-    // borderRadius: 5,
+    borderTopStartRadius: 10,
+    borderTopEndRadius: 10,
     paddingHorizontal: 25,
-    paddingVertical: 14,
+    paddingVertical: 18,
     alignItems: 'center',
   },
   buttonText: {

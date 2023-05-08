@@ -9,26 +9,40 @@ import {
 } from 'react-native';
 
 import color from '@lib/color/color';
+import { userState } from '@recoil/auth';
 import axios from 'axios';
+import { useRecoilState } from 'recoil';
 
 const NICKNAME_REGEX = /^[가-힣a-zA-Z0-9]{2,10}$/;
 const NICKNAME_ERROR_MESSAGE = '닉네임을 두 글자 이상 입력해주세요.';
+const DUPLICATE_NICKNAME_ERROR_MESSAGE = '이미 사용중인 닉네임 이에요.';
 
 export default function EditNickname({ navigation }: any) {
+  const [user, setUser] = useRecoilState(userState);
   const [nicknameErrorMessage, setNicknameErrorMessage] = useState('');
   const [nickname, setNickname] = useState('');
 
   const handleEditNickname = async () => {
     try {
-      const response = await axios.post(
+      const response = await axios.patch(
         'http://localhost:8080/auth/info/reset/nickname',
         {
           nickname,
+        },
+        {
+          headers: {
+            authorization: user?.accessToken,
+          },
         }
       );
-      // if (response.state >= 400) throw new Error();
+      setUser({
+        ...user,
+        nickname,
+      });
+      if (response.state >= 400) throw new Error();
     } catch (err) {
-      Alert.alert('오류', '다시 시도해주세요');
+      console.log(err);
+      setNicknameErrorMessage(DUPLICATE_NICKNAME_ERROR_MESSAGE);
     }
   };
 
