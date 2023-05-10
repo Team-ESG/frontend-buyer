@@ -36,6 +36,7 @@ export default function EditProfile({ navigation }: any): JSX.Element {
     {
       id: 6,
       title: '주소 변경',
+      content: user?.address?.firstAddress,
     },
   ];
   return (

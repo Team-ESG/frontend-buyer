@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Alert,
   Image,
@@ -10,16 +10,41 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import color from '@lib/color/color';
 import kakaoLogo from '@lib/img/kakaoLogo.png';
 import naverLogo from '@lib/img/naverLogo.png';
 import { userState } from '@recoil/auth';
 import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
+import { getTokens, setTokens } from 'src/utils/storageHelper';
 
 function Login({ navigation }: any): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const setUser = useSetRecoilState(userState);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const tokens = await getTokens();
+      if (!tokens) return;
+
+      const response = await axios.post('http://localhost:8080/autoLogin', {
+        accessToken: tokens.accessToken,
+        refreshToken: tokens.refreshToken,
+      });
+      setUser({
+        id: response.data.data.memberId,
+        nickname: response.data.data.nickName,
+        address: response.data.data.address,
+        discountPrice: response.data.data.discountPrice,
+        sex: response.data.data.sex,
+        accessToken: response.data.accessToken,
+        refreshToken: response.data.refreshToken,
+      });
+      setTokens(response.data.accessToken, response.data.refreshToken);
+    };
+    fetchUser();
+  }, []);
 
   const handleLogin = async () => {
     try {
@@ -36,9 +61,26 @@ function Login({ navigation }: any): JSX.Element {
         accessToken: response.data.accessToken,
         refreshToken: response.data.refreshToken,
       });
+      setTokens(response.data.accessToken, response.data.refreshToken).then(
+        () => {
+          console.log('토큰 저장 완료');
+        }
+      );
     } catch (e) {
       Alert.alert('로그인 실패!', '아이디 혹은 비밀번호를 확인해주세요.');
     }
+  };
+
+  const handleKakaoLogin = () => {
+    navigation.navigate('WebView', {
+      url: 'http://localhost:8080/oauth2/authorization/kakao',
+    });
+  };
+
+  const handleNaverLogin = () => {
+    navigation.navigate('WebView', {
+      url: 'http://localhost:8080/oauth2/authorization/naver',
+    });
   };
 
   return (
@@ -85,14 +127,14 @@ function Login({ navigation }: any): JSX.Element {
       <View style={styles.socialLoginSection}>
         <Pressable
           style={[styles.socialLoginButton, styles.naverBackgroundColor]}
-          onPress={() => Alert.alert('네이버 로그인을 실행하였습니다.')}
+          onPress={handleNaverLogin}
         >
           <Image style={styles.socialLogo} source={naverLogo} />
           <Text style={styles.naverTextColor}>네이버로 로그인</Text>
         </Pressable>
         <Pressable
           style={[styles.socialLoginButton, styles.kakaoBackgroundColor]}
-          onPress={() => Alert.alert('카카오 로그인을 실행하였습니다.')}
+          onPress={handleKakaoLogin}
         >
           <Image
             style={[styles.socialLogo, { height: 18 }]}
@@ -131,13 +173,13 @@ const styles = StyleSheet.create({
     borderBottomColor: '#433518',
   },
   loginButton: {
-    width: '90%',
+    width: '100%',
     marginTop: 70,
     height: 60,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    backgroundColor: '#433518',
+    backgroundColor: color.green,
     shadowColor: '#000',
     shadowOpacity: 0.5,
     shadowRadius: 5,
@@ -149,7 +191,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    fontSize: 25,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   helpSection: {
@@ -199,6 +241,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignItems: 'center',
     flexDirection: 'row',
+    elevation: 3,
   },
   naverBackgroundColor: {
     backgroundColor: '#03C75A',
@@ -211,22 +254,15 @@ const styles = StyleSheet.create({
   },
   naverTextColor: {
     flex: 1,
-    fontSize: 20,
+    fontSize: 16,
     color: '#fff',
     textAlign: 'center',
   },
   kakaoTextColor: {
     flex: 1,
-    fontSize: 20,
+    fontSize: 16,
     color: '#000',
     opacity: 0.85,
-    textAlign: 'center',
-  },
-  googleTextColor: {
-    flex: 1,
-    fontSize: 20,
-    color: '#757575',
-    fontWeight: 'bold',
     textAlign: 'center',
   },
   socialLogo: {

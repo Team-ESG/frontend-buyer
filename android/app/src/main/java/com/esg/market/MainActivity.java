@@ -1,4 +1,4 @@
-package com.buyerapp;
+package com.esg.market;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

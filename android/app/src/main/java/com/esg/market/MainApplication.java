@@ -1,4 +1,4 @@
-package com.buyerapp;
+package com.esg.market;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

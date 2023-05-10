@@ -23,6 +23,7 @@ export default function EditNickname({ navigation }: any) {
   const [nickname, setNickname] = useState('');
 
   const handleEditNickname = async () => {
+    console.log(user?.accessToken)
     try {
       const response = await axios.patch(
         'http://localhost:8080/auth/info/reset/nickname',
@@ -31,7 +32,7 @@ export default function EditNickname({ navigation }: any) {
         },
         {
           headers: {
-            authorization: user?.accessToken,
+            Authorization: `Bearer ${user?.accessToken}`,
           },
         }
       );
