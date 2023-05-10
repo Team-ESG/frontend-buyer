@@ -1,5 +1,5 @@
 // home screen component with tsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -13,53 +13,35 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import testImg from '@lib/img/testImg.jpeg';
 import axios from 'axios';
-const data = [
-  {
-    marketName: '듀쿠플',
-    name: '초콜릿 레이어 케이크',
-    pthotoUrl: testImg,
-    price: {
-      original: 19000,
-      discount: 20,
-      current: 15200,
-    },
-    leftTime: 1800,
-  },
-  {
-    marketName: '듀쿠플',
-    name: '초콜릿 레이어 케이크',
-    pthotoUrl: testImg,
-    price: {
-      original: 19000,
-      discount: 20,
-      current: 15200,
-    },
-    leftTime: 1800,
-  },
-];
 
 export default function ItemList({ navigation }: any) {
+  const [itemList, setItemList] = useState([]);
+
   useEffect(() => {
     axios
       .get('http://localhost:8080/main/list')
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data.data);
+        setItemList(res.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
   return (
     <ScrollView>
       <View style={styles.container}>
-        {data?.map((item, index) => (
+        {itemList?.map((item, index) => (
           <Pressable
             key={index}
-            onPress={() => navigation.navigate('ItemDetail')}
+            onPress={() =>
+              navigation.navigate('ItemDetail', { id: item.itemId })
+            }
           >
             <View style={styles.card}>
               <ImageBackground
-                source={item.pthotoUrl}
+                source={testImg}
                 style={styles.image}
                 imageStyle={{ borderRadius: 18 }}
               >
@@ -70,7 +52,19 @@ export default function ItemList({ navigation }: any) {
                 >
                   <View style={styles.alarm}>
                     <Icon name="alarm" size={24} color="#433518" />
-                    <Text style={styles.alarmText}>00:30</Text>
+                    <Text style={styles.alarmText}>
+                      {`${(
+                        ((item.expirationDate - Date.now()) / 1000 / 60 / 60) %
+                        24
+                      )
+                        .toFixed(0)
+                        .padStart(2, '0')}:${(
+                        ((item.expirationDate - Date.now()) / 1000 / 60) %
+                        60
+                      )
+                        .toFixed(0)
+                        .padStart(2, '0')}`}
+                    </Text>
                   </View>
                 </View>
                 <View
@@ -111,10 +105,15 @@ export default function ItemList({ navigation }: any) {
                             textDecorationStyle: 'solid',
                           }}
                         >
-                          {item.price.original.toLocaleString('ko-KR')}
+                          {item.originalPrice.toLocaleString('ko-KR')}
                         </Text>
                         <Text style={{ color: 'red', fontSize: 12 }}>
-                          {item.price.discount}%
+                          {100 -
+                            (
+                              (item.discountPrice / item.originalPrice) *
+                              100
+                            ).toFixed(0)}
+                          %
                         </Text>
                       </View>
                       <Text
@@ -124,7 +123,7 @@ export default function ItemList({ navigation }: any) {
                           fontSize: 18,
                         }}
                       >
-                        {item.price.current.toLocaleString('ko-KR')}원
+                        {item.discountPrice.toLocaleString('ko-KR')}원
                       </Text>
                     </View>
                   </View>

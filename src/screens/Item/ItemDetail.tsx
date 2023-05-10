@@ -13,20 +13,64 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import testMarket from '@lib/img/market.png';
 import testImg from '@lib/img/testImg.jpeg';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Alert } from 'react-native';
+import { useRecoilValue } from 'recoil';
+import { userState } from '@recoil/auth';
 
-export default function ItemDetail({ navigation }: any) {
+export default function ItemDetail({ navigation, route }: any) {
+  const user = useRecoilValue(userState);
+  const [item, setItem] = useState({} as any);
+  const [buyCount, setBuyCount] = useState(1);
+
   useEffect(() => {
     axios
-      .get('http://localhost:8080/main/item/1')
+      .get(`http://localhost:8080/main/item/${route.params.id}`)
       .then((res) => {
-        console.log(res.data);
+        setItem(res.data.data);
+        console.log(res.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  const onPressCountMinus = () => {
+    if (buyCount > 1) {
+      setBuyCount(buyCount - 1);
+    }
+  };
+
+  const onPressCountPlus = () => {
+    if (buyCount !== item.itemQuantity) {
+      setBuyCount(buyCount + 1);
+    }
+  };
+
+  const onPressAddCart = () => {
+    axios
+      .post(
+        'http://localhost:8080/main/item/cart',
+        {
+          itemId: route.params.id,
+          quantity: buyCount,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${user?.accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        Alert.alert('장바구니에 추가되었습니다.');
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <View style={styles.container}>
       <SafeAreaView
@@ -92,12 +136,16 @@ export default function ItemDetail({ navigation }: any) {
               />
               <View style={{ marginLeft: 20, gap: 5 }}>
                 <Text
-                  style={{ fontSize: 16, color: '#433518', fontWeight: 'bold' }}
+                  style={{
+                    fontSize: 16,
+                    color: '#433518',
+                    fontWeight: 'bold',
+                  }}
                 >
-                  미스터쉐프
+                  {item.marketName}
                 </Text>
                 <Text style={{ fontSize: 14, color: '#787878' }}>
-                  우만동 아주로47번길 18
+                  {`${item.address?.firstAddr} ${item.address?.secondAddr} ${item.address?.thirdAddr}`}
                 </Text>
               </View>
             </View>
@@ -126,44 +174,14 @@ export default function ItemDetail({ navigation }: any) {
             gap: 10,
           }}
         >
-          <Text style={{ fontSize: 14, color: '#787878' }}>미스터쉐프</Text>
+          <Text style={{ fontSize: 14, color: '#787878' }}>
+            {item.marketName}
+          </Text>
           <Text style={{ fontSize: 16, color: '#433518', fontWeight: 'bold' }}>
-            초콜릿 레이어 케이크
+            {item.name}
           </Text>
           <Text style={{ fontSize: 14, marginBottom: 40 }}>
-            미스터쉐프에서 오랜만에 케이크를 제작해 보았습니다. 저렴하게
-            판매하니 많이 찾아와주세요.미스터쉐프에서 오랜만에 케이크를 제작해
-            보았습니다. 저렴하게 판매하니 많이 찾아와주세요.미스터쉐프에서
-            오랜만에 케이크를 제작해 보았습니다. 저렴하게 판매하니 많이
-            찾아와주세요.미스터쉐프에서 오랜만에 케이크를 제작해 보았습니다.
-            저렴하게 판매하니 많이 찾아와주세요.미스터쉐프에서 오랜만에 케이크를
-            제작해 보았습니다. 저렴하게 판매하니 많이
-            찾아와주세요.미스터쉐프에서 오랜만에 케이크를 제작해 보았습니다.
-            저렴하게 판매하니 많이 찾아와주세요.미스터쉐프에서 오랜만에 케이크를
-            제작해 보았습니다. 저렴하게 판매하니 많이
-            찾아와주세요.미스터쉐프에서 오랜만에 케이크를 제작해 보았습니다.
-            저렴하게 판매하니 많이 찾아와주세요.미스터쉐프에서 오랜만에 케이크를
-            제작해 보았습니다. 저렴하게 판매하니 많이
-            찾아와주세요.미스터쉐프에서 오랜만에 케이크를 제작해 보았습니다.
-            저렴하게 판매하니 많이 찾아와주세요.미스터쉐프에서 오랜만에 케이크를
-            제작해 보았습니다. 저렴하게 판매하니 많이
-            찾아와주세요.미스터쉐프에서 오랜만에 케이크를 제작해 보았습니다.
-            저렴하게 판매하니 많이 찾아와주세요.미스터쉐프에서 오랜만에 케이크를
-            제작해 보았습니다. 저렴하게 판매하니 많이
-            찾아와주세요.미스터쉐프에서 오랜만에 케이크를 제작해 보았습니다.
-            저렴하게 판매하니 많이 찾아와주세요.미스터쉐프에서 오랜만에 케이크를
-            제작해 보았습니다. 저렴하게 판매하니 많이
-            찾아와주세요.미스터쉐프에서 오랜만에 케이크를 제작해 보았습니다.
-            저렴하게 판매하니 많이 찾아와주세요.미스터쉐프에서 오랜만에 케이크를
-            제작해 보았습니다. 저렴하게 판매하니 많이
-            찾아와주세요.미스터쉐프에서 오랜만에 케이크를 제작해 보았습니다.
-            저렴하게 판매하니 많이 찾아와주세요. 찾아와주세요.미스터쉐프에서
-            오랜만에 케이크를 제작해 보았습니다. 저렴하게 판매하니 많이
-            찾아와주세요.미스터쉐프에서 오랜만에 케이크를 제작해 보았습니다.
-            저렴하게 판매하니 많이 찾아와주세요.미스터쉐프에서 오랜만에 케이크를
-            제작해 보았습니다. 저렴하게 판매하니 많이
-            찾아와주세요.미스터쉐프에서 오랜만에 케이크를 제작해 보았습니다.
-            저렴하게 판매하니 많이
+            {item.itemDetail}
           </Text>
         </View>
       </ScrollView>
@@ -183,7 +201,10 @@ export default function ItemDetail({ navigation }: any) {
           }}
         >
           <Text style={{ color: 'white', fontSize: 14, fontWeight: 'bold' }}>
-            유통기한:23.04.27
+            {`유통기한 ${new Date(item.expirationDate)
+              .toLocaleDateString('ko-KR')
+              .split('.', 3)
+              .join('.')}`}
           </Text>
         </View>
         <View
@@ -212,15 +233,25 @@ export default function ItemDetail({ navigation }: any) {
                   textDecorationStyle: 'solid',
                 }}
               >
-                19,000원
+                {item.originalPrice?.toLocaleString('ko-KR')}원
               </Text>
-              <Text style={{ color: 'red', fontSize: 12 }}>20%</Text>
+              <Text style={{ color: 'red', fontSize: 12 }}>
+                {(
+                  100 -
+                  (item.discountPrice / item.originalPrice) * 100
+                )?.toFixed(0)}
+                %
+              </Text>
             </View>
             <View>
               <Text
-                style={{ color: '#433518', fontSize: 16, fontWeight: 'bold' }}
+                style={{
+                  color: '#433518',
+                  fontSize: 16,
+                  fontWeight: 'bold',
+                }}
               >
-                15,200원
+                {item.discountPrice?.toLocaleString('ko-KR')}원
               </Text>
             </View>
           </View>
@@ -233,9 +264,19 @@ export default function ItemDetail({ navigation }: any) {
               gap: 10,
             }}
           >
-            <Icon name="remove-circle-outline" size={24} color="#78787850" />
-            <Text style={{ fontSize: 16 }}>1</Text>
-            <Icon name="add-circle-outline" size={24} color="#787878" />
+            <Icon
+              name="remove-circle-outline"
+              size={24}
+              color={buyCount === 1 ? '#78787850' : '#787878'}
+              onPress={onPressCountMinus}
+            />
+            <Text style={{ fontSize: 16 }}>{buyCount}</Text>
+            <Icon
+              name="add-circle-outline"
+              size={24}
+              color={buyCount === item.itemQuantity ? '#78787850' : '#787878'}
+              onPress={onPressCountPlus}
+            />
           </View>
         </View>
         <View
@@ -257,13 +298,17 @@ export default function ItemDetail({ navigation }: any) {
               paddingRight: 30,
             }}
           >
-            <Icon name="add-shopping-cart" size={24} color="#787878" />
+            <Pressable onPress={onPressAddCart}>
+              <Icon name="add-shopping-cart" size={24} color="#787878" />
+            </Pressable>
           </View>
           <View>
             <Text
               style={{ color: '#433518', fontSize: 20, fontWeight: 'bold' }}
             >
-              총 15,200원
+              {`총 ${(item.discountPrice * buyCount).toLocaleString(
+                'ko-KR'
+              )}원`}
             </Text>
           </View>
           <View
