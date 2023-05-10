@@ -8,6 +8,7 @@ import { userState } from '@recoil/auth';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { useRecoilState } from 'recoil';
+import { removeTokens } from 'src/utils/storageHelper';
 
 const menuList = [
   {
@@ -79,7 +80,10 @@ export default function MyPage({ navigation }: any) {
                 onPress={
                   menu.id === 1
                     ? () => navigation.navigate(menu.target)
-                    : () => setUser(null)
+                    : () => {
+                        setUser(null);
+                        removeTokens();
+                      }
                 }
               >
                 <Icon name={menu.icon} size={24} color="#333" />

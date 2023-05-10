@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Alert,
   Image,
@@ -16,12 +16,35 @@ import naverLogo from '@lib/img/naverLogo.png';
 import { userState } from '@recoil/auth';
 import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
+import { getTokens, setTokens } from 'src/utils/storageHelper';
 
 function Login({ navigation }: any): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [url, setUrl] = useState('');
   const setUser = useSetRecoilState(userState);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const tokens = await getTokens();
+      if (!tokens) return;
+
+      const response = await axios.post('http://localhost:8080/autoLogin', {
+        accessToken: tokens.accessToken,
+        refreshToken: tokens.refreshToken,
+      });
+      setUser({
+        id: response.data.data.memberId,
+        nickname: response.data.data.nickName,
+        address: response.data.data.address,
+        discountPrice: response.data.data.discountPrice,
+        sex: response.data.data.sex,
+        accessToken: response.data.accessToken,
+        refreshToken: response.data.refreshToken,
+      });
+      setTokens(response.data.accessToken, response.data.refreshToken);
+    };
+    fetchUser();
+  }, []);
 
   const handleLogin = async () => {
     try {
@@ -38,6 +61,11 @@ function Login({ navigation }: any): JSX.Element {
         accessToken: response.data.accessToken,
         refreshToken: response.data.refreshToken,
       });
+      setTokens(response.data.accessToken, response.data.refreshToken).then(
+        () => {
+          console.log('토큰 저장 완료');
+        }
+      );
     } catch (e) {
       Alert.alert('로그인 실패!', '아이디 혹은 비밀번호를 확인해주세요.');
     }
