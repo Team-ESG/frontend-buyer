@@ -10,16 +10,17 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import color from '@lib/color/color';
 import kakaoLogo from '@lib/img/kakaoLogo.png';
 import naverLogo from '@lib/img/naverLogo.png';
 import { userState } from '@recoil/auth';
 import axios from 'axios';
 import { useSetRecoilState } from 'recoil';
-import color from '@lib/color/color';
 
 function Login({ navigation }: any): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [url, setUrl] = useState('');
   const setUser = useSetRecoilState(userState);
 
   const handleLogin = async () => {
@@ -40,6 +41,18 @@ function Login({ navigation }: any): JSX.Element {
     } catch (e) {
       Alert.alert('로그인 실패!', '아이디 혹은 비밀번호를 확인해주세요.');
     }
+  };
+
+  const handleKakaoLogin = () => {
+    navigation.navigate('WebView', {
+      url: 'http://localhost:8080/oauth2/authorization/kakao',
+    });
+  };
+
+  const handleNaverLogin = () => {
+    navigation.navigate('WebView', {
+      url: 'http://localhost:8080/oauth2/authorization/naver',
+    });
   };
 
   return (
@@ -86,14 +99,14 @@ function Login({ navigation }: any): JSX.Element {
       <View style={styles.socialLoginSection}>
         <Pressable
           style={[styles.socialLoginButton, styles.naverBackgroundColor]}
-          onPress={() => Alert.alert('네이버 로그인을 실행하였습니다.')}
+          onPress={handleNaverLogin}
         >
           <Image style={styles.socialLogo} source={naverLogo} />
           <Text style={styles.naverTextColor}>네이버로 로그인</Text>
         </Pressable>
         <Pressable
           style={[styles.socialLoginButton, styles.kakaoBackgroundColor]}
-          onPress={() => Alert.alert('카카오 로그인을 실행하였습니다.')}
+          onPress={handleKakaoLogin}
         >
           <Image
             style={[styles.socialLogo, { height: 18 }]}

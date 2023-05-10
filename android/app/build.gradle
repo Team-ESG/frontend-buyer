@@ -93,9 +93,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.buyerapp"
+    namespace "com.esg.market"
     defaultConfig {
-        applicationId "com.buyerapp"
+        applicationId "com.esg.market"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

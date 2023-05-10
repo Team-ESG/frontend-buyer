@@ -20,7 +20,6 @@ const menuList = [
     id: 2,
     icon: 'settings',
     title: '환경설정',
-    target: 'Setting',
   },
 ];
 
@@ -43,7 +42,6 @@ const systemList = [
 
 export default function MyPage({ navigation }: any) {
   const [user, setUser] = useRecoilState(userState);
-  const total = 7000;
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -78,7 +76,11 @@ export default function MyPage({ navigation }: any) {
                   },
                   styles.menu,
                 ]}
-                onPress={() => navigation.navigate(menu.target)}
+                onPress={
+                  menu.id === 1
+                    ? () => navigation.navigate(menu.target)
+                    : () => setUser(null)
+                }
               >
                 <Icon name={menu.icon} size={24} color="#333" />
                 <Text style={{ color: '#333', fontWeight: 'bold' }}>
@@ -89,7 +91,7 @@ export default function MyPage({ navigation }: any) {
           </View>
           <View style={styles.disCountContainer}>
             <Text style={styles.disCountText}>
-              현재까지 총 {total}원 할인 받았어요!
+              현재까지 총 {user?.discountPrice}원 할인 받았어요!
             </Text>
           </View>
         </View>

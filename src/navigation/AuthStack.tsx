@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FindAccount from '@screens/Auth/FindAccount';
 import FindPassword from '@screens/Auth/FindPassword';
+import WebViewScreen from '@screens/Auth/WebViewScreen';
 
 import Login from '../screens/Auth/Login';
 import Signup from '../screens/Auth/Signup';
@@ -29,6 +30,11 @@ export default function AuthStack(): JSX.Element {
         name="FindPassword"
         component={FindPassword}
         options={{ title: '비밀번호 찾기' }}
+      />
+      <Stack.Screen
+        name="WebView"
+        component={WebViewScreen}
+        options={{ title: '카카오 로그인', headerShown: false }}
       />
     </Stack.Navigator>
   );
