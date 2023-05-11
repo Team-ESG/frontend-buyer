@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { WebView } from 'react-native-webview';
 
 import color from '@lib/color/color';
 import kakaoLogo from '@lib/img/kakaoLogo.png';
@@ -21,27 +22,29 @@ import { getTokens, setTokens } from 'src/utils/storageHelper';
 function Login({ navigation }: any): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [url, setUrl] = useState('');
   const setUser = useSetRecoilState(userState);
 
   useEffect(() => {
     const fetchUser = async () => {
-      const tokens = await getTokens();
-      if (!tokens) return;
-
-      const response = await axios.post('http://localhost:8080/autoLogin', {
-        accessToken: tokens.accessToken,
-        refreshToken: tokens.refreshToken,
-      });
-      setUser({
-        id: response.data.data.memberId,
-        nickname: response.data.data.nickName,
-        address: response.data.data.address,
-        discountPrice: response.data.data.discountPrice,
-        sex: response.data.data.sex,
-        accessToken: response.data.accessToken,
-        refreshToken: response.data.refreshToken,
-      });
-      setTokens(response.data.accessToken, response.data.refreshToken);
+      try {
+        const tokens = await getTokens();
+        if (!tokens) throw new Error('No tokens');
+        const response = await axios.post('http://localhost:8080/autoLogin', {
+          accessToken: tokens.accessToken,
+          refreshToken: tokens.refreshToken,
+        });
+        setUser({
+          id: response.data.data.memberId,
+          nickname: response.data.data.nickName,
+          address: response.data.data.address,
+          discountPrice: response.data.data.discountPrice,
+          sex: response.data.data.sex,
+          accessToken: response.data.accessToken,
+          refreshToken: response.data.refreshToken,
+        });
+        setTokens(response.data.accessToken, response.data.refreshToken);
+      } catch (e) {}
     };
     fetchUser();
   }, []);
@@ -61,11 +64,7 @@ function Login({ navigation }: any): JSX.Element {
         accessToken: response.data.accessToken,
         refreshToken: response.data.refreshToken,
       });
-      setTokens(response.data.accessToken, response.data.refreshToken).then(
-        () => {
-          console.log('토큰 저장 완료');
-        }
-      );
+      setTokens(response.data.accessToken, response.data.refreshToken);
     } catch (e) {
       Alert.alert('로그인 실패!', '아이디 혹은 비밀번호를 확인해주세요.');
     }
@@ -192,7 +191,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'Inter-Bold',
   },
   helpSection: {
     marginTop: 20,
@@ -257,6 +256,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
     textAlign: 'center',
+    fontFamily: 'Inter-SemiBold',
   },
   kakaoTextColor: {
     flex: 1,
@@ -264,6 +264,7 @@ const styles = StyleSheet.create({
     color: '#000',
     opacity: 0.85,
     textAlign: 'center',
+    fontFamily: 'Inter-SemiBold',
   },
   socialLogo: {
     height: 36,
