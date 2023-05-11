@@ -13,21 +13,27 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import testImg from '@lib/img/testImg.jpeg';
 import axios from 'axios';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function ItemList({ navigation }: any) {
   const [itemList, setItemList] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:8080/main/list')
-      .then((res) => {
-        console.log(res.data.data);
-        setItemList(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      axios
+        .get('http://localhost:8080/main/list')
+        .then((res) => {
+          console.log(res.data.data);
+          setItemList(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      return () => {
+        setItemList([]);
+      };
+    }, [])
+  );
 
   return (
     <ScrollView>

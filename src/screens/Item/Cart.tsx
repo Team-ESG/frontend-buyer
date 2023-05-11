@@ -193,6 +193,7 @@ export default function Cart({ navigation }: any) {
       return () => {
         setTotalCount(0);
         setTotalPrice(0);
+        setData([]);
       };
     }, [])
   );

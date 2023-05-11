@@ -9,6 +9,7 @@ import EditProfile from '@screens/User/EditProfile';
 import NoticeDetail from '@screens/User/NoticeDetail';
 import NoticeList from '@screens/User/NoticeList';
 import BottomTab from 'src/navigation/BottomTab';
+import PurchaseHistory from '@screens/User/PurchaseHistory';
 
 const Stack = createNativeStackNavigator();
 
@@ -58,6 +59,11 @@ export default function RootStack(): JSX.Element {
           headerShown: false,
           animation: 'slide_from_right',
         }}
+      />
+      <Stack.Screen
+        name="PurchaseHistory"
+        component={PurchaseHistory}
+        options={{ title: '구매내역', headerShown: false }}
       />
     </Stack.Navigator>
   );

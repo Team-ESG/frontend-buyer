@@ -71,6 +71,29 @@ export default function ItemDetail({ navigation, route }: any) {
       });
   };
 
+  const onPressBuy = () => {
+    axios
+      .post(
+        `http://localhost:8080/main/item/${route.params.id}/reserve`,
+        {
+          item: route.params.id,
+          reserveDate: '2023-05-01T13:04:50.551705',
+          quantity: buyCount,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${user?.accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        Alert.alert('예약이 완료되었습니다.');
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <View style={styles.container}>
       <SafeAreaView
@@ -311,7 +334,8 @@ export default function ItemDetail({ navigation, route }: any) {
               )}원`}
             </Text>
           </View>
-          <View
+          <Pressable
+            onPress={onPressBuy}
             style={{
               backgroundColor: '#80C597',
               padding: 10,
@@ -323,7 +347,7 @@ export default function ItemDetail({ navigation, route }: any) {
             <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>
               구매하기
             </Text>
-          </View>
+          </Pressable>
         </View>
       </View>
       <SafeAreaView edges={['bottom']} />
