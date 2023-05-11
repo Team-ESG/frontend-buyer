@@ -59,13 +59,13 @@ function PhoneNumberInputScreen({
   const handleSendAuthCode = async () => {
     try {
       /* Todo: 인증번호 발송 요청 코드 */
-      // const response: any = await axios.post(
-      //   `http://localhost:8080/register/send`,
-      //   {
-      //     phone: phoneNumber,
-      //   }
-      // );
-      // if (response.state >= 400) throw new Error();
+      const response: any = await axios.post(
+        `http://localhost:8080/register/send`,
+        {
+          phone: phoneNumber,
+        }
+      );
+      if (response.state >= 400) throw new Error();
       await setIsSendAuthCode(true);
       if (authCodeRef.current) {
         setTimeout(() => {
@@ -80,14 +80,14 @@ function PhoneNumberInputScreen({
 
   const handleCheckAuthCode = async () => {
     try {
-      // const response: any = await axios.post(
-      //   `http://localhost:8080/check/code`,
-      //   {
-      //     phone: phoneNumber,
-      //     code: authCode,
-      //   }
-      // );
-      // if (response.state >= 400) throw new Error();
+      const response: any = await axios.post(
+        `http://localhost:8080/check/code`,
+        {
+          phone: phoneNumber,
+          code: authCode,
+        }
+      );
+      if (response.state >= 400) throw new Error();
       goToNextStep();
     } catch (error: any) {
       setAuthCodeErrorMessage(AUTH_CODE_ERROR_MESSAGE);

@@ -1,9 +1,14 @@
+import { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 import color from '@lib/color/color';
 import { Picker } from '@react-native-picker/picker';
 
 function AddressInputScreen({ address, setAddress }: any): JSX.Element {
+  useEffect(() => {
+    setAddress('경기도 수원시 영통구');
+  }, []);
+
   return (
     <View style={styles.topContainer}>
       <Text style={styles.title}>내 위치 설정</Text>

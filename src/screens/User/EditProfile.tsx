@@ -28,10 +28,12 @@ export default function EditProfile({ navigation }: any): JSX.Element {
     {
       id: 4,
       title: '생년월일',
+      content: '1999.01.01',
     },
     {
       id: 5,
       title: '휴대폰 번호',
+      content: '010-****-5678'
     },
     {
       id: 6,
@@ -68,13 +70,16 @@ export default function EditProfile({ navigation }: any): JSX.Element {
               }
             >
               <Text style={styles.profileTitle}>{item.title}</Text>
-              {item.id !== 2 ? (
+              {item.id === 2 ||
+              item.id === 4 ||
+              item.id === 5 ||
+              item.id === 7 ? (
+                <Text style={styles.profileContent}>{item.content}</Text>
+              ) : (
                 <View style={{ flexDirection: 'row', gap: 15 }}>
                   <Text style={styles.profileContent}>{item.content}</Text>
                   <Icon2 name="arrow-right" size={16} color="grey" />
                 </View>
-              ) : (
-                <Text style={styles.profileContent}>{item.content}</Text>
               )}
             </Pressable>
           ))}
