@@ -12,12 +12,18 @@ import {
 
 import mapImg from '@lib/img/map.png';
 import marketImg from '@lib/img/market.png';
+import { userState } from '@recoil/auth';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useRecoilValue } from 'recoil';
 
 export default function MarketDetail({ navigation }: any) {
+  const user = useRecoilValue(userState);
   const [marketInfo, setMarketInfo] = useState<any>(null);
-  const [marketId, setMarketId] = useState<number>(1);
+  // const marketId = navigation.getParam('id');
+  const marketId = 1;
+  // 찜 여부
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +32,7 @@ export default function MarketDetail({ navigation }: any) {
           `http://localhost:8080/market/${marketId}`
         );
         if (response.data.state !== 200) throw new Error();
+        console.log(response.data);
         setMarketInfo(response.data);
       } catch (error) {
         Alert.alert('잘못된 접근입니다.', '홈 화면으로 이동합니다.', [
@@ -39,6 +46,20 @@ export default function MarketDetail({ navigation }: any) {
     fetchData();
   }, []);
 
+  const handleFavorite = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/market/${marketId}/control`,
+        { headers: { authorization: `Bearer ${user?.accessToken}` } }
+      );
+      if (response.data.state !== 200) throw new Error();
+      console.log(response.data);
+      setIsFavorite(!isFavorite);
+    } catch (e) {
+      Alert.alert('찜 오류', '다시 시도해주세요.');
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageContainer}>
@@ -47,11 +68,19 @@ export default function MarketDetail({ navigation }: any) {
           style={styles.backBtn}
           onPress={() => navigation.goBack()}
         />
-        <Icon
-          name="favorite-border"
-          style={styles.heartBtn}
-          onPress={() => console.log('heart')}
-        />
+        {isFavorite ? (
+          <Icon
+            name="favorite"
+            style={styles.heartBtnActive}
+            onPress={handleFavorite}
+          />
+        ) : (
+          <Icon
+            name="favorite-border"
+            style={styles.heartBtn}
+            onPress={handleFavorite}
+          />
+        )}
         <Image source={marketImg} style={{ width: '100%', height: '100%' }} />
       </View>
 
@@ -121,6 +150,14 @@ const styles = StyleSheet.create({
     zIndex: 1,
     fontSize: 24,
     color: '#fff',
+  },
+  heartBtnActive: {
+    position: 'absolute',
+    top: 35,
+    right: 25,
+    zIndex: 1,
+    fontSize: 24,
+    color: 'red',
   },
   infoContainer: {
     flex: 0.3,
