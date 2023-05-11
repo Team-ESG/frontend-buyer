@@ -93,6 +93,8 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     alignItems: 'center',
     justifyContent: 'center',
+    borderBottomWidth: 3,
+    borderBottomColor: '#eee',
   },
   headerText: {
     fontSize: 19,

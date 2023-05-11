@@ -3,10 +3,12 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ItemDetail from '@screens/Item/ItemDetail';
 import MarketDetail from '@screens/Market/MarketDetail';
-import BottomTab from 'src/navigation/BottomTab';
 import Search from '@screens/Search';
-import EditProfile from '@screens/User/EditProfile';
 import Edit from '@screens/User/Edit';
+import EditProfile from '@screens/User/EditProfile';
+import NoticeDetail from '@screens/User/NoticeDetail';
+import NoticeList from '@screens/User/NoticeList';
+import BottomTab from 'src/navigation/BottomTab';
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +44,20 @@ export default function RootStack(): JSX.Element {
         name="Edit"
         component={Edit}
         options={{ title: '회원정보 수정', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Notice"
+        component={NoticeList}
+        options={{ title: '공지사항', headerShown: false }}
+      />
+      <Stack.Screen
+        name="NoticeDetail"
+        component={NoticeDetail}
+        options={{
+          title: '공지사항',
+          headerShown: false,
+          animation: 'slide_from_right',
+        }}
       />
     </Stack.Navigator>
   );

@@ -1,5 +1,7 @@
 // home screen component with tsx
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,71 +9,84 @@ import {
   Pressable,
   Image,
   ScrollView,
+  Alert,
 } from 'react-native';
 
 import marketImg from '@lib/img/market.png';
+import { userState } from '@recoil/auth';
+import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useRecoilValue } from 'recoil';
 
-const ItemList = [
-  {
-    id: 1,
-    title: '듀쿠플',
-    desc: '초콜릿 레이어 케이크, 블루베리 치즈케이크',
-  },
-  {
-    id: 2,
-    title: '파리바게트',
-    desc: '크로와상, 바게트, 초코케이크, 빵, 케이크',
-  },
-  {
-    id: 3,
-    title: '미스터쉐프',
-    desc: '제육볶음, 불고기',
-  },
-];
 export default function Favorites({ navigation }: any) {
+  const user = useRecoilValue(userState);
+  const [ItemList, setItemList] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchList = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:8080/main/wishList',
+          {
+            headers: {
+              authorization: `Bearer ${user?.accessToken}`,
+            },
+          }
+        );
+        if (response.data.state !== 200) throw new Error();
+        console.log(response.data);
+        setItemList(response.data.data);
+      } catch (e) {
+        Alert.alert('잘못된 접근입니다.', '홈 화면으로 이동합니다.');
+        navigation.navigate('Home');
+      }
+    };
+    fetchList();
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.outerContainer}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>찜한 가게</Text>
           <View style={styles.totalCountCircle}>
-            <Text style={styles.totalCountText}>총 {ItemList.length}개</Text>
+            <Text style={styles.totalCountText}>총 {ItemList?.length}개</Text>
           </View>
         </View>
       </View>
 
       <ScrollView>
-        {ItemList.map((item) => (
-          <Pressable
-            key={item.id}
-            style={({ pressed }) => [
-              {
-                backgroundColor: pressed ? '#eee' : '#fff',
-              },
-              styles.itemContainer,
-            ]}
-            onPress={() => navigation.navigate('MarketDetail')}
-          >
-            <View style={styles.imageContainer}>
-              <Image style={styles.itemImage} source={marketImg} />
-            </View>
-            <View style={styles.itemTextContainer}>
-              <Text numberOfLines={1} style={styles.itemText}>
-                {item.title}
-              </Text>
-              <Text numberOfLines={1} style={styles.descText}>
-                {item.desc}
-              </Text>
-              {/* <Text numberOfLines={1} style={styles.descText}>
+        {ItemList &&
+          ItemList.map((item) => (
+            <Pressable
+              key={item.id}
+              style={({ pressed }) => [
+                {
+                  backgroundColor: pressed ? '#eee' : '#fff',
+                },
+                styles.itemContainer,
+              ]}
+              onPress={() => navigation.navigate('MarketDetail')}
+            >
+              <View style={styles.imageContainer}>
+                <Image style={styles.itemImage} source={marketImg} />
+              </View>
+              <View style={styles.itemTextContainer}>
+                <Text numberOfLines={1} style={styles.itemText}>
+                  {item.title}
+                </Text>
+                <Text numberOfLines={1} style={styles.descText}>
+                  {item.desc}
+                </Text>
+                {/* <Text numberOfLines={1} style={styles.descText}>
                 {item.desc}
               </Text> */}
-            </View>
-            {/* <View style={styles.itemHeartContainer}>
+              </View>
+              {/* <View style={styles.itemHeartContainer}>
               <Icon name="heart" size={25} color="red" />
             </View> */}
-          </Pressable>
-        ))}
+            </Pressable>
+          ))}
       </ScrollView>
     </View>
   );

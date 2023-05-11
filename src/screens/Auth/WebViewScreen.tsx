@@ -1,15 +1,32 @@
-import { View } from 'react-native';
-import WebView, { WebViewNavigation } from 'react-native-webview';
+import React, { useState } from 'react';
+import { View, Text } from 'react-native';
+import WebView, {
+  WebViewMessageEvent,
+  WebViewNavigation,
+} from 'react-native-webview';
 
+const INJECTED_JAVASCRIPT = `
+  (function() {
+    document.addEventListener('DOMContentLoaded', function() {
+      const bodyElement = document.body;
+      if (bodyElement && window.ReactNativeWebView) {
+        const pageTextContent = bodyElement.textContent || bodyElement.innerText;
+        window.ReactNativeWebView.postMessage(pageTextContent);
+      }
+    });
+  })();
+`;
 
 export default function WebViewScreen({ navigation, route }: any) {
   const { url } = route.params;
-  const onWebViewNavigationStateChange = (navState: WebViewNavigation) => {
-    if (navState.url.startsWith(url)) {
-      const code = new URL(navState.url).searchParams.get('code');
-      navigation.navigate('Login', { code });
-    }
+  const [webViewData, setWebViewData] = useState(null);
+
+  const handleWebViewMessage = (event: WebViewMessageEvent) => {
+    const data = JSON.parse(event.nativeEvent.data);
+    console.log('Received JSON data:', data);
+    setWebViewData(data);
   };
+
   return (
     <View style={{ flex: 1 }}>
       <WebView
@@ -17,8 +34,18 @@ export default function WebViewScreen({ navigation, route }: any) {
         style={{ flex: 1 }}
         javaScriptEnabled
         domStorageEnabled
-        onNavigationStateChange={onWebViewNavigationStateChange}
+        onMessage={handleWebViewMessage}
+        injectedJavaScript={INJECTED_JAVASCRIPT}
       />
+      {webViewData && (
+        <View>
+          {Object.entries(webViewData).map(([key, value], index) => (
+            <Text key={index}>
+              {key}: {JSON.stringify(value)}
+            </Text>
+          ))}
+        </View>
+      )}
     </View>
   );
 }
