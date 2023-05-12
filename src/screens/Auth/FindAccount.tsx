@@ -20,7 +20,9 @@ const PHONE_NUMBER_REGEX = /^(010)[0-9]{4}[0-9]{4}$/;
 const PHONE_NUMBER_ERROR_MESSAGE =
   '숫자로만 휴대폰 번호를 정확히 입력해주세요.';
 
-export default function PhoneNumberInputScreen({}: any): JSX.Element {
+export default function PhoneNumberInputScreen({
+  navigation,
+}: any): JSX.Element {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [phoneNumberErrorMessage, setPhoneNumberErrorMessage] = useState('');
 
@@ -33,6 +35,7 @@ export default function PhoneNumberInputScreen({}: any): JSX.Element {
       });
       if (response.status >= 400) throw new Error();
       Alert.alert('회원님의 아이디는 다음과 같아요.', response.data.data.id);
+      navigation.navigate('Login');
     } catch (error) {
       Alert.alert('아이디 찾기 실패!', '일치하는 회원 정보가 없습니다.');
     }
@@ -85,6 +88,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     justifyContent: 'space-between',
+    backgroundColor: color.white,
   },
   topContainer: {
     paddingTop: 30,
@@ -92,22 +96,22 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom: 1.5,
     color: color.brown,
   },
   title_disabled: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 1.5,
     color: color.disabled_01,
   },
   subTitle: {
     fontSize: 17,
     fontWeight: 'normal',
     marginBottom: 15,
-    color: color.disabled_01,
+    color: '#444',
   },
   inputContainer: {
     marginBottom: 5,
@@ -119,17 +123,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 5,
-    color: color.brown,
+    color: color.offBlack,
     paddingHorizontal: 5,
   },
   input: {
-    borderWidth: 2,
-    borderColor: color.brown,
-    borderRadius: 2.5,
+    borderWidth: 1.5,
+    borderColor: color.offBlack,
+    borderRadius: 3.5,
     paddingHorizontal: 15,
     paddingVertical: 8,
     fontSize: 16,
-    color: color.brown,
+    color: color.offBlack,
     flex: 1,
   },
   buttonContainer: {
