@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -17,13 +17,12 @@ const NICKNAME_REGEX = /^[가-힣a-zA-Z0-9]{2,10}$/;
 const NICKNAME_ERROR_MESSAGE = '닉네임을 두 글자 이상 입력해주세요.';
 const DUPLICATE_NICKNAME_ERROR_MESSAGE = '이미 사용중인 닉네임 이에요.';
 
-export default function EditNickname({ navigation }: any) {
+export default function EditNickname({ setIsSubmitting }: any) {
   const [user, setUser] = useRecoilState(userState);
   const [nicknameErrorMessage, setNicknameErrorMessage] = useState('');
   const [nickname, setNickname] = useState('');
 
   const handleEditNickname = async () => {
-    console.log(user?.accessToken)
     try {
       const response = await axios.patch(
         'http://localhost:8080/auth/info/reset/nickname',
@@ -36,13 +35,13 @@ export default function EditNickname({ navigation }: any) {
           },
         }
       );
+      if (response.state >= 400) throw new Error();
       setUser({
         ...user,
         nickname,
       });
-      if (response.state >= 400) throw new Error();
+      setIsSubmitting(true);
     } catch (err) {
-      console.log(err);
       setNicknameErrorMessage(DUPLICATE_NICKNAME_ERROR_MESSAGE);
     }
   };

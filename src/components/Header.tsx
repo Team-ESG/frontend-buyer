@@ -23,9 +23,7 @@ export default function Header(): JSX.Element {
       <SafeAreaView edges={['top']}>
         <View style={styles.container}>
           <View style={styles.leftContainer}>
-            <Text style={styles.locationText}>
-              {user?.address.thirdAddress}
-            </Text>
+            <Text style={styles.locationText}>{user?.address?.thirdAddr}</Text>
             <Icon
               name="keyboard-arrow-down"
               size={24}

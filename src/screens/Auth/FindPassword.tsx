@@ -68,8 +68,8 @@ export default function PhoneNumberInputScreen({
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.topContainer}>
-        <Text style={styles.title}>휴대폰 인증</Text>
-        <Text style={styles.subTitle}>본인의 휴대폰 번호를 입력해주세요.</Text>
+        <Text style={styles.title}>비밀번호 찾기</Text>
+        <Text style={styles.subTitle}>본인의 아이디와 휴대폰 번호를 입력해주세요.</Text>
         <Text style={styles.label}>아이디</Text>
         <View style={styles.inputContainer}>
           <TextInput
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     justifyContent: 'space-between',
+    backgroundColor: color.white,
   },
   topContainer: {
     paddingTop: 30,
@@ -131,22 +132,22 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom: 1.5,
     color: color.brown,
   },
   title_disabled: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 1.5,
     color: color.disabled_01,
   },
   subTitle: {
     fontSize: 17,
     fontWeight: 'normal',
     marginBottom: 15,
-    color: color.disabled_01,
+    color: '#444',
   },
   inputContainer: {
     marginBottom: 5,
@@ -158,17 +159,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 5,
-    color: color.brown,
+    color: color.offBlack,
     paddingHorizontal: 5,
   },
   input: {
-    borderWidth: 2,
-    borderColor: color.brown,
-    borderRadius: 2.5,
+    borderWidth: 1.5,
+    borderColor: color.offBlack,
+    borderRadius: 3.5,
     paddingHorizontal: 15,
     paddingVertical: 8,
     fontSize: 16,
-    color: color.brown,
+    color: color.offBlack,
     flex: 1,
   },
   buttonContainer: {

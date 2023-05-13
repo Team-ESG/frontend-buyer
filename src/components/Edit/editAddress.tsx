@@ -1,15 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Pressable, Alert } from 'react-native';
 
 import color from '@lib/color/color';
 import { Picker } from '@react-native-picker/picker';
 import { userState } from '@recoil/auth';
 import axios from 'axios';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 
-export default function EditAddress({ navigation }: any) {
+export default function EditAddress({ setIsSubmitting }: any) {
   const [user, setUser] = useRecoilState(userState);
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState('경기도 수원시 영통구');
+
+  useEffect(() => {
+    console.log(address.split(' ')[0]);
+  }, []);
 
   const handleEditAddress = async () => {
     try {
@@ -26,11 +30,16 @@ export default function EditAddress({ navigation }: any) {
           },
         }
       );
+      if (response.state >= 400) throw new Error();
       setUser({
         ...user,
-        address,
+        address: {
+          firstAddr: address.split(' ')[0],
+          secondAddr: address.split(' ')[1],
+          thirdAddr: address.split(' ')[2],
+        },
       });
-      if (response.state >= 400) throw new Error();
+      setIsSubmitting(true);
     } catch (err) {
       Alert.alert('주소 변경 오류', '다시 시도해주세요');
     }

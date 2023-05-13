@@ -47,6 +47,29 @@ function InfoInputScreen({
   const genderRef = useRef<TextInput>(null);
   const nicknameRef = useRef<TextInput>(null);
 
+  const birthDateOpacity = useRef(new Animated.Value(0)).current;
+  const nicknameOpacity = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (isNameInputCompleted) {
+      Animated.timing(birthDateOpacity, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [isNameInputCompleted]);
+
+  useEffect(() => {
+    if (isBirthDateInputCompleted) {
+      Animated.timing(nicknameOpacity, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [isBirthDateInputCompleted]);
+
   useEffect(() => {
     if (!isNameInputCompleted) return;
 
@@ -80,8 +103,8 @@ function InfoInputScreen({
   useEffect(() => {
     if (
       birthDate.length === 6 &&
-      gender.length === 1 &&
-      birthDateErrorMessage !== BIRTH_DATE_ERROR_MESSAGE
+      GENDER_REGEX.test(gender) &&
+      birthDateErrorMessage === ''
     ) {
       setIsBirthDateInputCompleted(true);
       if (nicknameRef.current) {
@@ -120,9 +143,9 @@ function InfoInputScreen({
 
         {isNameInputCompleted && isBirthDateInputCompleted && (
           <Animated.View
-          // style={{
-          //   opacity: fadeAnim,
-          // }}
+            style={{
+              opacity: nicknameOpacity,
+            }}
           >
             <Text style={styles.label}>닉네임</Text>
             <View style={styles.inputContainer}>
@@ -141,9 +164,9 @@ function InfoInputScreen({
 
         {isNameInputCompleted && (
           <Animated.View
-          // style={{
-          //   opacity: fadeAnim,
-          // }}
+            style={{
+              opacity: birthDateOpacity,
+            }}
           >
             <Text
               style={
@@ -202,21 +225,29 @@ function InfoInputScreen({
           </Animated.View>
         )}
 
-        <Text
-          style={isNameInputCompleted ? styles.label_disabled : styles.label}
+        <Animated.View
+        // style={{
+        //   opacity: nameOpacity,
+        // }}
         >
-          이름
-        </Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={isNameInputCompleted ? styles.input_disabled : styles.input}
-            value={name}
-            onChangeText={setName}
-            ref={nameRef}
-            editable={!isNameInputCompleted}
-            selectTextOnFocus={!isNameInputCompleted}
-          />
-        </View>
+          <Text
+            style={isNameInputCompleted ? styles.label_disabled : styles.label}
+          >
+            이름
+          </Text>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={
+                isNameInputCompleted ? styles.input_disabled : styles.input
+              }
+              value={name}
+              onChangeText={setName}
+              ref={nameRef}
+              editable={!isNameInputCompleted}
+              selectTextOnFocus={!isNameInputCompleted}
+            />
+          </View>
+        </Animated.View>
         {nameErrorMessage !== '' && (
           <Text style={styles.errorMessage}>{nameErrorMessage}</Text>
         )}
@@ -267,22 +298,22 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginBottom: 1.5,
     color: color.brown,
   },
   title_disabled: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: 1.5,
     color: color.disabled_01,
   },
   subTitle: {
     fontSize: 17,
     fontWeight: 'normal',
     marginBottom: 15,
-    color: color.disabled_02,
+    color: '#444',
   },
   inputContainer: {
     marginBottom: 5,
@@ -294,7 +325,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 5,
-    color: color.brown,
+    color: color.offBlack,
     paddingHorizontal: 5,
   },
   label_disabled: {
@@ -306,19 +337,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   input: {
-    borderWidth: 2,
-    borderColor: color.brown,
-    borderRadius: 5,
+    borderWidth: 1.5,
+    borderColor: color.offBlack,
+    borderRadius: 3.5,
     paddingHorizontal: 15,
     paddingVertical: 8,
     fontSize: 16,
-    color: color.brown,
+    color: color.offBlack,
     flex: 1,
   },
   input_disabled: {
-    borderWidth: 2,
+    borderWidth: 1.5,
     borderColor: color.disabled_01,
-    borderRadius: 5,
+    borderRadius: 3.5,
     paddingHorizontal: 15,
     paddingVertical: 8,
     fontSize: 16,
@@ -356,19 +387,19 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   input_gender: {
-    borderWidth: 2,
-    borderColor: color.brown,
-    borderRadius: 5,
+    borderWidth: 1.5,
+    borderColor: color.offBlack,
+    borderRadius: 3.5,
     paddingHorizontal: 15,
     paddingVertical: 8,
     fontSize: 16,
-    color: color.brown,
+    color: color.offBlack,
     flex: 0.05,
   },
   input_gender_disabled: {
-    borderWidth: 2,
+    borderWidth: 1.5,
     borderColor: color.disabled_01,
-    borderRadius: 5,
+    borderRadius: 3.5,
     paddingHorizontal: 15,
     paddingVertical: 8,
     fontSize: 16,

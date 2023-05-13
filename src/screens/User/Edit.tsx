@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import EditAddress from '@components/Edit/editAddress';
@@ -8,6 +9,13 @@ import color from '@lib/color/color';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function Edit({ navigation, route }: any): JSX.Element {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (isSubmitting) {
+      navigation.goBack();
+    }
+  }, [isSubmitting]);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -24,11 +32,11 @@ export default function Edit({ navigation, route }: any): JSX.Element {
       {(() => {
         switch (route.params.title) {
           case '닉네임':
-            return <EditNickname />;
+            return <EditNickname setIsSubmitting={setIsSubmitting} />;
           case '주소 변경':
-            return <EditAddress />;
+            return <EditAddress setIsSubmitting={setIsSubmitting} />;
           case '비밀번호 변경':
-            return <EditPassword />;
+            return <EditPassword setIsSubmitting={setIsSubmitting} />;
           default:
             return null;
         }
