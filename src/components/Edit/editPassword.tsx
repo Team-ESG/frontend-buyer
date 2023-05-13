@@ -18,7 +18,7 @@ const PASSWORD_ERROR_MESSAGE =
   '영문, 숫자, 특수문자를 포함한 8~16자리로 입력해주세요.';
 const PASSWORD_CONFIRMATION_ERROR_MESSAGE = '비밀번호가 일치하지 않아요.';
 
-export default function EditPassword({ navigation }: any) {
+export default function EditPassword({ setIsSubmitting }: any) {
   const user = useRecoilValue(userState);
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
@@ -43,8 +43,9 @@ export default function EditPassword({ navigation }: any) {
         }
       );
       if (response.state >= 400) throw new Error();
+      setIsSubmitting(true);
     } catch (err) {
-      Alert.alert('비밀번호 변경 오류', '다시 시도해주세요');
+      Alert.alert('비밀번호 변경 실패', '다시 시도해주세요');
     }
   };
 

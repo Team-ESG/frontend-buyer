@@ -4,9 +4,9 @@ export interface User {
   id: string;
   nickname: string;
   address: {
-    firstAddress: string;
-    secondAddress: string;
-    thirdAddress: string;
+    firstAddr: string;
+    secondAddr: string;
+    thirdAddr: string;
   };
   accessToken: string;
   refreshToken: string;

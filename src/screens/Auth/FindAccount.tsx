@@ -51,7 +51,7 @@ export default function PhoneNumberInputScreen({
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.topContainer}>
-        <Text style={styles.title}>휴대폰 인증</Text>
+        <Text style={styles.title}>아이디 찾기</Text>
         <Text style={styles.subTitle}>본인의 휴대폰 번호를 입력해주세요.</Text>
         <Text style={styles.label}>휴대폰 번호</Text>
         <View style={styles.inputContainer}>
