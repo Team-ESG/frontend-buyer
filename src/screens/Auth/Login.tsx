@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { WebView } from 'react-native-webview';
 
 import color from '@lib/color/color';
 import kakaoLogo from '@lib/img/kakaoLogo.png';
@@ -34,15 +33,20 @@ function Login({ navigation }: any): JSX.Element {
           accessToken: tokens.accessToken,
           refreshToken: tokens.refreshToken,
         });
-        setUser({
-          id: response.data.data.memberId,
-          nickname: response.data.data.nickName,
-          address: response.data.data.address,
-          discountPrice: response.data.data.discountPrice,
-          sex: response.data.data.sex,
-          accessToken: response.data.accessToken,
-          refreshToken: response.data.refreshToken,
-        });
+        // setUser({
+        // address: response.data.info.address,
+        // birthDate: response.data.info.birthDate,
+        // discountPrice: response.data.info.discountPrice,
+        // id: email,
+        // name: response.data.info.name,
+        // nickname: response.data.info.nickName,
+        // phoneNumber: response.data.info.phoneNumber,
+        // sex: response.data.info.sex,
+        // social: response.data.info.social,
+        // wishList: response.data.info.wishList,
+        // accessToken: response.data.accessToken,
+        // refreshToken: response.data.refreshToken,
+        // });
         setTokens(response.data.accessToken, response.data.refreshToken);
       } catch (e) {}
     };
@@ -56,11 +60,16 @@ function Login({ navigation }: any): JSX.Element {
         pwd: password,
       });
       setUser({
-        id: email,
-        nickname: response.data.info.nickName,
         address: response.data.info.address,
+        birthDate: response.data.info.birthDate,
         discountPrice: response.data.info.discountPrice,
+        id: email,
+        name: response.data.info.name,
+        nickname: response.data.info.nickName,
+        phoneNumber: response.data.info.phoneNumber,
         sex: response.data.info.sex,
+        social: response.data.info.social,
+        wishList: response.data.info.wishList,
         accessToken: response.data.accessToken,
         refreshToken: response.data.refreshToken,
       });
