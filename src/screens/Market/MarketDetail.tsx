@@ -12,33 +12,37 @@ import {
 
 import mapImg from '@lib/img/map.png';
 import marketImg from '@lib/img/market.png';
+import { useIsFocused } from '@react-navigation/native';
 import { userState } from '@recoil/auth';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 export default function MarketDetail({ navigation }: any) {
-  const user = useRecoilValue(userState);
+  const [user, setUser] = useRecoilState(userState);
   const [marketInfo, setMarketInfo] = useState<any>(null);
   // const marketId = navigation.getParam('id');
   const marketId = 1;
   // 찜 여부
   const [isFavorite, setIsFavorite] = useState(false);
+  const isFocuesed = useIsFocused();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/market/${marketId}`
+          `http://localhost:8080/market/${marketId}`,
+          {
+            headers: { authorization: `Bearer ${user?.accessToken}` },
+          }
         );
         if (response.data.state !== 200) throw new Error();
-        console.log(response.data);
-        setMarketInfo(response.data);
+        setMarketInfo(response.data.data);
       } catch (error) {
         Alert.alert('잘못된 접근입니다.', '홈 화면으로 이동합니다.', [
           {
             text: '확인',
-            onPress: () => navigation.navigate('Home'),
+            onPress: () => navigation.goBack(),
           },
         ]);
       }
@@ -46,15 +50,40 @@ export default function MarketDetail({ navigation }: any) {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchFavorite = async () => {
+      if (user?.wishList.includes(marketId)) setIsFavorite(true);
+    };
+    if (isFocuesed) fetchFavorite();
+  }, [isFocuesed, user?.wishList]);
+
   const handleFavorite = async () => {
     try {
       const response = await axios.post(
         `http://localhost:8080/market/${marketId}/control`,
+        {
+          memberId: user?.id,
+        },
         { headers: { authorization: `Bearer ${user?.accessToken}` } }
       );
       if (response.data.state !== 200) throw new Error();
-      console.log(response.data);
+      if (isFavorite) Alert.alert('찜 취소', '찜 목록에서 삭제 되었습니다.');
+      else Alert.alert('찜 완료!', '찜 목록에서 확인할 수 있습니다.');
       setIsFavorite(!isFavorite);
+      setUser((currentUser) => {
+        if (currentUser) {
+          let updatedWishList = [];
+          if (currentUser.wishList.includes(marketId)) {
+            updatedWishList = currentUser.wishList.filter(
+              (id) => id !== marketId
+            );
+          } else {
+            updatedWishList = [...currentUser.wishList, marketId];
+          }
+          return { ...currentUser, wishList: updatedWishList };
+        }
+        return currentUser;
+      });
     } catch (e) {
       Alert.alert('찜 오류', '다시 시도해주세요.');
     }
@@ -86,14 +115,14 @@ export default function MarketDetail({ navigation }: any) {
 
       <ScrollView style={styles.infoContainer}>
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>{marketInfo && marketInfo.data.name}</Text>
+          <Text style={styles.title}>{marketInfo && marketInfo.name}</Text>
         </View>
         <View style={styles.locInfoContainer}>
           <View style={styles.textContainer}>
             <Text style={styles.textTitle}>위치정보</Text>
             <Text style={styles.textDetail}>
               {marketInfo &&
-                `${marketInfo.data.address.firstAddr} ${marketInfo.data.address.secondAddr} ${marketInfo.data.address.thirdAddr}`}
+                `${marketInfo.address.firstAddr} ${marketInfo.address.secondAddr} ${marketInfo.address.thirdAddr}`}
             </Text>
           </View>
           <View style={styles.mapContainer}>
@@ -107,8 +136,7 @@ export default function MarketDetail({ navigation }: any) {
           <View style={styles.subTextContainer}>
             <Text style={styles.subTextTitle}>운영시간</Text>
             <Text style={styles.subTextDetail}>
-              {marketInfo &&
-                `${marketInfo.data.startTime} ~ ${marketInfo.data.endTime}`}
+              {marketInfo && `${marketInfo.startTime} ~ ${marketInfo.endTime}`}
             </Text>
           </View>
           <View style={styles.subTextContainer}>
@@ -118,7 +146,7 @@ export default function MarketDetail({ navigation }: any) {
           <View style={styles.subTextContainer}>
             <Text style={styles.subTextTitle}>전화번호</Text>
             <Text style={styles.subTextDetail}>
-              {marketInfo && marketInfo.data.phoneNumber}
+              {marketInfo && marketInfo.phoneNumber}
             </Text>
           </View>
         </View>

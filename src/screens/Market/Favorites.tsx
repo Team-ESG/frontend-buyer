@@ -12,18 +12,21 @@ import {
   Alert,
 } from 'react-native';
 
+import color from '@lib/color/color';
 import marketImg from '@lib/img/market.png';
+import { useIsFocused } from '@react-navigation/native';
 import { userState } from '@recoil/auth';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 export default function Favorites({ navigation }: any) {
-  const user = useRecoilValue(userState);
+  const [user, setUser] = useRecoilState(userState);
   const [ItemList, setItemList] = useState<any>(null);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    const fetchList = async () => {
+    const fetchWishList = async () => {
       try {
         const response = await axios.get(
           'http://localhost:8080/main/wishList',
@@ -34,15 +37,42 @@ export default function Favorites({ navigation }: any) {
           }
         );
         if (response.data.state !== 200) throw new Error();
-        console.log(response.data);
         setItemList(response.data.data);
+        // console.log(response.data.data);
       } catch (e) {
-        Alert.alert('잘못된 접근입니다.', '홈 화면으로 이동합니다.');
-        navigation.navigate('Home');
+        console.log(e);
       }
     };
-    fetchList();
-  }, []);
+    if (isFocused) fetchWishList();
+  }, [isFocused, user?.accessToken]);
+
+  const handleFavorite = async (marketId: any) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/market/${marketId}/control`,
+        {
+          memberId: user?.id,
+        },
+        { headers: { authorization: `Bearer ${user?.accessToken}` } }
+      );
+      if (response.data.state !== 200) throw new Error();
+      setUser((currentUser) => {
+        if (currentUser) {
+          let updatedWishList = [];
+          if (currentUser.wishList.includes(marketId)) {
+            updatedWishList = currentUser.wishList.pop(marketId);
+          } else {
+            updatedWishList = [...currentUser.wishList, marketId];
+          }
+          return { ...currentUser, wishList: updatedWishList };
+        }
+        return currentUser;
+      });
+    } catch (e) {
+      console.log(e);
+      Alert.alert('찜 오류', '다시 시도해주세요.');
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -57,9 +87,9 @@ export default function Favorites({ navigation }: any) {
 
       <ScrollView>
         {ItemList &&
-          ItemList.map((item) => (
+          ItemList.map((item: any) => (
             <Pressable
-              key={item.id}
+              key={item.marketId}
               style={({ pressed }) => [
                 {
                   backgroundColor: pressed ? '#eee' : '#fff',
@@ -73,18 +103,22 @@ export default function Favorites({ navigation }: any) {
               </View>
               <View style={styles.itemTextContainer}>
                 <Text numberOfLines={1} style={styles.itemText}>
-                  {item.title}
+                  {item.name}
                 </Text>
-                <Text numberOfLines={1} style={styles.descText}>
-                  {item.desc}
+                <Text numberOfLines={2} style={styles.descText}>
+                  {item.address.firstAddr} {item.address.secondAddr}{' '}
+                  {item.address.thirdAddr}
+                  {/* 수원시 영통구 원천동 원천동 104호 */}
                 </Text>
-                {/* <Text numberOfLines={1} style={styles.descText}>
-                {item.desc}
-              </Text> */}
               </View>
-              {/* <View style={styles.itemHeartContainer}>
-              <Icon name="heart" size={25} color="red" />
-            </View> */}
+              <View style={styles.itemHeartContainer}>
+                <Icon
+                  name="heart"
+                  size={24}
+                  color="#dc143c"
+                  onPress={() => handleFavorite(item.id)}
+                />
+              </View>
             </Pressable>
           ))}
       </ScrollView>
@@ -141,7 +175,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderColor: '#eee',
     paddingHorizontal: 20,
-    paddingVertical: 23,
+    paddingVertical: 17,
   },
   imageContainer: {
     flex: 0.3,
@@ -169,12 +203,13 @@ const styles = StyleSheet.create({
   },
   descText: {
     fontSize: 13,
-    color: '#7e7e7e',
+    color: color.offBlack,
     marginHorizontal: 15,
     marginVertical: 5,
   },
   itemHeartContainer: {
     flex: 0.1,
     alignItems: 'flex-end',
+    marginBottom: 60,
   },
 });
