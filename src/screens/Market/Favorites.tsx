@@ -1,7 +1,4 @@
-// home screen component with tsx
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -38,40 +35,50 @@ export default function Favorites({ navigation }: any) {
         );
         if (response.data.state !== 200) throw new Error();
         setItemList(response.data.data);
-        // console.log(response.data.data);
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     };
     if (isFocused) fetchWishList();
-  }, [isFocused, user?.accessToken]);
+  }, [isFocused, user?.accessToken, user?.wishList]);
 
-  const handleFavorite = async (marketId: any) => {
-    try {
-      const response = await axios.post(
-        `http://localhost:8080/market/${marketId}/control`,
-        {
-          memberId: user?.id,
-        },
-        { headers: { authorization: `Bearer ${user?.accessToken}` } }
-      );
-      if (response.data.state !== 200) throw new Error();
-      setUser((currentUser) => {
-        if (currentUser) {
-          let updatedWishList = [];
-          if (currentUser.wishList.includes(marketId)) {
-            updatedWishList = currentUser.wishList.pop(marketId);
-          } else {
-            updatedWishList = [...currentUser.wishList, marketId];
+  const handleFavorite = async (marketId: number) => {
+    Alert.alert('찜 삭제', '찜 목록에서 삭제하시겠어요?', [
+      {
+        text: '취소',
+        onPress: () => {},
+      },
+      {
+        text: '삭제',
+        onPress: async () => {
+          try {
+            const response = await axios.post(
+              `http://localhost:8080/market/${marketId}/control`,
+              {
+                memberId: user?.id,
+              },
+              { headers: { authorization: `Bearer ${user?.accessToken}` } }
+            );
+            if (response.data.state !== 200) throw new Error();
+            setUser((currentUser) => {
+              if (currentUser) {
+                let updatedWishList = [];
+                if (currentUser.wishList.includes(marketId)) {
+                  updatedWishList = currentUser.wishList.filter(
+                    (id: any) => id !== marketId
+                  );
+                } else {
+                  updatedWishList = [...currentUser.wishList, marketId];
+                }
+                return { ...currentUser, wishList: updatedWishList };
+              }
+              return currentUser;
+            });
+          } catch (e) {
+            console.log(e);
+            Alert.alert('찜 오류', '다시 시도해주세요.');
           }
-          return { ...currentUser, wishList: updatedWishList };
-        }
-        return currentUser;
-      });
-    } catch (e) {
-      console.log(e);
-      Alert.alert('찜 오류', '다시 시도해주세요.');
-    }
+        },
+      },
+    ]);
   };
 
   return (
@@ -96,7 +103,9 @@ export default function Favorites({ navigation }: any) {
                 },
                 styles.itemContainer,
               ]}
-              onPress={() => navigation.navigate('MarketDetail')}
+              onPress={() =>
+                navigation.navigate('MarketDetail', { marketId: item.marketId })
+              }
             >
               <View style={styles.imageContainer}>
                 <Image style={styles.itemImage} source={marketImg} />
@@ -108,7 +117,6 @@ export default function Favorites({ navigation }: any) {
                 <Text numberOfLines={2} style={styles.descText}>
                   {item.address.firstAddr} {item.address.secondAddr}{' '}
                   {item.address.thirdAddr}
-                  {/* 수원시 영통구 원천동 원천동 104호 */}
                 </Text>
               </View>
               <View style={styles.itemHeartContainer}>
@@ -116,7 +124,7 @@ export default function Favorites({ navigation }: any) {
                   name="heart"
                   size={24}
                   color="#dc143c"
-                  onPress={() => handleFavorite(item.id)}
+                  onPress={() => handleFavorite(item.marketId)}
                 />
               </View>
             </Pressable>

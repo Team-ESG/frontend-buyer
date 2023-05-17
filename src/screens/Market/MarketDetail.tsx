@@ -18,10 +18,10 @@ import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useRecoilState } from 'recoil';
 
-export default function MarketDetail({ navigation }: any) {
+export default function MarketDetail({ navigation, route }: any) {
   const [user, setUser] = useRecoilState(userState);
   const [marketInfo, setMarketInfo] = useState<any>(null);
-  const marketId = navigation.getParam('marketId');
+  const { marketId } = route.params;
   // 찜 여부
   const [isFavorite, setIsFavorite] = useState(false);
   const isFocuesed = useIsFocused();

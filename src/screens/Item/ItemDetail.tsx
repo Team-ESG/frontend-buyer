@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,17 +8,16 @@ import {
   ImageBackground,
   ScrollView,
   Animated,
+  Alert,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import testMarket from '@lib/img/market.png';
 import testImg from '@lib/img/testImg.jpeg';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Alert } from 'react-native';
-import { useRecoilValue } from 'recoil';
 import { userState } from '@recoil/auth';
+import axios from 'axios';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useRecoilValue } from 'recoil';
 
 export default function ItemDetail({ navigation, route }: any) {
   const user = useRecoilValue(userState);
@@ -117,7 +117,7 @@ export default function ItemDetail({ navigation, route }: any) {
           <ImageBackground
             style={{ width: '100%', aspectRatio: 1 }}
             source={testImg}
-          ></ImageBackground>
+          />
         </View>
         <View>
           <View
@@ -180,7 +180,9 @@ export default function ItemDetail({ navigation, route }: any) {
                 borderRadius: 24,
                 backgroundColor: '#80C597',
               }}
-              onPress={() => navigation.navigate('MarketDetail')}
+              onPress={() =>
+                navigation.navigate('MarketDetail', { marketId: item.marketId })
+              }
             >
               <Text
                 style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}
@@ -225,11 +227,7 @@ export default function ItemDetail({ navigation, route }: any) {
           <Text style={{ color: 'white', fontSize: 14, fontWeight: 'bold' }}>
             {`유통기한 ${
               item.expirationDate?.length &&
-              item.expirationDate[0] +
-                '.' +
-                item.expirationDate[1] +
-                '.' +
-                item.expirationDate[2]
+              `${item.expirationDate[0]}.${item.expirationDate[1]}.${item.expirationDate[2]}`
             }`}
           </Text>
         </View>
