@@ -1,7 +1,9 @@
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import color from '@lib/color/color';
+import kakaoLogo from '@lib/img/kakaoLogo.png';
+import naverLogo from '@lib/img/naverLogo.png';
 import { userState } from '@recoil/auth';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BackIcon from 'react-native-vector-icons/MaterialIcons';
@@ -28,18 +30,22 @@ export default function EditProfile({ navigation }: any): JSX.Element {
     {
       id: 4,
       title: '생년월일',
-      content: '1999.01.01',
+      content: user?.birthDate,
     },
     {
       id: 5,
       title: '휴대폰 번호',
-      content: '010-****-5678'
+      content: user?.phoneNumber,
     },
     {
       id: 6,
       title: '주소 변경',
-      content: user?.address?.firstAddress,
+      content: `${user?.address?.secondAddr} ${user?.address?.thirdAddr}`,
     },
+    // {
+    //   id: 7,
+    //   title: '연동된 소셜 계정',
+    // },
   ];
   return (
     <SafeAreaView style={styles.container}>
@@ -70,19 +76,37 @@ export default function EditProfile({ navigation }: any): JSX.Element {
               }
             >
               <Text style={styles.profileTitle}>{item.title}</Text>
-              {item.id === 2 ||
-              item.id === 4 ||
-              item.id === 5 ||
-              item.id === 7 ? (
+              {item.id === 2 || item.id === 4 || item.id === 5 ? (
                 <Text style={styles.profileContent}>{item.content}</Text>
               ) : (
-                <View style={{ flexDirection: 'row', gap: 15 }}>
-                  <Text style={styles.profileContent}>{item.content}</Text>
+                <View style={styles.profileItemRight}>
+                  <Text style={styles.profileContent} numberOfLines={1}>
+                    {item.content}
+                  </Text>
                   <Icon2 name="arrow-right" size={16} color="grey" />
                 </View>
               )}
             </Pressable>
           ))}
+          {user?.social && (
+            <Pressable
+              style={({ pressed }) => [
+                {
+                  backgroundColor: pressed ? '#eee' : '#fff',
+                },
+                styles.profileItem,
+              ]}
+            >
+              <Text style={styles.profileTitle}>연동된 소셜 계정</Text>
+              <View style={styles.profileItemRight}>
+                {user?.id.includes('naver') ? (
+                  <Image source={naverLogo} style={styles.logo} />
+                ) : (
+                  <Image source={kakaoLogo} style={styles.logo} />
+                )}
+              </View>
+            </Pressable>
+          )}
         </View>
       </View>
     </SafeAreaView>
@@ -116,7 +140,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     marginTop: 20,
-    // justifyContent: 'center',
   },
   profileList: {
     width: '100%',
@@ -132,6 +155,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: '#eee',
   },
+  profileItemRight: {
+    flexDirection: 'row',
+    gap: 15,
+    alignItems: 'center',
+  },
   profileTitle: {
     fontSize: 14,
     fontWeight: 'bold',
@@ -140,5 +168,10 @@ const styles = StyleSheet.create({
   profileContent: {
     fontSize: 14,
     color: 'grey',
+  },
+  logo: {
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
   },
 });

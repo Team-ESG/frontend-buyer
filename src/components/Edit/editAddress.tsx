@@ -9,7 +9,7 @@ import { useRecoilState } from 'recoil';
 
 export default function EditAddress({ setIsSubmitting }: any) {
   const [user, setUser] = useRecoilState(userState);
-  const [address, setAddress] = useState('경기도 수원시 영통구');
+  const [address, setAddress] = useState('수원시 영통구 원천동');
 
   useEffect(() => {
     console.log(address.split(' ')[0]);
@@ -57,8 +57,8 @@ export default function EditAddress({ setIsSubmitting }: any) {
           }}
         >
           <Picker.Item
-            label="경기도 수원시 영통구"
-            value="경기도 수원시 영통구"
+            label="수원시 영통구 원천동"
+            value="수원시 영통구 원천동"
           />
         </Picker>
       </View>

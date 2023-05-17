@@ -6,7 +6,7 @@ import { Picker } from '@react-native-picker/picker';
 
 function AddressInputScreen({ address, setAddress }: any): JSX.Element {
   useEffect(() => {
-    setAddress('경기도 수원시 영통구');
+    setAddress('수원시 영통구 원천동');
   }, []);
 
   return (
@@ -23,8 +23,8 @@ function AddressInputScreen({ address, setAddress }: any): JSX.Element {
         }}
       >
         <Picker.Item
-          label="경기도 수원시 영통구"
-          value="경기도 수원시 영통구"
+          label="수원시 영통구 원천동"
+          value="수원시 영통구 원천동"
         />
       </Picker>
     </View>

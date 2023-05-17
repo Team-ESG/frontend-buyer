@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { WebView } from 'react-native-webview';
 
 import color from '@lib/color/color';
 import kakaoLogo from '@lib/img/kakaoLogo.png';
@@ -22,7 +21,6 @@ import { getTokens, setTokens } from 'src/utils/storageHelper';
 function Login({ navigation }: any): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [url, setUrl] = useState('');
   const setUser = useSetRecoilState(userState);
 
   useEffect(() => {
@@ -35,11 +33,16 @@ function Login({ navigation }: any): JSX.Element {
           refreshToken: tokens.refreshToken,
         });
         setUser({
-          id: response.data.data.memberId,
-          nickname: response.data.data.nickName,
           address: response.data.data.address,
+          birthDate: response.data.data.birthDate,
           discountPrice: response.data.data.discountPrice,
+          id: email,
+          name: response.data.data.name,
+          nickname: response.data.data.nickName,
+          phoneNumber: response.data.data.phoneNumber,
           sex: response.data.data.sex,
+          social: response.data.data.social,
+          wishList: response.data.data.wishList,
           accessToken: response.data.accessToken,
           refreshToken: response.data.refreshToken,
         });
@@ -56,11 +59,16 @@ function Login({ navigation }: any): JSX.Element {
         pwd: password,
       });
       setUser({
-        id: email,
-        nickname: response.data.info.nickName,
         address: response.data.info.address,
+        birthDate: response.data.info.birthDate,
         discountPrice: response.data.info.discountPrice,
+        id: email,
+        name: response.data.info.name,
+        nickname: response.data.info.nickName,
+        phoneNumber: response.data.info.phoneNumber,
         sex: response.data.info.sex,
+        social: response.data.info.social,
+        wishList: response.data.info.wishList,
         accessToken: response.data.accessToken,
         refreshToken: response.data.refreshToken,
       });
