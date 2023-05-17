@@ -51,7 +51,7 @@ export default function NoticeDetail({ navigation, route }: any): JSX.Element {
           </Text>
         </View>
         <View style={styles.noticeContent}>
-          <Text style={styles.noticeTitleText}>{noticeInfo.content}</Text>
+          <Text style={styles.noticeContentText}>{noticeInfo.content}</Text>
         </View>
       </View>
     </SafeAreaView>
@@ -113,6 +113,10 @@ const styles = StyleSheet.create({
     // paddingHorizontal: 20,
     paddingLeft: 20,
     paddingRight: 40,
-    lineHeight: 30,
+  },
+  noticeContentText: {
+    fontSize: 14,
+    color: '#333',
+    lineHeight: 20,
   },
 });

@@ -1,6 +1,8 @@
+import HeaderSocial from '@components/HeaderSocial';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FindAccount from '@screens/Auth/FindAccount';
 import FindPassword from '@screens/Auth/FindPassword';
+import SignupSocial from '@screens/Auth/SignUpSocial';
 import WebViewScreen from '@screens/Auth/WebViewScreen';
 
 import Login from '../screens/Auth/Login';
@@ -34,7 +36,18 @@ export default function AuthStack(): JSX.Element {
       <Stack.Screen
         name="WebView"
         component={WebViewScreen}
-        options={{ title: '카카오 로그인', headerShown: false }}
+        options={{
+          title: '소셜 로그인',
+          header: () => <HeaderSocial />,
+        }}
+      />
+      <Stack.Screen
+        name="SignUpSocial"
+        component={SignupSocial}
+        options={{
+          title: '소셜 회원가입',
+          header: () => <HeaderSocial />,
+        }}
       />
     </Stack.Navigator>
   );

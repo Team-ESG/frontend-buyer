@@ -21,7 +21,6 @@ import { getTokens, setTokens } from 'src/utils/storageHelper';
 function Login({ navigation }: any): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [url, setUrl] = useState('');
   const setUser = useSetRecoilState(userState);
 
   useEffect(() => {
@@ -33,20 +32,20 @@ function Login({ navigation }: any): JSX.Element {
           accessToken: tokens.accessToken,
           refreshToken: tokens.refreshToken,
         });
-        // setUser({
-        // address: response.data.info.address,
-        // birthDate: response.data.info.birthDate,
-        // discountPrice: response.data.info.discountPrice,
-        // id: email,
-        // name: response.data.info.name,
-        // nickname: response.data.info.nickName,
-        // phoneNumber: response.data.info.phoneNumber,
-        // sex: response.data.info.sex,
-        // social: response.data.info.social,
-        // wishList: response.data.info.wishList,
-        // accessToken: response.data.accessToken,
-        // refreshToken: response.data.refreshToken,
-        // });
+        setUser({
+          address: response.data.data.address,
+          birthDate: response.data.data.birthDate,
+          discountPrice: response.data.data.discountPrice,
+          id: email,
+          name: response.data.data.name,
+          nickname: response.data.data.nickName,
+          phoneNumber: response.data.data.phoneNumber,
+          sex: response.data.data.sex,
+          social: response.data.data.social,
+          wishList: response.data.data.wishList,
+          accessToken: response.data.accessToken,
+          refreshToken: response.data.refreshToken,
+        });
         setTokens(response.data.accessToken, response.data.refreshToken);
       } catch (e) {}
     };

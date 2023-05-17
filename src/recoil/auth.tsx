@@ -16,7 +16,7 @@ export interface User {
   phoneNumber: string;
   sex: string;
   social: boolean;
-  wishList: object[];
+  wishList: number[];
   accessToken: string;
   refreshToken: string;
 }
