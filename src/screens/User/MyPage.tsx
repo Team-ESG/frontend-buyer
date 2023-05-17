@@ -7,8 +7,7 @@ import color from '@lib/color/color';
 import { userState } from '@recoil/auth';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
-import { useRecoilState } from 'recoil';
-import { removeTokens } from 'src/utils/storageHelper';
+import { useRecoilValue } from 'recoil';
 
 const menuList = [
   {
@@ -21,6 +20,7 @@ const menuList = [
     id: 2,
     icon: 'settings',
     title: '환경설정',
+    target: 'Settings',
   },
 ];
 
@@ -42,7 +42,7 @@ const systemList = [
 ];
 
 export default function MyPage({ navigation }: any) {
-  const [user, setUser] = useRecoilState(userState);
+  const user = useRecoilValue(userState);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -77,14 +77,7 @@ export default function MyPage({ navigation }: any) {
                   },
                   styles.menu,
                 ]}
-                onPress={
-                  menu.id === 1
-                    ? () => navigation.navigate(menu.target)
-                    : () => {
-                        setUser(null);
-                        removeTokens();
-                      }
-                }
+                onPress={() => navigation.navigate(menu.target)}
               >
                 <Icon name={menu.icon} size={24} color="#333" />
                 <Text style={{ color: '#333', fontWeight: 'bold' }}>

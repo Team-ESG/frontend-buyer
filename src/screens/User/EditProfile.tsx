@@ -2,6 +2,8 @@ import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import color from '@lib/color/color';
+import kakaoLogo from '@lib/img/kakaoLogo.png';
+import naverLogo from '@lib/img/naverLogo.png';
 import { userState } from '@recoil/auth';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BackIcon from 'react-native-vector-icons/MaterialIcons';
@@ -86,6 +88,25 @@ export default function EditProfile({ navigation }: any): JSX.Element {
               )}
             </Pressable>
           ))}
+          {user?.social && (
+            <Pressable
+              style={({ pressed }) => [
+                {
+                  backgroundColor: pressed ? '#eee' : '#fff',
+                },
+                styles.profileItem,
+              ]}
+            >
+              <Text style={styles.profileTitle}>연동된 소셜 계정</Text>
+              <View style={styles.profileItemRight}>
+                {user?.id.includes('naver') ? (
+                  <Image source={naverLogo} style={styles.logo} />
+                ) : (
+                  <Image source={kakaoLogo} style={styles.logo} />
+                )}
+              </View>
+            </Pressable>
+          )}
         </View>
       </View>
     </SafeAreaView>
@@ -147,5 +168,10 @@ const styles = StyleSheet.create({
   profileContent: {
     fontSize: 14,
     color: 'grey',
+  },
+  logo: {
+    width: 20,
+    height: 20,
+    resizeMode: 'contain',
   },
 });

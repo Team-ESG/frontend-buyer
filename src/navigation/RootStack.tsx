@@ -10,6 +10,7 @@ import NoticeDetail from '@screens/User/NoticeDetail';
 import NoticeList from '@screens/User/NoticeList';
 import BottomTab from 'src/navigation/BottomTab';
 import PurchaseHistory from '@screens/User/PurchaseHistory';
+import Settings from '@screens/User/Settings';
 
 const Stack = createNativeStackNavigator();
 
@@ -64,6 +65,11 @@ export default function RootStack(): JSX.Element {
         name="PurchaseHistory"
         component={PurchaseHistory}
         options={{ title: '구매내역', headerShown: false }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={{ title: '환경설정', headerShown: false }}
       />
     </Stack.Navigator>
   );

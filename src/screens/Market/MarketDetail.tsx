@@ -21,8 +21,7 @@ import { useRecoilState } from 'recoil';
 export default function MarketDetail({ navigation }: any) {
   const [user, setUser] = useRecoilState(userState);
   const [marketInfo, setMarketInfo] = useState<any>(null);
-  // const marketId = navigation.getParam('id');
-  const marketId = 1;
+  const marketId = navigation.getParam('marketId');
   // 찜 여부
   const [isFavorite, setIsFavorite] = useState(false);
   const isFocuesed = useIsFocused();
