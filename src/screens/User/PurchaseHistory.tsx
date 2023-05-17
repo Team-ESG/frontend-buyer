@@ -101,19 +101,16 @@ export default function PurchaseHistory({ navigation }: any) {
                     minimumIntegerDigits: 2,
                   }) +
                   '(' +
-                  ['월', '화', '수', '목', '금', '토', '일'][
+                  ['일', '월', '화', '수', '목', '금', '토'][
                     new Date(
-                      `${item.reserveDate[0]}-${item.reserveDate[1] - 1}-${
-                        item.reserveDate[2]
-                      }`
-                    ).getDate()
+                      `${item.reserveDate[0]}-${item.reserveDate[1]}-${item.reserveDate[2]}`
+                    ).getDay()
                   ] +
                   ')' +
-                  ` ${
-                    item.isSuccess === 'RESERVE_FAIL' ? '픽업예정' : '픽업완료'
-                  }`}
+                  ` ${item.isSuccess === 'RESERVED' ? '픽업예정' : '픽업완료'}`}
               </Text>
               <Pressable
+                onPress={() => navigation.navigate('PurchaseHistoryDetail')}
                 style={{
                   backgroundColor: '#fff',
                   padding: 8,
@@ -155,7 +152,7 @@ export default function PurchaseHistory({ navigation }: any) {
               >
                 <View style={{ gap: 5 }}>
                   <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-                    {'????????'}
+                    {item.marketName}
                   </Text>
                   <Text style={{ color: '#787878' }}>{item.itemName}</Text>
                   <Text style={{ color: '#787878' }}>
@@ -171,7 +168,7 @@ export default function PurchaseHistory({ navigation }: any) {
                   justifyContent: 'center',
                   alignItems: 'center',
                   borderRadius: 8,
-                  opacity: item.isSuccess === 'RESERVE_FAIL' ? 1 : 0.5,
+                  opacity: item.isSuccess === 'RESERVED' ? 1 : 0.5,
                 }}
               >
                 <Text
@@ -181,9 +178,7 @@ export default function PurchaseHistory({ navigation }: any) {
                     color: color.white,
                   }}
                 >
-                  {item.isSuccess === 'RESERVE_FAIL'
-                    ? '구매예약중'
-                    : '구매완료'}
+                  {item.isSuccess === 'RESERVED' ? '구매예약중' : '구매완료'}
                 </Text>
               </View>
             </View>

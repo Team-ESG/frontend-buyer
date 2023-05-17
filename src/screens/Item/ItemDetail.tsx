@@ -74,10 +74,9 @@ export default function ItemDetail({ navigation, route }: any) {
   const onPressBuy = () => {
     axios
       .post(
-        `http://localhost:8080/main/item/${route.params.id}/reserve`,
+        `http://localhost:8080/main/item/reserve`,
         {
-          item: route.params.id,
-          reserveDate: '2023-05-01T13:04:50.551705',
+          itemId: route.params.id,
           quantity: buyCount,
         },
         {
@@ -224,10 +223,14 @@ export default function ItemDetail({ navigation, route }: any) {
           }}
         >
           <Text style={{ color: 'white', fontSize: 14, fontWeight: 'bold' }}>
-            {`유통기한 ${new Date(item.expirationDate)
-              .toLocaleDateString('ko-KR')
-              .split('.', 3)
-              .join('.')}`}
+            {`유통기한 ${
+              item.expirationDate?.length &&
+              item.expirationDate[0] +
+                '.' +
+                item.expirationDate[1] +
+                '.' +
+                item.expirationDate[2]
+            }`}
           </Text>
         </View>
         <View

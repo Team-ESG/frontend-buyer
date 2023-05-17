@@ -36,7 +36,7 @@ export default function ItemList({ navigation }: any) {
   );
 
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: 'white', flex: 1 }}>
       <View style={styles.container}>
         {itemList?.map((item, index) => (
           <Pressable
@@ -59,17 +59,34 @@ export default function ItemList({ navigation }: any) {
                   <View style={styles.alarm}>
                     <Icon name="alarm" size={24} color="#433518" />
                     <Text style={styles.alarmText}>
-                      {`${(
-                        ((item.expirationDate - Date.now()) / 1000 / 60 / 60) %
-                        24
-                      )
-                        .toFixed(0)
-                        .padStart(2, '0')}:${(
-                        ((item.expirationDate - Date.now()) / 1000 / 60) %
-                        60
-                      )
-                        .toFixed(0)
-                        .padStart(2, '0')}`}
+                      {item.expirationDate?.length &&
+                        (
+                          (new Date(
+                            item.expirationDate[0],
+                            item.expirationDate[1] - 1,
+                            item.expirationDate[2]
+                          ) -
+                            new Date()) /
+                          1000 /
+                          60 /
+                          60
+                        )
+                          .toFixed(0)
+                          .padStart(2, '0') +
+                          ':' +
+                          (
+                            ((new Date(
+                              item.expirationDate[0],
+                              item.expirationDate[1] - 1,
+                              item.expirationDate[2]
+                            ) -
+                              new Date()) /
+                              1000 /
+                              60) %
+                            60
+                          )
+                            .toFixed(0)
+                            .padStart(2, '0')}
                     </Text>
                   </View>
                 </View>
