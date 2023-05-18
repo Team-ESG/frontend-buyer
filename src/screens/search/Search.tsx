@@ -28,18 +28,51 @@ export default function Search({ navigation }: any) {
         <View style={styles.imageContainer}>
           <View style={styles.section}>
             <Icon name="search" size={24} style={styles.icon} />
-            <TextInput style={styles.input} placeholder="오늘 뭐먹지?" />
+            <TextInput
+              style={styles.input}
+              placeholder="오늘 뭐먹지?"
+              value={searchWord}
+              onChangeText={setSearchWord}
+              onSubmitEditing={() => {
+                if (searchWord !== '') {
+                  navigation.navigate('SearchResults', { searchWord });
+                }
+              }}
+            />
           </View>
         </View>
         <View style={styles.searchWordContainer}>
           <View style={styles.searchWordCircle}>
-            <Text style={styles.searchWordText}>조각 케이크</Text>
+            <Text
+              onPress={() => {
+                navigation.navigate('SearchResults', { searchWord: '사과' });
+              }}
+              style={styles.searchWordText}
+            >
+              사과
+            </Text>
           </View>
           <View style={styles.searchWordCircle}>
-            <Text style={styles.searchWordText}>치킨 마감세일</Text>
+            <Text
+              onPress={() => {
+                navigation.navigate('SearchResults', {
+                  searchWord: '파인애플',
+                });
+              }}
+              style={styles.searchWordText}
+            >
+              파인애플
+            </Text>
           </View>
           <View style={styles.searchWordCircle}>
-            <Text style={styles.searchWordText}>치즈피자</Text>
+            <Text
+              onPress={() => {
+                navigation.navigate('SearchResults', { searchWord: '모카빵' });
+              }}
+              style={styles.searchWordText}
+            >
+              모카빵
+            </Text>
           </View>
         </View>
       </KeyboardAvoidingView>
