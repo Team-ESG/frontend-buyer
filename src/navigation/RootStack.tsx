@@ -3,7 +3,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ItemDetail from '@screens/Item/ItemDetail';
 import MarketDetail from '@screens/Market/MarketDetail';
-import Search from '@screens/Search';
+import Search from '@screens/search/Search';
 import Edit from '@screens/User/Edit';
 import EditProfile from '@screens/User/EditProfile';
 import NoticeDetail from '@screens/User/NoticeDetail';
@@ -12,6 +12,7 @@ import BottomTab from 'src/navigation/BottomTab';
 import PurchaseHistory from '@screens/User/PurchaseHistory';
 import Settings from '@screens/User/Settings';
 import PurchaseHistoryDetail from '@screens/User/PurchaseHistoryDetail';
+import SearchResults from '@screens/search/SearchResults';
 
 const Stack = createNativeStackNavigator();
 
@@ -76,6 +77,11 @@ export default function RootStack(): JSX.Element {
         name="PurchaseHistoryDetail"
         component={PurchaseHistoryDetail}
         options={{ title: '주문내역', headerShown: false }}
+      />
+      <Stack.Screen
+        name="SearchResults"
+        component={SearchResults}
+        options={{ title: '검색결과', headerShown: false }}
       />
     </Stack.Navigator>
   );
