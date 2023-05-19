@@ -83,12 +83,10 @@ export default function Favorites({ navigation }: any) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.outerContainer}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>찜한 가게</Text>
-          <View style={styles.totalCountCircle}>
-            <Text style={styles.totalCountText}>총 {ItemList?.length}개</Text>
-          </View>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>찜한 가게</Text>
+        <View style={styles.totalCountCircle}>
+          <Text style={styles.totalCountText}>총 {ItemList?.length}개</Text>
         </View>
       </View>
 
@@ -140,15 +138,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   outerContainer: {
-    shadowColor: '#000',
-    overflow: 'hidden',
+    // shadowColor: '#000',
+    // overflow: 'hidden',
   },
   titleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: 1,
     paddingHorizontal: 20,
-    paddingVertical: 20,
-    backgroundColor: '#80c597',
+    paddingVertical: 18,
+    backgroundColor: 'rgba(73,172,106,0.7)',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -156,7 +155,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.5,
     shadowRadius: 3.84,
-    elevation: 3,
+    elevation: 1,
   },
   title: {
     fontSize: 17,

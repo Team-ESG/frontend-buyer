@@ -42,7 +42,7 @@ export default function PurchaseHistoryDetail({ navigation, route }: any) {
             flexDirection: 'row',
             alignItems: 'center',
             backgroundColor: '#fff',
-            paddingBottom: 15,
+            paddingVertical: 15,
             shadowColor: '#787878',
             shadowOpacity: 0.25,
             shadowOffset: {

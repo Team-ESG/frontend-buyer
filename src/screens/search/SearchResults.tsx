@@ -198,11 +198,11 @@ export default function SearchResults({ navigation, route }: any) {
       >
         <View style={styles.imageContainer}>
           <View style={styles.searchContainer}>
-            {/* <Icon
+            <Icon
               name="arrow-back-ios"
               style={styles.backBtn}
               onPress={() => navigation.goBack()}
-            /> */}
+            />
             <View style={styles.section}>
               <Icon name="search" size={24} style={styles.icon} />
               <TextInput
@@ -236,12 +236,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(73,172,106,0.7)',
     borderBottomStartRadius: 15,
     borderBottomEndRadius: 15,
-    height: 120,
+    height: 85,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'flex-end', // 'flex-end
+    alignItems: 'center', // 'flex-end
     paddingHorizontal: 20,
-    paddingBottom: 20,
   },
   searchContainer: {
     flexDirection: 'row',
@@ -249,13 +248,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   backBtn: {
-    flex: 0.1,
-    color: '#ffffff',
+    color: '#fff',
+    flex: 0.12,
     fontSize: 24,
   },
   section: {
     // marginLeft: 10,
-    flex: 1,
+    flex: 0.88,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
