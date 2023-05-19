@@ -67,6 +67,7 @@ export default function ItemDetail({ navigation, route }: any) {
         console.log(res.data);
       })
       .catch((err) => {
+        Alert.alert('장바구니 담기에 실패하였습니다.');
         console.log(err);
       });
   };
@@ -90,6 +91,7 @@ export default function ItemDetail({ navigation, route }: any) {
         console.log(res.data);
       })
       .catch((err) => {
+        Alert.alert('예약에 실패하였습니다.');
         console.log(err);
       });
   };

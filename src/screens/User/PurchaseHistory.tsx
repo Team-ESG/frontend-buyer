@@ -107,10 +107,20 @@ export default function PurchaseHistory({ navigation }: any) {
                     ).getDay()
                   ] +
                   ')' +
-                  ` ${item.isSuccess === 'RESERVED' ? '픽업예정' : '픽업완료'}`}
+                  ` ${
+                    item.isSuccess === 'RESERVED'
+                      ? '픽업예정'
+                      : item.isSuccess === 'RESERVE_FAIL'
+                      ? '구매실패'
+                      : '구매완료'
+                  }`}
               </Text>
               <Pressable
-                onPress={() => navigation.navigate('PurchaseHistoryDetail')}
+                onPress={() =>
+                  navigation.navigate('PurchaseHistoryDetail', {
+                    reserveId: item.reserveId,
+                  })
+                }
                 style={{
                   backgroundColor: '#fff',
                   padding: 8,
@@ -178,7 +188,11 @@ export default function PurchaseHistory({ navigation }: any) {
                     color: color.white,
                   }}
                 >
-                  {item.isSuccess === 'RESERVED' ? '구매예약중' : '구매완료'}
+                  {item.isSuccess === 'RESERVED'
+                    ? '예약중'
+                    : item.isSuccess === 'RESERVE_FAIL'
+                    ? '구매실패'
+                    : '구매완료'}
                 </Text>
               </View>
             </View>

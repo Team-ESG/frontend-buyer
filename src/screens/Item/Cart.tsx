@@ -38,6 +38,15 @@ export default function Cart({ navigation }: any) {
                 (prev) => prev + item.shoppingCartListedItemQuantity
               );
               setTotalPrice((prev) => prev + item.totalPrice);
+              if (item.itemQuantity < item.shoppingCartListedItemQuantity) {
+                const diff =
+                  item.shoppingCartListedItemQuantity - item.itemQuantity;
+                setTotalCount((prev) => prev - diff);
+                setTotalPrice((prev) => prev - diff * item.discountPrice);
+                Alert.alert(
+                  `${item.name} 상품의 재고가 부족하여 개수를 조정하였습니다.`
+                );
+              }
             }
           });
           setData(data);
@@ -73,6 +82,7 @@ export default function Cart({ navigation }: any) {
           console.log(res.data);
         })
         .catch((err) => {
+          Alert.alert('구매에 실패하였습니다.');
           console.log(err.response.data);
         });
     }

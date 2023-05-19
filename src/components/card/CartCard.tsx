@@ -21,8 +21,34 @@ export default function CartCard(params) {
     setTotalPrice,
     setData,
   } = params;
-  const [buyCount, setBuyCount] = useState(shoppingCartListedItemQuantity);
+  const [buyCount, setBuyCount] = useState(
+    itemQuantity < shoppingCartListedItemQuantity
+      ? itemQuantity
+      : shoppingCartListedItemQuantity
+  );
   const user = useRecoilValue(userState);
+
+  if (itemQuantity < shoppingCartListedItemQuantity) {
+    axios
+      .post(
+        `http://localhost:8080/main/item/cart`,
+        {
+          itemId: itemId,
+          quantity: buyCount,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${user?.accessToken}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   const onPressCountMinus = () => {
     if (buyCount > 1) {
