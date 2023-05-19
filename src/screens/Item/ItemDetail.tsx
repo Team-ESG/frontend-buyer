@@ -108,6 +108,7 @@ export default function ItemDetail({ navigation, route }: any) {
           style={{
             width: 24,
             height: 24,
+            top: 20,
           }}
           onPress={() => navigation.goBack()}
         >

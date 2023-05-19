@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   backBtn: {
     position: 'absolute',
-    top: 25,
+    top: 20,
     left: 20,
     zIndex: 1,
     color: '#ffffff',
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(73,172,106,0.7)',
     borderBottomStartRadius: 15,
     borderBottomEndRadius: 15,
-    height: 150,
+    height: 130,
     justifyContent: 'flex-end',
   },
   section: {
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     height: 45,
     paddingHorizontal: 10,
     marginHorizontal: 20,
-    marginBottom: 25,
+    marginBottom: 20,
     borderRadius: 2.5,
     shadowColor: '#000',
     shadowOffset: {

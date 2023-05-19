@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   },
   backBtn: {
     position: 'absolute',
-    top: 35,
+    top: 20,
     left: 25,
     zIndex: 1,
     fontSize: 24,
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   },
   heartBtn: {
     position: 'absolute',
-    top: 35,
+    top: 20,
     right: 25,
     zIndex: 1,
     fontSize: 24,
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   },
   heartBtnActive: {
     position: 'absolute',
-    top: 35,
+    top: 20,
     right: 25,
     zIndex: 1,
     fontSize: 24,
