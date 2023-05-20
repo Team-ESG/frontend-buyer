@@ -1,13 +1,14 @@
-import color from '@lib/color/color';
-import { useFocusEffect } from '@react-navigation/native';
-import { userState } from '@recoil/auth';
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Image, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import color from '@lib/color/color';
+import testImg from '@lib/img/testImg.jpeg';
+import { useFocusEffect } from '@react-navigation/native';
+import { userState } from '@recoil/auth';
+import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useRecoilValue } from 'recoil';
-import testImg from '@lib/img/testImg.jpeg';
 
 export default function PurchaseHistory({ navigation }: any) {
   const [data, setData] = useState([]);
@@ -91,22 +92,20 @@ export default function PurchaseHistory({ navigation }: any) {
               }}
             >
               <Text style={{ color: '#787878', fontSize: 14 }}>
-                {item.reserveDate[0] +
-                  '.' +
-                  item.reserveDate[1].toLocaleString('ko-KR', {
+                {`${item.reserveDate[0]}.${item.reserveDate[1].toLocaleString(
+                  'ko-KR',
+                  {
                     minimumIntegerDigits: 2,
-                  }) +
-                  '.' +
-                  item.reserveDate[2].toLocaleString('ko-KR', {
-                    minimumIntegerDigits: 2,
-                  }) +
-                  '(' +
+                  }
+                )}.${item.reserveDate[2].toLocaleString('ko-KR', {
+                  minimumIntegerDigits: 2,
+                })}(${
                   ['일', '월', '화', '수', '목', '금', '토'][
                     new Date(
                       `${item.reserveDate[0]}-${item.reserveDate[1]}-${item.reserveDate[2]}`
                     ).getDay()
-                  ] +
-                  ')' +
+                  ]
+                })` +
                   ` ${
                     item.isSuccess === 'RESERVED'
                       ? '픽업예정'

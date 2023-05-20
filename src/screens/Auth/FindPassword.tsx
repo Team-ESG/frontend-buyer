@@ -69,7 +69,9 @@ export default function PhoneNumberInputScreen({
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.topContainer}>
         <Text style={styles.title}>비밀번호 찾기</Text>
-        <Text style={styles.subTitle}>본인의 아이디와 휴대폰 번호를 입력해주세요.</Text>
+        <Text style={styles.subTitle}>
+          본인의 아이디와 휴대폰 번호를 입력해주세요.
+        </Text>
         <Text style={styles.label}>아이디</Text>
         <View style={styles.inputContainer}>
           <TextInput

@@ -9,12 +9,13 @@ import {
   Text,
   View,
 } from 'react-native';
+
+import CartCard from '@components/card/CartCard';
+import color from '@lib/color/color';
+import { useFocusEffect } from '@react-navigation/native';
+import { userState } from '@recoil/auth';
 import axios from 'axios';
 import { useRecoilValue } from 'recoil';
-import { userState } from '@recoil/auth';
-import { useFocusEffect } from '@react-navigation/native';
-import color from '@lib/color/color';
-import CartCard from '@components/card/CartCard';
 
 export default function Cart({ navigation }: any) {
   const user = useRecoilValue(userState);
@@ -31,7 +32,7 @@ export default function Cart({ navigation }: any) {
           },
         })
         .then((res) => {
-          const data = res.data.data;
+          const { data } = res.data;
           data.forEach((item: any) => {
             if (item.isSold === 'False') {
               setTotalCount(

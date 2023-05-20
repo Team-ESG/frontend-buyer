@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   TextInput,
+  StatusBar,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -16,6 +17,7 @@ export default function Search({ navigation }: any) {
   const [searchWord, setSearchWord] = React.useState<string>('');
   return (
     <SafeAreaView>
+      <StatusBar backgroundColor="rgba(73,172,106,0.7)" />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}

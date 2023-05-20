@@ -10,6 +10,7 @@ import {
   Text,
   Pressable,
   Image,
+  StatusBar,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabView, TabBar } from 'react-native-tab-view';
@@ -41,6 +42,10 @@ function ItemView({ searchWord, navigation, setItemCount }: any) {
 
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar
+        backgroundColor="rgba(73,172,106,0.7)"
+        barStyle="light-content"
+      />
       {itemList.length > 0 ? (
         itemList.map((item: any) => (
           <Pressable
@@ -328,10 +333,9 @@ const styles = StyleSheet.create({
   },
   itemPrice: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '400',
     color: '#999',
     marginHorizontal: 15,
-    marginVertical: 5,
   },
   noItemText: {
     fontSize: 16,

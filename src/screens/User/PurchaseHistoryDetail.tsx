@@ -1,10 +1,11 @@
+import React, { useState } from 'react';
+import { Linking, Pressable, ScrollView, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import color from '@lib/color/color';
 import { useFocusEffect } from '@react-navigation/native';
 import { userState } from '@recoil/auth';
 import axios from 'axios';
-import React, { useState } from 'react';
-import { Linking, Pressable, ScrollView, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useRecoilValue } from 'recoil';
 

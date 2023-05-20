@@ -47,7 +47,9 @@ function Login({ navigation }: any): JSX.Element {
           refreshToken: response.data.refreshToken,
         });
         setTokens(response.data.accessToken, response.data.refreshToken);
-      } catch (e) {}
+      } catch (e) {
+        console.log(e);
+      }
     };
     fetchUser();
   }, []);
@@ -166,8 +168,10 @@ function Login({ navigation }: any): JSX.Element {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    height: '100%',
     paddingTop: 70,
     alignItems: 'center',
+    backgroundColor: color.white,
   },
   loginInputSection: {
     width: '60%',

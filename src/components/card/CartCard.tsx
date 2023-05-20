@@ -1,10 +1,11 @@
-import { userState } from '@recoil/auth';
 import { useState } from 'react';
 import { Image, Text, View } from 'react-native';
+
 import testImg from '@lib/img/testImg.jpeg';
+import { userState } from '@recoil/auth';
+import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useRecoilValue } from 'recoil';
-import axios from 'axios';
 
 export default function CartCard(params) {
   const {
@@ -33,7 +34,7 @@ export default function CartCard(params) {
       .post(
         `http://localhost:8080/main/item/cart`,
         {
-          itemId: itemId,
+          itemId,
           quantity: buyCount,
         },
         {
@@ -56,7 +57,7 @@ export default function CartCard(params) {
         .post(
           `http://localhost:8080/main/item/cart`,
           {
-            itemId: itemId,
+            itemId,
             quantity: buyCount - 1,
           },
           {
@@ -83,7 +84,7 @@ export default function CartCard(params) {
         .post(
           `http://localhost:8080/main/item/cart`,
           {
-            itemId: itemId,
+            itemId,
             quantity: buyCount + 1,
           },
           {

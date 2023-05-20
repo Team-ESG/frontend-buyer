@@ -9,11 +9,10 @@ import {
   ImageBackground,
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import testImg from '@lib/img/testImg.jpeg';
-import axios from 'axios';
 import { useFocusEffect } from '@react-navigation/native';
+import axios from 'axios';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default function ItemList({ navigation }: any) {
   const [itemList, setItemList] = useState([]);
@@ -60,7 +59,7 @@ export default function ItemList({ navigation }: any) {
                     <Icon name="alarm" size={24} color="#433518" />
                     <Text style={styles.alarmText}>
                       {item.expirationDate?.length &&
-                        (
+                        `${(
                           (new Date(
                             item.expirationDate[0],
                             item.expirationDate[1] - 1,
@@ -72,21 +71,19 @@ export default function ItemList({ navigation }: any) {
                           60
                         )
                           .toFixed(0)
-                          .padStart(2, '0') +
-                          ':' +
-                          (
-                            ((new Date(
-                              item.expirationDate[0],
-                              item.expirationDate[1] - 1,
-                              item.expirationDate[2]
-                            ) -
-                              new Date()) /
-                              1000 /
-                              60) %
-                            60
-                          )
-                            .toFixed(0)
-                            .padStart(2, '0')}
+                          .padStart(2, '0')}:${(
+                          ((new Date(
+                            item.expirationDate[0],
+                            item.expirationDate[1] - 1,
+                            item.expirationDate[2]
+                          ) -
+                            new Date()) /
+                            1000 /
+                            60) %
+                          60
+                        )
+                          .toFixed(0)
+                          .padStart(2, '0')}`}
                     </Text>
                   </View>
                 </View>
