@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
   locationText: {
     fontSize: 19,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: 'black',
     marginRight: 5,
   },

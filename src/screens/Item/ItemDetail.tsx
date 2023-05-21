@@ -26,7 +26,7 @@ export default function ItemDetail({ navigation, route }: any) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/main/item/${route.params.id}`)
+      .get(`http://52.78.81.8:8080/main/item/${route.params.id}`)
       .then((res) => {
         setItem(res.data.data);
         console.log(res.data.data);
@@ -51,7 +51,7 @@ export default function ItemDetail({ navigation, route }: any) {
   const onPressAddCart = () => {
     axios
       .post(
-        'http://localhost:8080/main/item/cart',
+        'http://52.78.81.8:8080/main/item/cart',
         {
           itemId: route.params.id,
           quantity: buyCount,
@@ -75,7 +75,7 @@ export default function ItemDetail({ navigation, route }: any) {
   const onPressBuy = () => {
     axios
       .post(
-        `http://localhost:8080/main/item/reserve`,
+        `http://52.78.81.8:8080/main/item/reserve`,
         {
           itemId: route.params.id,
           quantity: buyCount,
@@ -108,7 +108,7 @@ export default function ItemDetail({ navigation, route }: any) {
           style={{
             width: 24,
             height: 24,
-            top: 20,
+            top: 15,
           }}
           onPress={() => navigation.goBack()}
         >
@@ -164,7 +164,7 @@ export default function ItemDetail({ navigation, route }: any) {
                   style={{
                     fontSize: 16,
                     color: '#433518',
-                    fontWeight: 'bold',
+                    fontWeight: '600',
                   }}
                 >
                   {item.marketName}
@@ -187,9 +187,7 @@ export default function ItemDetail({ navigation, route }: any) {
                 navigation.navigate('MarketDetail', { marketId: item.marketId })
               }
             >
-              <Text
-                style={{ color: 'white', fontWeight: 'bold', fontSize: 16 }}
-              >
+              <Text style={{ color: 'white', fontWeight: '600', fontSize: 16 }}>
                 매장정보
               </Text>
             </Pressable>
@@ -204,7 +202,7 @@ export default function ItemDetail({ navigation, route }: any) {
           <Text style={{ fontSize: 14, color: '#787878' }}>
             {item.marketName}
           </Text>
-          <Text style={{ fontSize: 16, color: '#433518', fontWeight: 'bold' }}>
+          <Text style={{ fontSize: 16, color: '#433518', fontWeight: '600' }}>
             {item.name}
           </Text>
           <Text style={{ fontSize: 14, marginBottom: 40 }}>
@@ -227,7 +225,7 @@ export default function ItemDetail({ navigation, route }: any) {
             marginLeft: 40,
           }}
         >
-          <Text style={{ color: 'white', fontSize: 14, fontWeight: 'bold' }}>
+          <Text style={{ color: 'white', fontSize: 14, fontWeight: '600' }}>
             {`유통기한 ${
               item.expirationDate?.length &&
               `${item.expirationDate[0]}.${item.expirationDate[1]}.${item.expirationDate[2]}`
@@ -275,7 +273,7 @@ export default function ItemDetail({ navigation, route }: any) {
                 style={{
                   color: '#433518',
                   fontSize: 16,
-                  fontWeight: 'bold',
+                  fontWeight: '600',
                 }}
               >
                 {item.discountPrice?.toLocaleString('ko-KR')}원
@@ -330,9 +328,7 @@ export default function ItemDetail({ navigation, route }: any) {
             </Pressable>
           </View>
           <View>
-            <Text
-              style={{ color: '#433518', fontSize: 20, fontWeight: 'bold' }}
-            >
+            <Text style={{ color: '#433518', fontSize: 20, fontWeight: '600' }}>
               {`총 ${(item.discountPrice * buyCount).toLocaleString(
                 'ko-KR'
               )}원`}
@@ -348,7 +344,7 @@ export default function ItemDetail({ navigation, route }: any) {
               borderRadius: 10,
             }}
           >
-            <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>
+            <Text style={{ color: 'white', fontSize: 16, fontWeight: '600' }}>
               구매하기
             </Text>
           </Pressable>

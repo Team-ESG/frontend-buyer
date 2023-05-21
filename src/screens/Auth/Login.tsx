@@ -28,7 +28,7 @@ function Login({ navigation }: any): JSX.Element {
       try {
         const tokens = await getTokens();
         if (!tokens) throw new Error('No tokens');
-        const response = await axios.post('http://localhost:8080/autoLogin', {
+        const response = await axios.post('http://52.78.81.8:8080/autoLogin', {
           accessToken: tokens.accessToken,
           refreshToken: tokens.refreshToken,
         });
@@ -47,14 +47,16 @@ function Login({ navigation }: any): JSX.Element {
           refreshToken: response.data.refreshToken,
         });
         setTokens(response.data.accessToken, response.data.refreshToken);
-      } catch (e) {}
+      } catch (e) {
+        console.log(e);
+      }
     };
     fetchUser();
   }, []);
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/login', {
+      const response = await axios.post('http://52.78.81.8:8080/login', {
         id: email,
         pwd: password,
       });
@@ -80,13 +82,13 @@ function Login({ navigation }: any): JSX.Element {
 
   const handleKakaoLogin = () => {
     navigation.navigate('WebView', {
-      url: 'http://localhost:8080/oauth2/authorization/kakao',
+      url: 'http://52.78.81.8:8080/oauth2/authorization/kakao',
     });
   };
 
   const handleNaverLogin = () => {
     navigation.navigate('WebView', {
-      url: 'http://localhost:8080/oauth2/authorization/naver',
+      url: 'http://52.78.81.8:8080/oauth2/authorization/naver',
     });
   };
 
@@ -166,8 +168,10 @@ function Login({ navigation }: any): JSX.Element {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    height: '100%',
     paddingTop: 70,
     alignItems: 'center',
+    backgroundColor: color.white,
   },
   loginInputSection: {
     width: '60%',
@@ -221,7 +225,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   boldText: {
-    fontWeight: 'bold',
+    fontWeight: '600',
     fontSize: 16,
     color: '#433518',
   },

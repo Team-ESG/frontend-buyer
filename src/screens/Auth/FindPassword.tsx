@@ -35,7 +35,7 @@ export default function PhoneNumberInputScreen({
   const handleResetPassword = async () => {
     try {
       const response = await axios.post(
-        'http://localhost:8080/info/check/pwd',
+        'http://52.78.81.8:8080/info/check/pwd',
         {
           id,
           phone: phoneNumber,
@@ -69,7 +69,9 @@ export default function PhoneNumberInputScreen({
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.topContainer}>
         <Text style={styles.title}>비밀번호 찾기</Text>
-        <Text style={styles.subTitle}>본인의 아이디와 휴대폰 번호를 입력해주세요.</Text>
+        <Text style={styles.subTitle}>
+          본인의 아이디와 휴대폰 번호를 입력해주세요.
+        </Text>
         <Text style={styles.label}>아이디</Text>
         <View style={styles.inputContainer}>
           <TextInput
@@ -133,13 +135,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginBottom: 1.5,
     color: color.brown,
   },
   title_disabled: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginBottom: 1.5,
     color: color.disabled_01,
   },
@@ -156,7 +158,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginTop: 10,
     marginBottom: 5,
     color: color.offBlack,
@@ -193,7 +195,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#FFF',
   },
   errorMessage: {

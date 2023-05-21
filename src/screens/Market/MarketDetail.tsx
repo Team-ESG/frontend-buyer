@@ -9,6 +9,7 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
+import WebView from 'react-native-webview';
 
 import mapImg from '@lib/img/map.png';
 import marketImg from '@lib/img/market.png';
@@ -17,6 +18,32 @@ import { userState } from '@recoil/auth';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useRecoilState } from 'recoil';
+
+const html = `
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 100%; }
+    </style>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7f4af1e48d5ca958062eb8e5f2088353"></script>
+  </head>
+  <body>
+    <div id="map" style="width:100%;height:100%;"></div>
+    <script type="text/javascript">
+      var mapContainer = document.getElementById('map'), 
+          mapOption = { 
+              center: new kakao.maps.LatLng(33.450701, 126.570667), // Initial coordinates for the map's center
+              level: 3 // Initial zoom level
+          };
+
+      var map = new kakao.maps.Map(mapContainer, mapOption); // Create a map object
+    </script>
+  </body>
+</html>
+`;
 
 export default function MarketDetail({ navigation, route }: any) {
   const [user, setUser] = useRecoilState(userState);
@@ -30,7 +57,7 @@ export default function MarketDetail({ navigation, route }: any) {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/market/${marketId}`,
+          `http://52.78.81.8:8080/market/${marketId}`,
           {
             headers: { authorization: `Bearer ${user?.accessToken}` },
           }
@@ -59,7 +86,7 @@ export default function MarketDetail({ navigation, route }: any) {
   const handleFavorite = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:8080/market/${marketId}/control`,
+        `http://52.78.81.8:8080/market/${marketId}/control`,
         {
           memberId: user?.id,
         },
@@ -125,7 +152,12 @@ export default function MarketDetail({ navigation, route }: any) {
             </Text>
           </View>
           <View style={styles.mapContainer}>
-            <Image source={mapImg} />
+            {/* <WebView
+              originWhitelist={['*']}
+              source={{ html }}
+              style={{ width: '90%', height: 300 }}
+            /> */}
+            {/* <Image source={mapImg} /> */}
           </View>
         </View>
         <View style={styles.salesInfoContainer}>
@@ -164,7 +196,7 @@ const styles = StyleSheet.create({
   },
   backBtn: {
     position: 'absolute',
-    top: 20,
+    top: 45,
     left: 25,
     zIndex: 1,
     fontSize: 24,
@@ -172,7 +204,7 @@ const styles = StyleSheet.create({
   },
   heartBtn: {
     position: 'absolute',
-    top: 20,
+    top: 45,
     right: 25,
     zIndex: 1,
     fontSize: 24,
@@ -180,7 +212,7 @@ const styles = StyleSheet.create({
   },
   heartBtnActive: {
     position: 'absolute',
-    top: 20,
+    top: 45,
     right: 25,
     zIndex: 1,
     fontSize: 24,
@@ -196,7 +228,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#333',
     marginBottom: 20,
   },
@@ -215,7 +247,7 @@ const styles = StyleSheet.create({
   textTitle: {
     flex: 0.2,
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#333',
   },
   textDetail: {

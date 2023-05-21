@@ -1,13 +1,14 @@
-import color from '@lib/color/color';
-import { useFocusEffect } from '@react-navigation/native';
-import { userState } from '@recoil/auth';
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Image, Pressable, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import color from '@lib/color/color';
+import testImg from '@lib/img/testImg.jpeg';
+import { useFocusEffect } from '@react-navigation/native';
+import { userState } from '@recoil/auth';
+import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useRecoilValue } from 'recoil';
-import testImg from '@lib/img/testImg.jpeg';
 
 export default function PurchaseHistory({ navigation }: any) {
   const [data, setData] = useState([]);
@@ -16,7 +17,7 @@ export default function PurchaseHistory({ navigation }: any) {
   useFocusEffect(
     React.useCallback(() => {
       axios
-        .get('http://localhost:8080/main/reserveList', {
+        .get('http://52.78.81.8:8080/main/reserveList', {
           headers: {
             authorization: `Bearer ${user?.accessToken}`,
           },
@@ -59,7 +60,7 @@ export default function PurchaseHistory({ navigation }: any) {
           >
             <Icon name="arrow-back-ios" size={24} color="#000" />
           </Pressable>
-          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>주문내역</Text>
+          <Text style={{ fontSize: 16, fontWeight: '600' }}>주문내역</Text>
           <Pressable
             style={{
               marginLeft: 'auto',
@@ -91,22 +92,20 @@ export default function PurchaseHistory({ navigation }: any) {
               }}
             >
               <Text style={{ color: '#787878', fontSize: 14 }}>
-                {item.reserveDate[0] +
-                  '.' +
-                  item.reserveDate[1].toLocaleString('ko-KR', {
+                {`${item.reserveDate[0]}.${item.reserveDate[1].toLocaleString(
+                  'ko-KR',
+                  {
                     minimumIntegerDigits: 2,
-                  }) +
-                  '.' +
-                  item.reserveDate[2].toLocaleString('ko-KR', {
-                    minimumIntegerDigits: 2,
-                  }) +
-                  '(' +
+                  }
+                )}.${item.reserveDate[2].toLocaleString('ko-KR', {
+                  minimumIntegerDigits: 2,
+                })}(${
                   ['일', '월', '화', '수', '목', '금', '토'][
                     new Date(
                       `${item.reserveDate[0]}-${item.reserveDate[1]}-${item.reserveDate[2]}`
                     ).getDay()
-                  ] +
-                  ')' +
+                  ]
+                })` +
                   ` ${
                     item.isSuccess === 'RESERVED'
                       ? '픽업예정'
@@ -161,7 +160,7 @@ export default function PurchaseHistory({ navigation }: any) {
                 }}
               >
                 <View style={{ gap: 5 }}>
-                  <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                  <Text style={{ fontSize: 20, fontWeight: '600' }}>
                     {item.marketName}
                   </Text>
                   <Text style={{ color: '#787878' }}>{item.itemName}</Text>
@@ -184,7 +183,7 @@ export default function PurchaseHistory({ navigation }: any) {
                 <Text
                   style={{
                     fontSize: 16,
-                    fontWeight: 'bold',
+                    fontWeight: '600',
                     color: color.white,
                   }}
                 >

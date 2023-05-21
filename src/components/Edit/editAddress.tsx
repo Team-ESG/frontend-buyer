@@ -18,7 +18,7 @@ export default function EditAddress({ setIsSubmitting }: any) {
   const handleEditAddress = async () => {
     try {
       const response = await axios.patch(
-        'http://localhost:8080/auth/info/reset/address',
+        'http://52.78.81.8:8080/auth/info/reset/address',
         {
           firstAddr: address.split(' ')[0],
           secondAddr: address.split(' ')[1],
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#333',
     marginBottom: 10,
   },
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#FFF',
   },
 });

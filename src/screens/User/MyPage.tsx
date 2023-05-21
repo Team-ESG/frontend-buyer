@@ -80,7 +80,7 @@ export default function MyPage({ navigation }: any) {
                 onPress={() => navigation.navigate(menu.target)}
               >
                 <Icon name={menu.icon} size={24} color="#333" />
-                <Text style={{ color: '#333', fontWeight: 'bold' }}>
+                <Text style={{ color: '#333', fontWeight: '600' }}>
                   {menu.title}
                 </Text>
               </Pressable>
@@ -133,12 +133,12 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     alignItems: 'center',
     justifyContent: 'center',
-    borderBottomWidth: 3,
+    borderBottomWidth: 2,
     borderBottomColor: '#eee',
   },
   headerText: {
     fontSize: 19,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: color.brown,
   },
   content: {
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   },
   profileText: {
     fontSize: 17,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#333',
   },
   menuContainer: {
@@ -206,6 +206,6 @@ const styles = StyleSheet.create({
   disCountText: {
     color: 'white',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
   },
 });

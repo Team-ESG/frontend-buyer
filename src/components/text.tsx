@@ -16,7 +16,7 @@
 //     },
 //     {
 //       fontFamily: 'MyCustomFont-Bold',
-//       fontWeight: 'bold',
+//       fontWeight: '600',
 //       src: require('../../assets/fonts/Inter-Bold.ttf'),
 //     },
 //   ],

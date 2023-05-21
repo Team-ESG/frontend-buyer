@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 19,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: color.brown,
   },
   headerIcon: {
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#333',
     marginTop: 20,
     marginLeft: 20,

@@ -122,12 +122,12 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     alignItems: 'center',
     justifyContent: 'center',
-    borderBottomWidth: 3,
+    borderBottomWidth: 2,
     borderBottomColor: '#eee',
   },
   headerText: {
     fontSize: 19,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: color.brown,
   },
   headerIcon: {
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   },
   profileTitle: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#333',
   },
   profileContent: {

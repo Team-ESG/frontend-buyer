@@ -10,6 +10,7 @@ import {
   Text,
   Pressable,
   Image,
+  StatusBar,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabView, TabBar } from 'react-native-tab-view';
@@ -27,7 +28,7 @@ function ItemView({ searchWord, navigation, setItemCount }: any) {
     const fetchItemList = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/main/search/${searchWord}/item/all`
+          `http://52.78.81.8:8080/main/search/${searchWord}/item/all`
         );
         setItemList(response.data.data);
         setItemCount(response.data.data.length);
@@ -41,6 +42,10 @@ function ItemView({ searchWord, navigation, setItemCount }: any) {
 
   return (
     <View style={{ flex: 1 }}>
+      <StatusBar
+        backgroundColor="rgba(73,172,106,0.7)"
+        barStyle="light-content"
+      />
       {itemList.length > 0 ? (
         itemList.map((item: any) => (
           <Pressable
@@ -82,7 +87,7 @@ function MarketView({ searchWord, navigation, setMarketCount }: any) {
     const fetchMarketList = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/main/search/${searchWord}/market/all`
+          `http://52.78.81.8:8080/main/search/${searchWord}/market/all`
         );
         setMarketList(response.data.data);
         setMarketCount(response.data.data.length);
@@ -136,7 +141,7 @@ const renderTabBar = (props: any) => (
     {...props}
     indicatorStyle={{ backgroundColor: '#333' }}
     style={{ backgroundColor: '#fff' }}
-    labelStyle={{ color: '#333', fontWeight: 'bold', fontSize: 16 }}
+    labelStyle={{ color: '#333', fontWeight: '600', fontSize: 16 }}
     inactiveColor="#999"
   />
 );
@@ -286,7 +291,7 @@ const styles = StyleSheet.create({
   },
   searchWordText: {
     fontSize: 12,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#787878',
   },
   itemContainer: {
@@ -314,7 +319,7 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#433518',
     marginHorizontal: 15,
     marginTop: 5,
@@ -328,14 +333,13 @@ const styles = StyleSheet.create({
   },
   itemPrice: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '400',
     color: '#999',
     marginHorizontal: 15,
-    marginVertical: 5,
   },
   noItemText: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#999',
     marginVertical: 10,
     textAlign: 'center',

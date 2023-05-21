@@ -64,7 +64,7 @@ function Signup({ navigation }: any): JSX.Element {
       const formattedBirthDate = await formatBirthDate(birthDate);
       const formattedGender = await formatGender(gender);
 
-      const response = await axios.post('http://localhost:8080/register', {
+      const response = await axios.post('http://52.78.81.8:8080/register', {
         memberId: id,
         password,
         name,
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#FFF',
   },
 });

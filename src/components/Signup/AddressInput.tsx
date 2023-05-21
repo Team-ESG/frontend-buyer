@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginBottom: 1.5,
     color: color.brown,
   },
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginTop: 10,
     marginBottom: 5,
     color: color.brown,
