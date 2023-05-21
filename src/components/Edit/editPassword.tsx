@@ -32,7 +32,7 @@ export default function EditPassword({ setIsSubmitting }: any) {
   const handleEditPassword = async () => {
     try {
       const response = await axios.patch(
-        'http://localhost:8080/auth/info/reset/pwd',
+        'http://52.78.81.8:8080/auth/info/reset/pwd',
         {
           pwd: password,
         },
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#333',
     marginBottom: 10,
   },
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginTop: 10,
     marginBottom: 5,
     color: '#333',
@@ -151,6 +151,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: color.brown,
     flex: 1,
+    borderRadius: 5,
   },
   errorMessage: {
     color: 'red',
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#FFF',
   },
 });

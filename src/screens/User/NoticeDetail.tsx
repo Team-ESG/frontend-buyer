@@ -16,7 +16,7 @@ export default function NoticeDetail({ navigation, route }: any): JSX.Element {
     const getNoticeInfo = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8080/notice/${route.params.id}`,
+          `http://52.78.81.8:8080/notice/${route.params.id}`,
           {
             headers: {
               Authorization: `Bearer ${user?.accessToken}`,
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 19,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: color.brown,
   },
   headerIcon: {
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   },
   noticeTitleText: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#333',
   },
   noticeDateText: {

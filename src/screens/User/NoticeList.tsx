@@ -12,7 +12,7 @@ export default function NoticeList({ navigation }: any): JSX.Element {
 
   useEffect(() => {
     const getNoticeList = async () => {
-      const res = await axios.get('http://localhost:8080/notice/all');
+      const res = await axios.get('http://52.78.81.8:8080/notice/all');
       setNoticeList(res.data.data);
     };
     getNoticeList();
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 19,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: color.brown,
   },
   headerIcon: {
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   },
   noticeTitle: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#333',
   },
 });

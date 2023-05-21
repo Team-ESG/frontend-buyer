@@ -32,7 +32,7 @@ export default function CartCard(params) {
   if (itemQuantity < shoppingCartListedItemQuantity) {
     axios
       .post(
-        `http://localhost:8080/main/item/cart`,
+        `http://52.78.81.8:8080/main/item/cart`,
         {
           itemId,
           quantity: buyCount,
@@ -55,7 +55,7 @@ export default function CartCard(params) {
     if (buyCount > 1) {
       axios
         .post(
-          `http://localhost:8080/main/item/cart`,
+          `http://52.78.81.8:8080/main/item/cart`,
           {
             itemId,
             quantity: buyCount - 1,
@@ -82,7 +82,7 @@ export default function CartCard(params) {
     if (buyCount !== itemQuantity) {
       axios
         .post(
-          `http://localhost:8080/main/item/cart`,
+          `http://52.78.81.8:8080/main/item/cart`,
           {
             itemId,
             quantity: buyCount + 1,
@@ -108,7 +108,7 @@ export default function CartCard(params) {
   const onPressCartClear = () => {
     axios
       .post(
-        `http://localhost:8080/main/cart/delete/${index + 1}`,
+        `http://52.78.81.8:8080/main/cart/delete/${index + 1}`,
         {},
         {
           headers: {
@@ -130,7 +130,7 @@ export default function CartCard(params) {
   const onPressCartSoldOutClear = () => {
     axios
       .post(
-        `http://localhost:8080/main/cart/delete/${index + 1}`,
+        `http://52.78.81.8:8080/main/cart/delete/${index + 1}`,
         {},
         {
           headers: {
@@ -164,7 +164,7 @@ export default function CartCard(params) {
         />
         <View style={{ flex: 1, gap: 5, padding: 20 }}>
           <Text style={{ color: '#787878' }}>{marketName}</Text>
-          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{name}</Text>
+          <Text style={{ fontSize: 16, fontWeight: '600' }}>{name}</Text>
           <View style={{ flexDirection: 'row', gap: 10 }}>
             <Text
               style={{
@@ -183,7 +183,7 @@ export default function CartCard(params) {
             style={{
               color: '#433518',
               fontSize: 16,
-              fontWeight: 'bold',
+              fontWeight: '600',
             }}
           >
             {discountPrice?.toLocaleString('ko-KR')}원
@@ -202,7 +202,7 @@ export default function CartCard(params) {
               color={buyCount === 1 ? '#78787850' : '#787878'}
               onPress={onPressCountMinus}
             />
-            <Text style={{ fontWeight: 'bold' }}>{buyCount}</Text>
+            <Text style={{ fontWeight: '600' }}>{buyCount}</Text>
             <Icon
               name="add-circle-outline"
               size={24}
@@ -213,7 +213,7 @@ export default function CartCard(params) {
               style={{
                 color: '#433518',
                 fontSize: 16,
-                fontWeight: 'bold',
+                fontWeight: '600',
               }}
             >
               {(discountPrice * buyCount).toLocaleString('ko-KR')}원
@@ -246,7 +246,7 @@ export default function CartCard(params) {
             color="white"
             onPress={onPressCartSoldOutClear}
           />
-          <Text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>
+          <Text style={{ color: 'white', fontSize: 20, fontWeight: '600' }}>
             SOLD OUT
           </Text>
         </View>

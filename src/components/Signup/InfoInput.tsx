@@ -119,7 +119,7 @@ function InfoInputScreen({
     try {
       /* Todo: 닉네임 중복 확인 코드  */
       const response = await axios.get(
-        `http://localhost:8080/register/check/nickname/${nickname}`,
+        `http://52.78.81.8:8080/register/check/nickname/${nickname}`,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -299,13 +299,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginBottom: 1.5,
     color: color.brown,
   },
   title_disabled: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginBottom: 1.5,
     color: color.disabled_01,
   },
@@ -322,7 +322,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginTop: 10,
     marginBottom: 5,
     color: color.offBlack,
@@ -330,7 +330,7 @@ const styles = StyleSheet.create({
   },
   label_disabled: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginTop: 5,
     marginBottom: 5,
     color: color.disabled_01,
@@ -377,7 +377,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#FFF',
   },
   errorMessage: {

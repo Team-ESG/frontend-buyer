@@ -17,7 +17,7 @@ export default function PurchaseHistoryDetail({ navigation, route }: any) {
     React.useCallback(() => {
       axios
         .get(
-          `http://localhost:8080/main/reserveList/${route.params.reserveId}`,
+          `http://52.78.81.8:8080/main/reserveList/${route.params.reserveId}`,
           {
             headers: {
               authorization: `Bearer ${user?.accessToken}`,
@@ -62,7 +62,7 @@ export default function PurchaseHistoryDetail({ navigation, route }: any) {
           >
             <Icon name="arrow-back-ios" size={24} color="#000" />
           </Pressable>
-          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>주문내역</Text>
+          <Text style={{ fontSize: 16, fontWeight: '600' }}>주문내역</Text>
           <Pressable
             style={{
               marginLeft: 'auto',
@@ -83,12 +83,12 @@ export default function PurchaseHistoryDetail({ navigation, route }: any) {
             gap: 10,
           }}
         >
-          <Text style={{ color: 'green', fontWeight: 'bold' }}>
+          <Text style={{ color: 'green', fontWeight: '600' }}>
             {data.reserveState === 'RESERVE_FAIL'
               ? '픽업을 대기중이에요'
               : '픽업을 완료했어요'}
           </Text>
-          <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+          <Text style={{ fontSize: 18, fontWeight: '600' }}>
             {data.marketName}
           </Text>
           <Text style={{ fontSize: 16, color: '#787878' }}>
@@ -160,18 +160,14 @@ export default function PurchaseHistoryDetail({ navigation, route }: any) {
             padding: 20,
           }}
         >
-          <Text style={{ fontWeight: 'bold', fontSize: 16 }}>결제금액</Text>
+          <Text style={{ fontWeight: '600', fontSize: 16 }}>결제금액</Text>
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}
           >
-            <Text
-              style={{ fontWeight: 'bold', fontSize: 14, color: '#787878' }}
-            >
+            <Text style={{ fontWeight: '600', fontSize: 14, color: '#787878' }}>
               {data.itemName} {data.quantity}개
             </Text>
-            <Text
-              style={{ fontWeight: 'bold', fontSize: 14, color: '#787878' }}
-            >
+            <Text style={{ fontWeight: '600', fontSize: 14, color: '#787878' }}>
               {data.price}원
             </Text>
           </View>

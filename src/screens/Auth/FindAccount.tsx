@@ -30,7 +30,7 @@ export default function PhoneNumberInputScreen({
 
   const handleFindAccount = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/info/id', {
+      const response = await axios.post('http://52.78.81.8:8080/info/id', {
         phone: phoneNumber,
       });
       if (response.status >= 400) throw new Error();
@@ -97,13 +97,13 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginBottom: 1.5,
     color: color.brown,
   },
   title_disabled: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginBottom: 1.5,
     color: color.disabled_01,
   },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: '600',
     marginTop: 10,
     marginBottom: 5,
     color: color.offBlack,
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#FFF',
   },
   errorMessage: {

@@ -26,7 +26,7 @@ export default function Cart({ navigation }: any) {
   useFocusEffect(
     React.useCallback(() => {
       axios
-        .get('http://localhost:8080/main/cart', {
+        .get('http://52.78.81.8:8080/main/cart', {
           headers: {
             authorization: `Bearer ${user?.accessToken}`,
           },
@@ -70,7 +70,7 @@ export default function Cart({ navigation }: any) {
     } else {
       axios
         .post(
-          `http://localhost:8080/main/cart/reserve`,
+          `http://52.78.81.8:8080/main/cart/reserve`,
           {},
           {
             headers: {
@@ -137,10 +137,10 @@ export default function Cart({ navigation }: any) {
             padding: 20,
           }}
         >
-          <Text style={{ fontSize: 14, color: '#787878', fontWeight: 'bold' }}>
+          <Text style={{ fontSize: 14, color: '#787878', fontWeight: '600' }}>
             총 {totalCount}건
           </Text>
-          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>
+          <Text style={{ fontSize: 16, fontWeight: '600' }}>
             {totalPrice.toLocaleString('ko-KR')}원
           </Text>
         </View>
@@ -153,7 +153,7 @@ export default function Cart({ navigation }: any) {
             backgroundColor: totalCount === 0 ? color.disabled_01 : color.green,
           }}
         >
-          <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'white' }}>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white' }}>
             주문하기
           </Text>
         </Pressable>

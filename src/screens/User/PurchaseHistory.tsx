@@ -17,7 +17,7 @@ export default function PurchaseHistory({ navigation }: any) {
   useFocusEffect(
     React.useCallback(() => {
       axios
-        .get('http://localhost:8080/main/reserveList', {
+        .get('http://52.78.81.8:8080/main/reserveList', {
           headers: {
             authorization: `Bearer ${user?.accessToken}`,
           },
@@ -60,7 +60,7 @@ export default function PurchaseHistory({ navigation }: any) {
           >
             <Icon name="arrow-back-ios" size={24} color="#000" />
           </Pressable>
-          <Text style={{ fontSize: 16, fontWeight: 'bold' }}>주문내역</Text>
+          <Text style={{ fontSize: 16, fontWeight: '600' }}>주문내역</Text>
           <Pressable
             style={{
               marginLeft: 'auto',
@@ -160,7 +160,7 @@ export default function PurchaseHistory({ navigation }: any) {
                 }}
               >
                 <View style={{ gap: 5 }}>
-                  <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
+                  <Text style={{ fontSize: 20, fontWeight: '600' }}>
                     {item.marketName}
                   </Text>
                   <Text style={{ color: '#787878' }}>{item.itemName}</Text>
@@ -183,7 +183,7 @@ export default function PurchaseHistory({ navigation }: any) {
                 <Text
                   style={{
                     fontSize: 16,
-                    fontWeight: 'bold',
+                    fontWeight: '600',
                     color: color.white,
                   }}
                 >

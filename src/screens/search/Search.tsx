@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   },
   searchWordText: {
     fontSize: 12,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#787878',
   },
 });

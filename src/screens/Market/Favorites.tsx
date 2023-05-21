@@ -26,7 +26,7 @@ export default function Favorites({ navigation }: any) {
     const fetchWishList = async () => {
       try {
         const response = await axios.get(
-          'http://localhost:8080/main/wishList',
+          'http://52.78.81.8:8080/main/wishList',
           {
             headers: {
               authorization: `Bearer ${user?.accessToken}`,
@@ -51,7 +51,7 @@ export default function Favorites({ navigation }: any) {
         onPress: async () => {
           try {
             const response = await axios.post(
-              `http://localhost:8080/market/${marketId}/control`,
+              `http://52.78.81.8:8080/market/${marketId}/control`,
               {
                 memberId: user?.id,
               },
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 17,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#FFF',
   },
   totalCountCircle: {
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   },
   totalCountText: {
     fontSize: 15,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#80c597',
   },
   itemContainer: {
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#433518',
     marginHorizontal: 15,
     marginTop: 5,

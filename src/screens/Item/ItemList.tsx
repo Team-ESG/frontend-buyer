@@ -20,7 +20,7 @@ export default function ItemList({ navigation }: any) {
   useFocusEffect(
     React.useCallback(() => {
       axios
-        .get('http://localhost:8080/main/list')
+        .get('http://52.78.81.8:8080/main/list')
         .then((res) => {
           console.log(res.data.data);
           setItemList(res.data.data);
@@ -95,14 +95,14 @@ export default function ItemList({ navigation }: any) {
                 >
                   <View style={styles.dataDisplay}>
                     <View style={{ gap: 5 }}>
-                      <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+                      <Text style={{ fontSize: 18, fontWeight: '600' }}>
                         {item.name}
                       </Text>
                       <Text
                         style={{
                           fontSize: 16,
                           color: '#787878',
-                          fontWeight: 'bold',
+                          fontWeight: '600',
                         }}
                       >
                         {item.marketName}
@@ -139,7 +139,7 @@ export default function ItemList({ navigation }: any) {
                       <Text
                         style={{
                           color: '#433518',
-                          fontWeight: 'bold',
+                          fontWeight: '600',
                           fontSize: 18,
                         }}
                       >
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   },
   alarmText: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: '#433518',
   },
   dataDisplay: {
