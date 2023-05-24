@@ -116,7 +116,7 @@ export default function MarketDetail({ navigation, route }: any) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Icon
           name="arrow-back-ios"
@@ -182,7 +182,7 @@ export default function MarketDetail({ navigation, route }: any) {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 

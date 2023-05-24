@@ -16,69 +16,72 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 export default function Search({ navigation }: any) {
   const [searchWord, setSearchWord] = React.useState<string>('');
   return (
-    <SafeAreaView>
-      <StatusBar backgroundColor="rgba(73,172,106,0.7)" />
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.container}
-      >
-        <Icon
-          name="arrow-back-ios"
-          style={styles.backBtn}
-          onPress={() => navigation.goBack()}
-        />
-        <View style={styles.imageContainer}>
-          <View style={styles.section}>
-            <Icon name="search" size={24} style={styles.icon} />
-            <TextInput
-              style={styles.input}
-              placeholder="오늘 뭐먹지?"
-              value={searchWord}
-              onChangeText={setSearchWord}
-              onSubmitEditing={() => {
-                if (searchWord !== '') {
-                  navigation.navigate('SearchResults', { searchWord });
-                }
-              }}
-            />
+    <View style={{ backgroundColor: 'rgb(73,172,106)' }}>
+      <SafeAreaView>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.container}
+        >
+          <Icon
+            name="arrow-back-ios"
+            style={styles.backBtn}
+            onPress={() => navigation.goBack()}
+          />
+          <View style={styles.imageContainer}>
+            <View style={styles.section}>
+              <Icon name="search" size={24} style={styles.icon} />
+              <TextInput
+                style={styles.input}
+                placeholder="오늘 뭐먹지?"
+                value={searchWord}
+                onChangeText={setSearchWord}
+                onSubmitEditing={() => {
+                  if (searchWord !== '') {
+                    navigation.navigate('SearchResults', { searchWord });
+                  }
+                }}
+              />
+            </View>
           </View>
-        </View>
-        <View style={styles.searchWordContainer}>
-          <View style={styles.searchWordCircle}>
-            <Text
-              onPress={() => {
-                navigation.navigate('SearchResults', { searchWord: '사과' });
-              }}
-              style={styles.searchWordText}
-            >
-              사과
-            </Text>
+          <View style={styles.searchWordContainer}>
+            <View style={styles.searchWordCircle}>
+              <Text
+                onPress={() => {
+                  navigation.navigate('SearchResults', { searchWord: '사과' });
+                }}
+                style={styles.searchWordText}
+              >
+                사과
+              </Text>
+            </View>
+            <View style={styles.searchWordCircle}>
+              <Text
+                onPress={() => {
+                  navigation.navigate('SearchResults', {
+                    searchWord: '파인애플',
+                  });
+                }}
+                style={styles.searchWordText}
+              >
+                파인애플
+              </Text>
+            </View>
+            <View style={styles.searchWordCircle}>
+              <Text
+                onPress={() => {
+                  navigation.navigate('SearchResults', {
+                    searchWord: '모카빵',
+                  });
+                }}
+                style={styles.searchWordText}
+              >
+                모카빵
+              </Text>
+            </View>
           </View>
-          <View style={styles.searchWordCircle}>
-            <Text
-              onPress={() => {
-                navigation.navigate('SearchResults', {
-                  searchWord: '파인애플',
-                });
-              }}
-              style={styles.searchWordText}
-            >
-              파인애플
-            </Text>
-          </View>
-          <View style={styles.searchWordCircle}>
-            <Text
-              onPress={() => {
-                navigation.navigate('SearchResults', { searchWord: '모카빵' });
-              }}
-              style={styles.searchWordText}
-            >
-              모카빵
-            </Text>
-          </View>
-        </View>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </View>
   );
 }
 
@@ -96,7 +99,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   imageContainer: {
-    backgroundColor: 'rgba(73,172,106,0.7)',
+    backgroundColor: 'rgb(73,172,106)',
     borderBottomStartRadius: 15,
     borderBottomEndRadius: 15,
     height: 130,

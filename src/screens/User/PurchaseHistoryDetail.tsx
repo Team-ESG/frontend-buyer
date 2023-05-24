@@ -84,8 +84,10 @@ export default function PurchaseHistoryDetail({ navigation, route }: any) {
           }}
         >
           <Text style={{ color: 'green', fontWeight: '600' }}>
-            {data.reserveState === 'RESERVE_FAIL'
+            {data.reserveState === 'RESERVED'
               ? '픽업을 대기중이에요'
+              : data.reserveState === 'RESERVE_FAIL'
+              ? '픽업을 실패했어요'
               : '픽업을 완료했어요'}
           </Text>
           <Text style={{ fontSize: 18, fontWeight: '600' }}>
