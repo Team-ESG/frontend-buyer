@@ -203,7 +203,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 20,
-    fontFamily: 'Inter-Bold',
   },
   helpSection: {
     marginTop: 20,
@@ -268,7 +267,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#fff',
     textAlign: 'center',
-    fontFamily: 'Inter-SemiBold',
   },
   kakaoTextColor: {
     flex: 1,
@@ -276,7 +274,6 @@ const styles = StyleSheet.create({
     color: '#000',
     opacity: 0.85,
     textAlign: 'center',
-    fontFamily: 'Inter-SemiBold',
   },
   socialLogo: {
     height: 36,

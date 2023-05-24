@@ -42,10 +42,6 @@ function ItemView({ searchWord, navigation, setItemCount }: any) {
 
   return (
     <View style={{ flex: 1 }}>
-      <StatusBar
-        backgroundColor="rgba(73,172,106,0.7)"
-        barStyle="light-content"
-      />
       {itemList.length > 0 ? (
         itemList.map((item: any) => (
           <Pressable
@@ -196,40 +192,46 @@ export default function SearchResults({ navigation, route }: any) {
   };
 
   return (
-    <SafeAreaView>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.container}
-      >
-        <View style={styles.imageContainer}>
-          <View style={styles.searchContainer}>
-            <Icon
-              name="arrow-back-ios"
-              style={styles.backBtn}
-              onPress={() => navigation.goBack()}
-            />
-            <View style={styles.section}>
-              <Icon name="search" size={24} style={styles.icon} />
-              <TextInput
-                style={styles.input}
-                value={searchText}
-                onChangeText={setSearchText}
-                onSubmitEditing={handleSearch}
+    <View
+      style={{
+        backgroundColor: 'rgb(73,172,106)',
+      }}
+    >
+      <SafeAreaView>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.container}
+        >
+          <View style={styles.imageContainer}>
+            <View style={styles.searchContainer}>
+              <Icon
+                name="arrow-back-ios"
+                style={styles.backBtn}
+                onPress={() => navigation.goBack()}
               />
+              <View style={styles.section}>
+                <Icon name="search" size={24} style={styles.icon} />
+                <TextInput
+                  style={styles.input}
+                  value={searchText}
+                  onChangeText={setSearchText}
+                  onSubmitEditing={handleSearch}
+                />
+              </View>
             </View>
           </View>
-        </View>
-        <View style={styles.searchWordContainer}>
-          <TabView
-            navigationState={{ index, routes }}
-            renderScene={renderScene}
-            onIndexChange={setIndex}
-            initialLayout={initialLayout}
-            renderTabBar={renderTabBar}
-          />
-        </View>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+          <View style={styles.searchWordContainer}>
+            <TabView
+              navigationState={{ index, routes }}
+              renderScene={renderScene}
+              onIndexChange={setIndex}
+              initialLayout={initialLayout}
+              renderTabBar={renderTabBar}
+            />
+          </View>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </View>
   );
 }
 
@@ -238,7 +240,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   imageContainer: {
-    backgroundColor: 'rgba(73,172,106,0.7)',
+    backgroundColor: 'rgb(73,172,106)',
     borderBottomStartRadius: 15,
     borderBottomEndRadius: 15,
     height: 85,
