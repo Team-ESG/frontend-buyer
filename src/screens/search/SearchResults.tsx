@@ -64,6 +64,9 @@ function ItemView({ searchWord, navigation, setItemCount }: any) {
               <Image style={styles.itemImage} source={testImg} />
             </View>
             <View style={styles.itemTextContainer}>
+              <Text numberOfLines={1} style={styles.itemMarketName}>
+                {item.marketName}
+              </Text>
               <Text numberOfLines={1} style={styles.itemText}>
                 {item.name}
               </Text>
@@ -299,12 +302,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 2,
     borderColor: '#eee',
-    paddingHorizontal: 25,
+    paddingHorizontal: 30,
     paddingVertical: 17,
   },
   itemImageContainer: {
     flex: 0.3,
-    height: 90,
+    height: 85,
   },
   itemImage: {
     width: '100%',
@@ -317,24 +320,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     justifyContent: 'flex-start',
   },
+  itemMarketName: {
+    fontSize: 13,
+    fontWeight: '400',
+    color: '#787878',
+    marginHorizontal: 15,
+  },
   itemText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#433518',
+    color: '#000',
     marginHorizontal: 15,
-    marginTop: 5,
-    marginBottom: 2.5,
+    marginTop: 1,
+    marginBottom: 7.5,
   },
   descText: {
     fontSize: 13,
     color: color.offBlack,
     marginHorizontal: 15,
-    marginVertical: 5,
   },
   itemPrice: {
     fontSize: 16,
     fontWeight: '400',
-    color: '#999',
+    color: '#787878',
     marginHorizontal: 15,
   },
   noItemText: {
