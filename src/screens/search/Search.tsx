@@ -16,7 +16,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 export default function Search({ navigation }: any) {
   const [searchWord, setSearchWord] = React.useState<string>('');
   return (
-    <View style={{ backgroundColor: 'rgb(73,172,106)' }}>
+    <View style={{ backgroundColor: 'rgba(73,172,106,0.7)' }}>
       <SafeAreaView>
         <KeyboardAvoidingView
           behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   imageContainer: {
-    backgroundColor: 'rgb(73,172,106)',
+    backgroundColor: 'rgba(73,172,106,0.7)',
     borderBottomStartRadius: 15,
     borderBottomEndRadius: 15,
     height: 130,

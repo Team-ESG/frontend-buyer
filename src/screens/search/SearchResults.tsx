@@ -10,14 +10,11 @@ import {
   Text,
   Pressable,
   Image,
-  StatusBar,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabView, TabBar } from 'react-native-tab-view';
 
 import color from '@lib/color/color';
-import marketImg from '@lib/img/market.png';
-import testImg from '@lib/img/testImg.jpeg';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -57,9 +54,15 @@ function ItemView({ searchWord, navigation, setItemCount }: any) {
             }
           >
             <View style={styles.itemImageContainer}>
-              <Image style={styles.itemImage} source={testImg} />
+              <Image
+                style={styles.itemImage}
+                source={{ uri: item && item.photoUrl }}
+              />
             </View>
             <View style={styles.itemTextContainer}>
+              <Text numberOfLines={1} style={styles.itemMarketName}>
+                {item.marketName}
+              </Text>
               <Text numberOfLines={1} style={styles.itemText}>
                 {item.name}
               </Text>
@@ -112,7 +115,10 @@ function MarketView({ searchWord, navigation, setMarketCount }: any) {
             }
           >
             <View style={styles.itemImageContainer}>
-              <Image style={styles.itemImage} source={marketImg} />
+              <Image
+                style={styles.itemImage}
+                source={{ uri: item && item.photoUrl }}
+              />
             </View>
             <View style={styles.itemTextContainer}>
               <Text numberOfLines={1} style={styles.itemText}>
@@ -240,7 +246,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   imageContainer: {
-    backgroundColor: 'rgb(73,172,106)',
+    backgroundColor: 'rgba(73,172,106,0.7)',
     borderBottomStartRadius: 15,
     borderBottomEndRadius: 15,
     height: 85,
@@ -301,12 +307,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 2,
     borderColor: '#eee',
-    paddingHorizontal: 25,
+    paddingHorizontal: 30,
     paddingVertical: 17,
   },
   itemImageContainer: {
     flex: 0.3,
-    height: 90,
+    height: 85,
   },
   itemImage: {
     width: '100%',
@@ -319,24 +325,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     justifyContent: 'flex-start',
   },
+  itemMarketName: {
+    fontSize: 13,
+    fontWeight: '400',
+    color: '#787878',
+    marginHorizontal: 15,
+  },
   itemText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#433518',
+    color: '#000',
     marginHorizontal: 15,
-    marginTop: 5,
-    marginBottom: 2.5,
+    marginTop: 1,
+    marginBottom: 7.5,
   },
   descText: {
     fontSize: 13,
     color: color.offBlack,
     marginHorizontal: 15,
-    marginVertical: 5,
   },
   itemPrice: {
     fontSize: 16,
     fontWeight: '400',
-    color: '#999',
+    color: '#787878',
     marginHorizontal: 15,
   },
   noItemText: {

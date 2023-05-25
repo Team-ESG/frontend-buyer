@@ -12,7 +12,6 @@ import {
 import WebView from 'react-native-webview';
 
 import mapImg from '@lib/img/map.png';
-import marketImg from '@lib/img/market.png';
 import { useIsFocused } from '@react-navigation/native';
 import { userState } from '@recoil/auth';
 import axios from 'axios';
@@ -136,7 +135,10 @@ export default function MarketDetail({ navigation, route }: any) {
             onPress={handleFavorite}
           />
         )}
-        <Image source={marketImg} style={{ width: '100%', height: '100%' }} />
+        <Image
+          source={{ uri: marketInfo && marketInfo.photoUrl }}
+          style={{ width: '100%', height: '100%' }}
+        />
       </View>
 
       <ScrollView style={styles.infoContainer}>
@@ -151,13 +153,13 @@ export default function MarketDetail({ navigation, route }: any) {
                 `${marketInfo.address.firstAddr} ${marketInfo.address.secondAddr} ${marketInfo.address.thirdAddr}`}
             </Text>
           </View>
-          <View style={styles.mapContainer}>
             {/* <WebView
               originWhitelist={['*']}
               source={{ html }}
               style={{ width: '90%', height: 300 }}
             /> */}
-            {/* <Image source={mapImg} /> */}
+          <View style={styles.mapContainer}>
+            <Image source={mapImg} />
           </View>
         </View>
         <View style={styles.salesInfoContainer}>
