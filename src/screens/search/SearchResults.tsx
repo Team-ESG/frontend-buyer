@@ -10,14 +10,11 @@ import {
   Text,
   Pressable,
   Image,
-  StatusBar,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TabView, TabBar } from 'react-native-tab-view';
 
 import color from '@lib/color/color';
-import marketImg from '@lib/img/market.png';
-import testImg from '@lib/img/testImg.jpeg';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -57,7 +54,10 @@ function ItemView({ searchWord, navigation, setItemCount }: any) {
             }
           >
             <View style={styles.itemImageContainer}>
-              <Image style={styles.itemImage} source={testImg} />
+              <Image
+                style={styles.itemImage}
+                source={{ uri: item && item.photoUrl }}
+              />
             </View>
             <View style={styles.itemTextContainer}>
               <Text numberOfLines={1} style={styles.itemMarketName}>
@@ -115,7 +115,10 @@ function MarketView({ searchWord, navigation, setMarketCount }: any) {
             }
           >
             <View style={styles.itemImageContainer}>
-              <Image style={styles.itemImage} source={marketImg} />
+              <Image
+                style={styles.itemImage}
+                source={{ uri: item && item.photoUrl }}
+              />
             </View>
             <View style={styles.itemTextContainer}>
               <Text numberOfLines={1} style={styles.itemText}>
@@ -243,7 +246,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   imageContainer: {
-    backgroundColor: 'rgb(73,172,106)',
+    backgroundColor: 'rgba(73,172,106,0.7)',
     borderBottomStartRadius: 15,
     borderBottomEndRadius: 15,
     height: 85,

@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 
 import color from '@lib/color/color';
-import marketImg from '@lib/img/market.png';
 import { useIsFocused } from '@react-navigation/native';
 import { userState } from '@recoil/auth';
 import axios from 'axios';
@@ -73,7 +72,6 @@ export default function Favorites({ navigation }: any) {
               return currentUser;
             });
           } catch (e) {
-            console.log(e);
             Alert.alert('찜 오류', '다시 시도해주세요.');
           }
         },
@@ -106,7 +104,10 @@ export default function Favorites({ navigation }: any) {
               }
             >
               <View style={styles.imageContainer}>
-                <Image style={styles.itemImage} source={marketImg} />
+                <Image
+                  style={styles.itemImage}
+                  source={{ uri: item && item.photoUrl }}
+                />
               </View>
               <View style={styles.itemTextContainer}>
                 <Text numberOfLines={1} style={styles.itemText}>
